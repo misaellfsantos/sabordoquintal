@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description"
+        content="Página oficial do Sabor do Quintal, restaurante rural com comida caseira e saborosa.">
+
+    <meta name="keywords"
+        content="Sabor do Quintal, restaurante rural, restaurante, comida caseira, localização">
+
+    <meta name="author" content="Luara Pires">
+
+    <link rel="icon" type="image/png" href="../faviconn.png">
+
+    <title>Sabor do Quintal - Localização</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            background-color: #d8d5d2;
+            font-family: "Baloo 2", cursive;
+            color: #111;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            height: 95px;
+
+            background-color: #f8e8c9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 8px 30px 8px 25px;
+
+            border-bottom: 2px solid #ddd;
+        }
+
+
+        /* LINK DA LOGO */
+
+        .logo-link {
+
+            display: flex;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+
+        .logo-link:hover {
+
+            transform: scale(1.05);
+        }
+
+
+        .logo {
+
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .titulo {
+
+            font-size: 36px;
+
+            font-weight: 800;
+
+            font-style: italic;
+
+            margin-left: 80px;
+        }
+
+
+        .home {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #000;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            transition: 0.2s;
+        }
+
+
+        .home i {
+
+            font-size: 29px;
+        }
+
+
+        .home:hover {
+
+            transform: scale(1.08);
+        }
+
+
+        /* ================= MAIN ================= */
+
+        main {
+
+            min-height: calc(100vh - 127px);
+
+            padding: 35px 40px;
+        }
+
+
+        .container-principal {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 45px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        /* ================= FORMULÁRIO ================= */
+
+        .formulario {
+
+            background-color: #dfbd8b;
+
+            padding: 25px 35px 30px;
+
+            border-radius: 25px;
+
+            box-shadow: 12px 10px 0 #dd6849;
+        }
+
+
+        .titulo-formulario {
+
+            text-align: center;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+
+        .campo {
+
+            margin-bottom: 13px;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            font-style: italic;
+
+            margin-left: 8px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            height: 38px;
+
+            border: none;
+
+            outline: none;
+
+            border-radius: 10px;
+
+            padding: 0 15px;
+
+            font-family: "Baloo 2", cursive;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            background-color: white;
+        }
+
+
+        .campo input:focus {
+
+            box-shadow: 0 0 0 3px #dd6849;
+        }
+
+
+        /* ================= BOTÃO ================= */
+
+        .btn-continuar {
+
+            display: block;
+
+            margin: 20px auto 0;
+
+            width: 210px;
+
+            height: 44px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background-color: #dd6849;
+
+            color: #000;
+
+            font-family: "Baloo 2", cursive;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .btn-continuar:hover {
+
+            background-color: #c9573a;
+
+            transform: scale(1.03);
+        }
+
+
+        /* ================= MENSAGEM ================= */
+
+        #mensagem {
+
+            display: none;
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            font-weight: 700;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MAPA ================= */
+
+        .mapa {
+
+            width: 100%;
+
+            height: 330px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            background-color: white;
+
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
+        }
+
+
+        .mapa iframe {
+
+            width: 100%;
+
+            height: 100%;
+
+            border: 0;
+        }
+
+
+        /* ================= DESCRIÇÃO ================= */
+
+        .descricao {
+
+            background-color: #dfbd8b;
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            min-height: 120px;
+
+            margin-top: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 16px;
+
+            line-height: 1.3;
+        }
+
+
+        .descricao i {
+
+            font-size: 24px;
+
+            margin-right: 5px;
+        }
+
+
+        /* ================= CONTATO ================= */
+
+        .contato {
+
+            width: 90%;
+
+            min-height: 125px;
+
+            background-color: #dfbd8b;
+
+            border-radius: 20px;
+
+            margin: 35px auto 0;
+
+            padding: 20px;
+
+            font-size: 17px;
+
+            text-align: center;
+        }
+
+
+        .telefone {
+
+            margin-top: 15px;
+
+            font-size: 19px;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= FOTO ================= */
+
+        .foto-restaurante {
+
+            width: 80%;
+
+            height: 200px;
+
+            margin: 25px auto 0;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+        }
+
+
+        .foto-restaurante img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            min-height: 32px;
+
+            background-color: #f8e8c9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 5px 20px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 10px;
+        }
+
+
+        .direitos {
+
+            font-family: "Courier New", monospace;
+
+            font-size: 12px;
+        }
+
+
+        .email {
+
+            font-weight: bold;
+        }
+
+
+        /* ================= RESPONSIVO ================= */
+
+        @media (max-width: 768px) {
+
+            header {
+
+                height: 80px;
+
+                padding: 5px 15px;
+            }
+
+
+            .logo {
+
+                width: 65px;
+
+                height: 65px;
+            }
+
+
+            .titulo {
+
+                font-size: 25px;
+
+                margin-left: 0;
+            }
+
+
+            main {
+
+                padding: 25px 15px;
+            }
+
+
+            .container-principal {
+
+                grid-template-columns: 1fr;
+
+                gap: 30px;
+            }
+
+
+            .formulario {
+
+                padding: 20px;
+            }
+
+
+            .mapa {
+
+                height: 300px;
+            }
+
+
+            .contato {
+
+                width: 100%;
+            }
+
+
+            .foto-restaurante {
+
+                width: 100%;
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                gap: 5px;
+
+                padding: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <!-- LOGO CLICÁVEL -->
+
+        <a
+            href="pagina_principal.html"
+            class="logo-link"
+            title="Voltar para a página principal"
+        >
+
+            <img
+                src="../imagem/logo.png"
+                alt="Logo Sabor do Quintal"
+                class="logo"
+            >
+
+        </a>
+
+
+        <h1 class="titulo">
+            Sabor do Quintal
+        </h1>
+
+
+        <a
+            href="pagina_principal.html"
+            class="home"
+        >
+
+            <i class="bi bi-house-door"></i>
+
+            <span>Home</span>
+
+        </a>
+
+    </header>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <div class="container-principal">
+
+
+            <!-- ================= COLUNA ESQUERDA ================= -->
+
+            <section>
+
+
+                <div class="formulario">
+
+                    <h2 class="titulo-formulario">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Encontre nosso restaurante
+
+                    </h2>
+
+
+                    <!-- ESTADO -->
+
+                    <div class="campo">
+
+                        <label for="estado">
+                            Estado:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="estado"
+                            value="São Paulo"
+                            placeholder="Ex: São Paulo"
+                        >
+
+                    </div>
+
+
+                    <!-- CIDADE -->
+
+                    <div class="campo">
+
+                        <label for="cidade">
+                            Cidade:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="cidade"
+                            value="São Roque"
+                            placeholder="Ex: São Roque"
+                        >
+
+                    </div>
+
+
+                    <!-- BAIRRO -->
+
+                    <div class="campo">
+
+                        <label for="bairro">
+                            Bairro:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bairro"
+                            value="Canguera"
+                            placeholder="Ex: Canguera"
+                        >
+
+                    </div>
+
+
+                    <!-- RUA -->
+
+                    <div class="campo">
+
+                        <label for="rua">
+                            Rua / número:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="rua"
+                            value="Estrada do Vinho, 2450"
+                            placeholder="Ex: Estrada do Vinho, 2450"
+                        >
+
+                    </div>
+
+
+                    <div id="mensagem"></div>
+
+
+                    <!-- BOTÃO -->
+
+                    <button
+                        type="button"
+                        class="btn-continuar"
+                        onclick="mostrarMapa()"
+                    >
+
+                        <i class="bi bi-map"></i>
+
+                        Encontrar no mapa
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- CONTATO -->
+
+                <div class="contato">
+
+                    <p>
+
+                        Caso tenha alguma dúvida,
+                        entre em contato conosco.
+
+                    </p>
+
+
+                    <p class="telefone">
+
+                        <i class="bi bi-telephone"></i>
+
+                        (11) 9 3275-8484
+
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= COLUNA DIREITA ================= -->
+
+            <section>
+
+
+                <!-- MAPA -->
+
+                <div class="mapa">
+
+                    <iframe
+                        id="mapaGoogle"
+                        src="https://www.google.com/maps?q=Estrada%20do%20Vinho%2C%202450%2C%20Canguera%2C%20São%20Roque%2C%20São%20Paulo%2C%2018145-000&output=embed"
+                        loading="lazy"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+
+                <!-- DESCRIÇÃO -->
+
+                <div class="descricao">
+
+                    <p>
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                        <strong>Sabor do Quintal – Restaurante Rural</strong><br>
+
+                        Estrada do Vinho, 2450 – Canguera<br>
+
+                        São Roque – SP | CEP 18145-000
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- FOTO -->
+
+                <div class="foto-restaurante">
+
+                    <img
+                        src="../imagem/entrada_restaurante.png"
+                        alt="Entrada do restaurante Sabor do Quintal"
+                    >
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div>
+
+            <i class="bi bi-telephone"></i>
+
+            (11) 9 3275-8484
+
+        </div>
+
+
+        <div class="direitos">
+
+            © Direitos autorais
+
+        </div>
+
+
+        <div class="email">
+
+            sabordoquintal@gmail.com
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function mostrarMapa() {
+
+            // Pega os valores digitados
+
+            const estado =
+                document.getElementById("estado").value.trim();
+
+            const cidade =
+                document.getElementById("cidade").value.trim();
+
+            const bairro =
+                document.getElementById("bairro").value.trim();
+
+            const rua =
+                document.getElementById("rua").value.trim();
+
+
+            const mensagem =
+                document.getElementById("mensagem");
+
+
+            // Verifica os campos
+
+            if (
+                estado === "" ||
+                cidade === "" ||
+                bairro === ""
+            ) {
+
+                mensagem.style.display = "block";
+
+                mensagem.style.color = "#a00000";
+
+                mensagem.innerHTML =
+                    "Preencha Estado, Cidade e Bairro.";
+
+                return;
+
+            }
+
+
+            /*
+                Monta o endereço.
+
+                Aqui NÃO colocamos o nome do restaurante,
+                pois queremos que o Google Maps procure
+                diretamente pelo endereço.
+            */
+
+            let endereco = "";
+
+
+            if (rua !== "") {
+
+                endereco += rua + ", ";
+
+            }
+
+
+            endereco +=
+                bairro + ", " +
+                cidade + ", " +
+                estado;
+
+
+            /*
+                Transforma o endereço em formato
+                adequado para a URL.
+            */
+
+            const enderecoMapa =
+                encodeURIComponent(endereco);
+
+
+            /*
+                Atualiza o mapa que aparece
+                dentro da página.
+            */
+
+            const mapa =
+                document.getElementById("mapaGoogle");
+
+
+            mapa.src =
+                "https://www.google.com/maps?q=" +
+                enderecoMapa +
+                "&output=embed";
+
+
+            /*
+                Mostra confirmação.
+            */
+
+            mensagem.style.display = "block";
+
+            mensagem.style.color = "#155724";
+
+            mensagem.innerHTML =
+                "Localização atualizada no mapa!";
+
+
+            /*
+                Leva o usuário até o mapa.
+            */
+
+            document.querySelector(".mapa").scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "center"
+
+            });
+
+        }
+
+
+        /*
+            Permite usar a tecla ENTER
+            para pesquisar.
+        */
+
+        document.querySelectorAll(".campo input").forEach(function(input) {
+
+            input.addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    mostrarMapa();
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

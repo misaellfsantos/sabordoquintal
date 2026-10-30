@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description"
+        content="Página de reservas do restaurante Sabor do Quintal. Escolha o ambiente, dia, horário, quantidade de pessoas e mesa para realizar sua reserva.">
+
+    <meta name="keywords"
+        content="Sabor do Quintal, restaurante, reserva, mesa">
+
+    <meta name="author"
+        content="Luara Pires">
+
+    <link rel="icon"
+        type="image/png"
+        href="../faviconn.png">
+
+    <title>Sabor do Quintal - Reserva</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- Google Fonts -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            background-color: #d8d4d1;
+
+            color: #171717;
+
+            font-family: "Montserrat", sans-serif;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        header {
+            width: 100%;
+            height: 85px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #f8e9cd;
+
+            border-bottom: 1px solid #e3d5bc;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .logo-link {
+            position: absolute;
+
+            left: 40px;
+            top: 8px;
+
+            width: 70px;
+            height: 70px;
+
+            display: block;
+
+            z-index: 10;
+        }
+
+
+        .logo {
+            width: 70px;
+            height: 70px;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+        }
+
+
+        .titulo {
+            margin: 0;
+
+            font-family: "DM Serif Display", serif;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            letter-spacing: 1px;
+
+            color: #111;
+        }
+
+
+        /* ==============================
+           HOME
+        ============================== */
+
+        .home {
+            position: absolute;
+
+            right: 35px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 2px;
+
+            text-decoration: none;
+
+            color: #111;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+
+        .home i {
+            font-size: 25px;
+        }
+
+
+        .home:hover {
+            transform: translateY(-2px);
+
+            color: #df6a4b;
+        }
+
+
+        /* ==============================
+           MAIN
+        ============================== */
+
+        main {
+            width: 100%;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            flex: 1;
+
+            padding: 28px 35px 45px;
+        }
+
+
+        /* ==============================
+           AMBIENTES
+        ============================== */
+
+        .ambientes {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 45px;
+        }
+
+
+        .ambiente {
+            width: 100%;
+
+            overflow: hidden;
+
+            border-radius: 30px;
+        }
+
+
+        /* ==============================
+           CARROSSEL
+        ============================== */
+
+        .carousel-ambiente {
+            width: 100%;
+
+            height: 330px;
+
+            overflow: hidden;
+
+            background-color: #f8e9cd;
+
+            border: 4px solid #f8e9cd;
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 6px 15px rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .carousel-ambiente .carousel-inner,
+        .carousel-ambiente .carousel-item {
+            height: 100%;
+        }
+
+
+        .carousel-ambiente .carousel-item {
+            position: relative;
+        }
+
+
+        .carousel-ambiente .foto {
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: contain;
+
+            object-position: center;
+
+            background-color: #f8e9cd;
+        }
+
+
+        /* ==============================
+           MENSAGEM CARROSSEL
+        ============================== */
+
+        .mensagem-carrossel {
+            position: absolute;
+
+            bottom: 18px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 80%;
+
+            padding: 10px 15px;
+
+            background-color:
+                rgba(45, 36, 30, 0.82);
+
+            color: #fff;
+
+            text-align: center;
+
+            font-family: Georgia, serif;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            line-height: 1.4;
+
+            border-radius: 12px;
+
+            z-index: 10;
+        }
+
+
+        /* ==============================
+           CONTROLES
+        ============================== */
+
+        .carousel-ambiente .carousel-control-prev,
+        .carousel-ambiente .carousel-control-next {
+            width: 12%;
+        }
+
+
+        .carousel-ambiente .carousel-control-prev-icon,
+        .carousel-ambiente .carousel-control-next-icon {
+            width: 35px;
+
+            height: 35px;
+
+            padding: 8px;
+
+            border-radius: 50%;
+
+            background-color:
+                rgba(45, 36, 30, 0.75);
+
+            background-size: 55%;
+        }
+
+
+        .carousel-ambiente .carousel-indicators {
+            margin-bottom: 10px;
+
+            z-index: 20;
+        }
+
+
+        .carousel-ambiente .carousel-indicators [data-bs-target] {
+            width: 9px;
+
+            height: 9px;
+
+            margin: 0 4px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            opacity: 0.75;
+        }
+
+
+        .carousel-ambiente .carousel-indicators .active {
+            opacity: 1;
+        }
+
+
+        /* ==============================
+           DESCRIÇÃO
+        ============================== */
+
+        .descricao {
+            min-height: 152px;
+
+            margin: 20px 15px 0;
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                #e1bc87,
+                #d9ae76
+            );
+
+            border-radius: 25px;
+
+            font-family: Georgia, serif;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            color: #151515;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.10);
+        }
+
+
+        .descricao p {
+            margin: 0;
+        }
+
+
+        /* ==============================
+           RESERVA
+        ============================== */
+
+        .reserva {
+            margin-top: 55px;
+
+            padding: 25px;
+
+            background-color:
+                rgba(248, 233, 205, 0.55);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.08);
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            gap: 25px;
+
+            align-items: end;
+        }
+
+
+        /* ==============================
+           TÍTULOS
+        ============================== */
+
+        .titulo-reserva {
+            width: 100%;
+
+            height: 36px;
+
+            margin-bottom: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background-color: #df6a4b;
+
+            border-radius:
+                8px 8px 0 0;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            color: #000;
+
+            box-shadow:
+                2px 3px 0 #777;
+        }
+
+
+        /* ==============================
+           CAMPOS
+        ============================== */
+
+        .campo {
+            width: 100%;
+
+            height: 38px;
+
+            padding: 0 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background-color: #df6a4b;
+
+            color: #000;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            outline: none;
+
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .campo:focus {
+            box-shadow:
+                0 0 0 2px #b84f34;
+        }
+
+
+        /* ==============================
+           FORMULÁRIO DO CLIENTE
+        ============================== */
+
+        .formulario {
+            width: 100%;
+
+            min-height: 230px;
+
+            padding: 14px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            background-color: #e1bc87;
+
+            border-radius: 27px;
+
+            box-shadow:
+                0 3px 8px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .nome {
+            width: 100%;
+
+            height: 38px;
+
+            padding: 0 12px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background-color: #fff;
+
+            color: #111;
+
+            font-family: Georgia, serif;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            outline: none;
+        }
+
+
+        .nome::placeholder {
+            color: #111;
+
+            opacity: 1;
+        }
+
+
+        .nome:focus {
+            box-shadow:
+                0 0 0 2px #df6a4b;
+        }
+
+
+        .aviso {
+            font-family: Georgia, serif;
+
+            font-size: 10px;
+
+            color: #3f3328;
+
+            margin-left: 4px;
+        }
+
+
+        .resumo {
+            font-family: Georgia, serif;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            margin-top: 5px;
+
+            color: #171717;
+        }
+
+
+        /* ==============================
+           BOTÃO
+        ============================== */
+
+        .finalizar {
+            width: 153px;
+
+            height: 36px;
+
+            margin-left: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background-color: #df6a4b;
+
+            color: #000;
+
+            font-family:
+                "DM Serif Display", serif;
+
+            font-size: 14px;
+
+            font-style: italic;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .finalizar:hover {
+            background-color: #c85639;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==============================
+           MENSAGEM
+        ============================== */
+
+        .mensagem {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background-color: #e1bc87;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            font-family: Georgia, serif;
+
+            font-size: 14px;
+        }
+
+
+        .mensagem i {
+            font-size: 25px;
+
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            width: 100%;
+
+            min-height: 38px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            align-items: center;
+
+            padding: 5px 12px;
+
+            background-color: #f8e9cd;
+
+            border-top:
+                1px solid #e3d5bc;
+
+            font-size: 8px;
+
+            flex-shrink: 0;
+        }
+
+
+        .footer-esquerda {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+
+        .footer-esquerda i {
+            font-size: 16px;
+        }
+
+
+        .footer-centro {
+            display: flex;
+
+            justify-content: center;
+
+            font-family: Georgia, serif;
+
+            font-size: 11px;
+        }
+
+
+        .footer-direita {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 15px;
+        }
+
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .ambientes {
+                grid-template-columns: 1fr;
+            }
+
+
+            .reserva {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .formulario {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+
+        /* ==============================
+           CELULAR
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            header {
+                height: 75px;
+            }
+
+
+            .logo-link {
+                left: 15px;
+
+                width: 55px;
+
+                height: 55px;
+
+                top: 10px;
+            }
+
+
+            .logo {
+                width: 55px;
+
+                height: 55px;
+            }
+
+
+            .titulo {
+                font-size: 23px;
+            }
+
+
+            .home {
+                right: 15px;
+            }
+
+
+            main {
+                padding:
+                    20px 15px 30px;
+            }
+
+
+            .carousel-ambiente {
+                height: 230px;
+
+                border-radius: 25px;
+
+                border-width: 3px;
+            }
+
+
+            .mensagem-carrossel {
+                bottom: 12px;
+
+                width: 88%;
+
+                padding: 8px 10px;
+
+                font-size: 11px;
+            }
+
+
+            .descricao {
+                margin: 12px 5px 0;
+
+                padding: 16px;
+
+                min-height: auto;
+
+                font-size: 12px;
+
+                border-radius: 22px;
+            }
+
+
+            .reserva {
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+
+                margin-top: 40px;
+
+                padding: 18px;
+            }
+
+
+            .formulario {
+                grid-column: auto;
+
+                min-height: 230px;
+            }
+
+
+            .finalizar {
+                width: 100%;
+            }
+
+
+            footer {
+                min-height: 80px;
+
+                grid-template-columns: 1fr;
+
+                gap: 7px;
+
+                padding: 10px;
+            }
+
+
+            .footer-esquerda,
+            .footer-centro,
+            .footer-direita {
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header>
+
+        <!-- LOGO CLICÁVEL -->
+        <a
+            href="pagina_principal.html"
+            class="logo-link"
+            title="Voltar para a página principal">
+
+            <img
+                src="../imagem/logo.png"
+                alt="Logo Sabor do Quintal"
+                class="logo">
+
+        </a>
+
+
+        <h1 class="titulo">
+            Sabor do Quintal
+        </h1>
+
+
+        <a
+            href="pagina_principal.html"
+            class="home">
+
+            <i class="bi bi-house-door"></i>
+
+            <span>Home</span>
+
+        </a>
+
+    </header>
+
+
+    <!-- ==============================
+         CONTEÚDO
+    ============================== -->
+
+    <main>
+
+
+        <!-- ==============================
+             AMBIENTES
+        ============================== -->
+
+        <section class="ambientes">
+
+
+            <!-- AMBIENTE INTERNO -->
+
+            <article class="ambiente">
+
+                <div
+                    id="carouselInterno"
+                    class="carousel slide carousel-ambiente"
+                    data-bs-ride="carousel">
+
+
+                    <div class="carousel-indicators">
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselInterno"
+                            data-bs-slide-to="0"
+                            class="active">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselInterno"
+                            data-bs-slide-to="1">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselInterno"
+                            data-bs-slide-to="2">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselInterno"
+                            data-bs-slide-to="3">
+                        </button>
+
+                    </div>
+
+
+                    <div class="carousel-inner">
+
+
+                        <div class="carousel-item active">
+
+                            <img
+                                src="../imagem/mesa 02.png"
+                                class="foto"
+                                alt="Mesa para 2 pessoas">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para 2 pessoas —
+                                perfeita para um momento
+                                tranquilo e especial.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa 04.png"
+                                class="foto"
+                                alt="Mesa para 4 pessoas">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para 4 pessoas —
+                                ideal para aproveitar bons
+                                momentos com a família.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa 06.png"
+                                class="foto"
+                                alt="Mesa para grupos">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para grupos —
+                                mais espaço para reunir
+                                amigos e familiares.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa sofa.png"
+                                class="foto"
+                                alt="Mesa com sofá">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa com sofá —
+                                conforto para aproveitar
+                                sua refeição.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselInterno"
+                        data-bs-slide="prev">
+
+                        <span
+                            class="carousel-control-prev-icon">
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselInterno"
+                        data-bs-slide="next">
+
+                        <span
+                            class="carousel-control-next-icon">
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="descricao">
+
+                    <p>
+
+                        Ambientes aconchegantes e bem planejados
+                        para todos os momentos: desde mesas
+                        intimistas para duas pessoas, ideais para
+                        encontros tranquilos, até opções mais
+                        amplas para grupos e reuniões em família.
+                        Também contamos com mesas confortáveis
+                        para quatro pessoas e espaços com sofá.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- AMBIENTE EXTERNO -->
+
+            <article class="ambiente">
+
+                <div
+                    id="carouselExterno"
+                    class="carousel slide carousel-ambiente"
+                    data-bs-ride="carousel">
+
+
+                    <div class="carousel-indicators">
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExterno"
+                            data-bs-slide-to="0"
+                            class="active">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExterno"
+                            data-bs-slide-to="1">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExterno"
+                            data-bs-slide-to="2">
+                        </button>
+
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExterno"
+                            data-bs-slide-to="3">
+                        </button>
+
+                    </div>
+
+
+                    <div class="carousel-inner">
+
+
+                        <div class="carousel-item active">
+
+                            <img
+                                src="../imagem/mesa 02 ex.png"
+                                class="foto"
+                                alt="Mesa externa para 2 pessoas">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para 2 pessoas —
+                                aproveite uma refeição
+                                cercado pela natureza.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa 04 ex.png"
+                                class="foto"
+                                alt="Mesa externa para 4 pessoas">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para 4 pessoas —
+                                espaço para compartilhar
+                                bons momentos.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa 06 ex.png"
+                                class="foto"
+                                alt="Mesa externa para grupos">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa para grupos —
+                                reúna amigos e familiares
+                                ao ar livre.
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-item">
+
+                            <img
+                                src="../imagem/mesa sofa ex.png"
+                                class="foto"
+                                alt="Mesa externa com sofá">
+
+                            <div class="mensagem-carrossel">
+
+                                Mesa com sofá —
+                                mais conforto para aproveitar
+                                a natureza.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExterno"
+                        data-bs-slide="prev">
+
+                        <span
+                            class="carousel-control-prev-icon">
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExterno"
+                        data-bs-slide="next">
+
+                        <span
+                            class="carousel-control-next-icon">
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="descricao">
+
+                    <p>
+
+                        Em um cenário ao ar livre com vista para
+                        o rio, o ambiente combina natureza,
+                        charme e aconchego. Temos opções de mesas
+                        para duas pessoas, espaços para grupos
+                        e encontros em família, além de áreas
+                        com sofá para proporcionar mais conforto.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==============================
+             RESERVA
+        ============================== -->
+
+        <section class="reserva">
+
+
+            <!-- DATA -->
+
+            <div>
+
+                <div class="titulo-reserva">
+
+                    <i class="bi bi-calendar3 me-2"></i>
+
+                    DIA DA RESERVA
+
+                </div>
+
+
+                <input
+                    type="date"
+                    id="data"
+                    class="campo">
+
+            </div>
+
+
+            <!-- HORÁRIO -->
+
+            <div>
+
+                <div class="titulo-reserva">
+
+                    <i class="bi bi-clock me-2"></i>
+
+                    HORÁRIO
+
+                </div>
+
+
+                <select
+                    id="horario"
+                    class="campo">
+
+                    <option value="">
+                        Escolha o horário
+                    </option>
+
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PESSOAS -->
+
+            <div>
+
+                <div class="titulo-reserva">
+
+                    <i class="bi bi-people me-2"></i>
+
+                    QUANTIDADE DE PESSOAS
+
+                </div>
+
+
+                <select
+                    id="pessoas"
+                    class="campo">
+
+                    <option value="">
+                        Quantas pessoas?
+                    </option>
+
+                    <option value="1">1 pessoa</option>
+                    <option value="2">2 pessoas</option>
+                    <option value="3">3 pessoas</option>
+                    <option value="4">4 pessoas</option>
+                    <option value="5">5 pessoas</option>
+                    <option value="6">6 pessoas</option>
+                    <option value="7">7 pessoas</option>
+                    <option value="8">8 pessoas</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- AMBIENTE -->
+
+            <div>
+
+                <div class="titulo-reserva">
+
+                    <i class="bi bi-building me-2"></i>
+
+                    AMBIENTE
+
+                </div>
+
+
+                <select
+                    id="ambiente"
+                    class="campo">
+
+                    <option value="">
+                        Escolha o ambiente
+                    </option>
+
+                    <option value="Interno">
+                        Ambiente interno
+                    </option>
+
+                    <option value="Externo">
+                        Área externa
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MESA -->
+
+            <div>
+
+                <div class="titulo-reserva">
+
+                    <i class="bi bi-grid-3x3-gap me-2"></i>
+
+                    MESA DISPONÍVEL
+
+                </div>
+
+
+                <select
+                    id="mesa"
+                    class="campo">
+
+                    <option value="">
+                        Escolha primeiro o ambiente
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DADOS DO CLIENTE -->
+
+            <div class="formulario">
+
+                <input
+                    type="text"
+                    id="nome"
+                    class="nome"
+                    placeholder="Nome do cliente">
+
+
+                <div class="aviso">
+
+                    <i class="bi bi-pencil"></i>
+
+                    Nome preenchido pelo login.
+                    Você pode alterar se estiver errado.
+
+                </div>
+
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    class="nome"
+                    placeholder="Telefone do cliente"
+                    maxlength="11"
+                    inputmode="numeric">
+
+
+                <div class="aviso">
+
+                    <i class="bi bi-pencil"></i>
+
+                    Telefone preenchido pelo login.
+                    Você pode alterar se estiver errado.
+
+                </div>
+
+
+                <div
+                    class="resumo"
+                    id="resumo">
+
+                    Preencha os dados da reserva.
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="finalizar"
+                    onclick="finalizarReserva()">
+
+                    Finalizar
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MENSAGEM DE SUCESSO -->
+
+        <div
+            id="mensagem"
+            class="mensagem">
+
+            <i class="bi bi-check-circle"></i>
+
+            <strong>
+                Reserva realizada com sucesso!
+            </strong>
+
+            <p id="textoConfirmacao"></p>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-esquerda">
+
+            <i class="bi bi-geo-alt"></i>
+
+            <i class="bi bi-telephone"></i>
+
+            <span>
+                (11) 9 3275-8484
+            </span>
+
+        </div>
+
+
+        <div class="footer-centro">
+
+            © Direitos autorais
+
+        </div>
+
+
+        <div class="footer-direita">
+
+            <span>
+                sabordoquintal@gmail.com
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <script>
+
+        /* =====================================================
+           CAMPOS
+        ===================================================== */
+
+        const campoData =
+            document.getElementById("data");
+
+        const horario =
+            document.getElementById("horario");
+
+        const pessoas =
+            document.getElementById("pessoas");
+
+        const ambiente =
+            document.getElementById("ambiente");
+
+        const mesa =
+            document.getElementById("mesa");
+
+        const nome =
+            document.getElementById("nome");
+
+        const telefone =
+            document.getElementById("telefone");
+
+        const resumo =
+            document.getElementById("resumo");
+
+
+        /* =====================================================
+           PEGAR DADOS DO LOGIN
+        ===================================================== */
+
+        function pegarDadosLogin() {
+
+            return {
+
+                logado:
+                    localStorage.getItem(
+                        "usuarioLogado"
+                    ) === "true",
+
+                nome:
+                    localStorage.getItem(
+                        "nomeUsuario"
+                    ) || "",
+
+                email:
+                    localStorage.getItem(
+                        "emailUsuario"
+                    ) || "",
+
+                telefone:
+                    localStorage.getItem(
+                        "telefoneUsuario"
+                    ) || ""
+
+            };
+
+        }
+
+
+        /* =====================================================
+           VERIFICAR LOGIN
+        ===================================================== */
+
+        const usuario =
+            pegarDadosLogin();
+
+
+        if (
+            !usuario.logado ||
+            !usuario.nome
+        ) {
+
+            alert(
+                "Você precisa fazer login para realizar uma reserva."
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =====================================================
+           PUXAR NOME DO LOGIN
+        ===================================================== */
+
+        if (usuario.nome) {
+
+            nome.value =
+                usuario.nome;
+
+        }
+
+
+        /* =====================================================
+           PUXAR TELEFONE DO LOGIN
+        ===================================================== */
+
+        if (usuario.telefone) {
+
+            telefone.value =
+                usuario.telefone;
+
+        }
+
+
+        /* =====================================================
+           TELEFONE - SOMENTE NÚMEROS
+        ===================================================== */
+
+        telefone.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.replace(/\D/g, "");
+
+                this.value =
+                    this.value.substring(0, 11);
+
+                atualizarResumo();
+
+            }
+        );
+
+
+        /* =====================================================
+           DATA MÍNIMA
+        ===================================================== */
+
+        const hoje =
+            new Date();
+
+        const ano =
+            hoje.getFullYear();
+
+        const mes =
+            String(
+                hoje.getMonth() + 1
+            ).padStart(2, "0");
+
+        const dia =
+            String(
+                hoje.getDate()
+            ).padStart(2, "0");
+
+
+        campoData.min =
+            ano +
+            "-" +
+            mes +
+            "-" +
+            dia;
+
+
+        /* =====================================================
+           MESAS
+        ===================================================== */
+
+        const mesas = {
+
+            Interno: [
+
+                {
+                    nome: "Mesa 01",
+                    capacidade: 2
+                },
+
+                {
+                    nome: "Mesa 02",
+                    capacidade: 3
+                },
+
+                {
+                    nome: "Mesa 03",
+                    capacidade: 4
+                },
+
+                {
+                    nome: "Mesa 04",
+                    capacidade: 6
+                }
+
+            ],
+
+            Externo: [
+
+                {
+                    nome: "Mesa 05",
+                    capacidade: 2
+                },
+
+                {
+                    nome: "Mesa 06",
+                    capacidade: 4
+                },
+
+                {
+                    nome: "Mesa 07",
+                    capacidade: 6
+                },
+
+                {
+                    nome: "Mesa 08",
+                    capacidade: 8
+                }
+
+            ]
+
+        };
+
+
+        /* =====================================================
+           ATUALIZAR MESAS
+        ===================================================== */
+
+        function atualizarMesas() {
+
+            const ambienteEscolhido =
+                ambiente.value;
+
+            const quantidade =
+                Number(
+                    pessoas.value
+                );
+
+
+            mesa.innerHTML = "";
+
+
+            if (!ambienteEscolhido) {
+
+                mesa.innerHTML =
+                    '<option value="">Escolha primeiro o ambiente</option>';
+
+                atualizarResumo();
+
+                return;
+
+            }
+
+
+            const opcaoInicial =
+                document.createElement(
+                    "option"
+                );
+
+
+            opcaoInicial.value = "";
+
+            opcaoInicial.textContent =
+                "Escolha a mesa";
+
+
+            mesa.appendChild(
+                opcaoInicial
+            );
+
+
+            mesas[ambienteEscolhido]
+                .forEach(
+                    function(item) {
+
+                        if (
+                            !quantidade ||
+                            quantidade <= item.capacidade
+                        ) {
+
+                            const opcao =
+                                document.createElement(
+                                    "option"
+                                );
+
+
+                            opcao.value =
+                                item.nome;
+
+
+                            opcao.textContent =
+                                item.nome +
+                                " - " +
+                                item.capacidade +
+                                " pessoas";
+
+
+                            mesa.appendChild(
+                                opcao
+                            );
+
+                        }
+
+                    }
+                );
+
+
+            atualizarResumo();
+
+        }
+
+
+        /* =====================================================
+           ATUALIZAR RESUMO
+        ===================================================== */
+
+        function atualizarResumo() {
+
+            const nomeCliente =
+                nome.value.trim() ||
+                "cliente";
+
+
+            if (
+                campoData.value &&
+                horario.value &&
+                pessoas.value &&
+                ambiente.value &&
+                mesa.value
+            ) {
+
+                const dataFormatada =
+                    campoData.value
+                        .split("-")
+                        .reverse()
+                        .join("/");
+
+
+                resumo.textContent =
+
+                    "Olá, " +
+                    nomeCliente +
+                    "! Reserva para " +
+                    pessoas.value +
+                    " pessoa(s), no dia " +
+                    dataFormatada +
+                    ", às " +
+                    horario.value +
+                    ", no ambiente " +
+                    ambiente.value +
+                    ", " +
+                    mesa.value +
+                    ".";
+
+            } else {
+
+                resumo.textContent =
+                    "Preencha os dados da reserva.";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           EVENTOS
+        ===================================================== */
+
+        ambiente.addEventListener(
+            "change",
+            atualizarMesas
+        );
+
+
+        pessoas.addEventListener(
+            "change",
+            atualizarMesas
+        );
+
+
+        campoData.addEventListener(
+            "change",
+            atualizarResumo
+        );
+
+
+        horario.addEventListener(
+            "change",
+            atualizarResumo
+        );
+
+
+        mesa.addEventListener(
+            "change",
+            atualizarResumo
+        );
+
+
+        nome.addEventListener(
+            "input",
+            atualizarResumo
+        );
+
+
+        /* =====================================================
+           FINALIZAR RESERVA
+        ===================================================== */
+
+        function finalizarReserva() {
+
+            const usuarioAtual =
+                pegarDadosLogin();
+
+
+            if (
+                !usuarioAtual.logado ||
+                !usuarioAtual.nome
+            ) {
+
+                alert(
+                    "Sua sessão expirou. Faça login novamente."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            const nomeCliente =
+                nome.value.trim();
+
+
+            const telefoneCliente =
+                telefone.value.replace(/\D/g, "");
+
+
+            telefone.value =
+                telefoneCliente;
+
+
+            if (!nomeCliente) {
+
+                alert(
+                    "Informe o nome do cliente."
+                );
+
+                nome.focus();
+
+                return;
+
+            }
+
+
+            if (!telefoneCliente) {
+
+                alert(
+                    "Informe o telefone do cliente."
+                );
+
+                telefone.focus();
+
+                return;
+
+            }
+
+
+            if (
+                telefoneCliente.length !== 10 &&
+                telefoneCliente.length !== 11
+            ) {
+
+                alert(
+                    "Digite um telefone válido com 10 ou 11 números."
+                );
+
+                telefone.focus();
+
+                return;
+
+            }
+
+
+            if (!campoData.value) {
+
+                alert(
+                    "Escolha o dia da reserva."
+                );
+
+                campoData.focus();
+
+                return;
+
+            }
+
+
+            if (!horario.value) {
+
+                alert(
+                    "Escolha o horário."
+                );
+
+                horario.focus();
+
+                return;
+
+            }
+
+
+            if (!pessoas.value) {
+
+                alert(
+                    "Escolha a quantidade de pessoas."
+                );
+
+                pessoas.focus();
+
+                return;
+
+            }
+
+
+            if (!ambiente.value) {
+
+                alert(
+                    "Escolha o ambiente."
+                );
+
+                ambiente.focus();
+
+                return;
+
+            }
+
+
+            if (!mesa.value) {
+
+                alert(
+                    "Escolha uma mesa."
+                );
+
+                mesa.focus();
+
+                return;
+
+            }
+
+
+            let identificadorUsuario = "";
+
+
+            if (usuarioAtual.email) {
+
+                identificadorUsuario =
+                    "email:" +
+                    usuarioAtual.email
+                        .trim()
+                        .toLowerCase();
+
+            } else {
+
+                identificadorUsuario =
+                    "nome:" +
+                    usuarioAtual.nome
+                        .trim()
+                        .toLowerCase();
+
+            }
+
+
+            const dataFormatada =
+                campoData.value
+                    .split("-")
+                    .reverse()
+                    .join("/");
+
+
+            const reserva = {
+
+                identificadorUsuario:
+                    identificadorUsuario,
+
+                nomeUsuario:
+                    usuarioAtual.nome,
+
+                emailUsuario:
+                    usuarioAtual.email,
+
+                nome:
+                    nomeCliente,
+
+                telefone:
+                    telefoneCliente,
+
+                data:
+                    dataFormatada,
+
+                hora:
+                    horario.value,
+
+                pessoas:
+                    pessoas.value,
+
+                ambiente:
+                    ambiente.value,
+
+                mesa:
+                    mesa.value,
+
+                dataReserva:
+                    new Date(
+                        campoData.value +
+                        "T" +
+                        horario.value +
+                        ":00"
+                    ).getTime(),
+
+                dataLembrete:
+                    new Date(
+                        campoData.value +
+                        "T" +
+                        horario.value +
+                        ":00"
+                    ).getTime()
+                    -
+                    (
+                        5 *
+                        24 *
+                        60 *
+                        60 *
+                        1000
+                    )
+
+            };
+
+
+            /*
+             * SALVAR A RESERVA SEM APAGAR AS ANTERIORES.
+             * A página principal poderá ler esta lista
+             * em "Minhas reservas".
+             */
+            let reservasSalvas = [];
+
+            try {
+
+                const dadosSalvos =
+                    localStorage.getItem(
+                        "reservasSaborQuintal"
+                    );
+
+                if (dadosSalvos) {
+
+                    const dados =
+                        JSON.parse(dadosSalvos);
+
+                    if (Array.isArray(dados)) {
+                        reservasSalvas = dados;
+                    } else if (dados) {
+                        reservasSalvas = [dados];
+                    }
+
+                }
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar reservas:",
+                    erro
+                );
+
+                reservasSalvas = [];
+
+            }
+
+
+            reservasSalvas.push(reserva);
+
+
+            localStorage.setItem(
+                "reservasSaborQuintal",
+                JSON.stringify(reservasSalvas)
+            );
+
+
+            /*
+             * Mantém a chave antiga atualizada para
+             * compatibilidade com versões anteriores.
+             */
+            localStorage.setItem(
+                "reservaSaborQuintal",
+                JSON.stringify(reserva)
+            );
+
+
+            document.getElementById(
+                "textoConfirmacao"
+            ).innerHTML =
+
+                "Cliente: <strong>" +
+                nomeCliente +
+                "</strong><br>" +
+
+                "Telefone: <strong>" +
+                telefoneCliente +
+                "</strong><br>" +
+
+                "Data: <strong>" +
+                dataFormatada +
+                "</strong><br>" +
+
+                "Horário: <strong>" +
+                horario.value +
+                "</strong><br>" +
+
+                "Pessoas: <strong>" +
+                pessoas.value +
+                "</strong><br>" +
+
+                "Ambiente: <strong>" +
+                ambiente.value +
+                "</strong><br>" +
+
+                "Mesa: <strong>" +
+                mesa.value +
+                "</strong>";
+
+
+            document.getElementById(
+                "mensagem"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "mensagem"
+            ).scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "center"
+
+            });
+
+
+            /*
+             * Depois de salvar, volta para a página principal.
+             * Os dados continuam salvos no localStorage.
+             */
+            setTimeout(function () {
+
+                window.location.href =
+                    "pagina_principal.html";
+
+            }, 1200);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+/* ================= HEADER ================= */
+
+header {
+    width: 100%;
+    min-height: 70px;
+    padding: 7px 20px;
+
+    background: var(--primaria);
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar .container {
+    min-height: 70px;
+}
+
+.navbar-brand {
+    color: var(--texto);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.navbar-brand:hover {
+    color: var(--destaque);
+}
+
+.logo {
+    width: 65px;
+    height: 55px;
+    object-fit: contain;
+}
+
+/* ================= MENU ================= */
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar-nav .nav-item {
+    color: var(--texto);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 70px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-item i {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.navbar-nav .nav-item:hover {
+    color: var(--destaque);
+    transform: translateY(-2px);
+}
+
+/* BOTÃO DO MENU MOBILE */
+
+.navbar-toggler {
+    border: none;
+    padding: 5px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+
+@media (max-width: 700px) {
+
+    header {
+        min-height: 70px;
+        padding: 8px 12px;
+    }
+
+    .navbar .container {
+        min-height: 55px;
+    }
+
+    .logo {
+        width: 55px;
+        height: 50px;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .navbar-nav .nav-item {
+        min-width: 60px;
+        font-size: 10px;
+    }
+
+    .navbar-nav .nav-item i {
+        font-size: 18px;
+    }
+
+    main {
+        padding: 5px 20px 50px;
+    }
+}

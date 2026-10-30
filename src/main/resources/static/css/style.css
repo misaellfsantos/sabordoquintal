@@ -1,0 +1,379 @@
+        :root {
+            --primaria: #F4E7CF;
+            --secundaria: #D8B78B;
+            --destaque: #D96A4A;
+            --fundo: #D5D1CD;
+            --texto: #000000;
+            --cinza-seta: #AAA9A7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #C2BDB9;
+            margin: 0;
+            color: var(--texto);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 120px;
+            width: 100%;
+
+            background-color: #F3EAD8;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        header img {
+            /* width: 90px;
+            height: 90px; */
+            object-fit: contain;
+        }
+
+
+       main {
+            padding: 5px 45px 100px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            min-height: 80px;
+
+            width: 100%;
+
+            background-color: #F3EAD8;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 20px 60px;
+
+            font-size: 14px;
+
+            color: #333333;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #333333;
+
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #D56745;
+        }
+
+
+
+        @import "menu.css";
+/* ÁREA PRINCIPAL */
+.site {
+    min-height: 510px;
+    background: var(--fundo);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    
+}
+
+/* HEADER */
+header {
+    height: 70px;
+    padding: 7px 20px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    background: var(--primaria);
+}
+
+.logo {
+    width: 80px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.titulo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    margin: 0;
+    white-space: nowrap;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* MENU DO HEADER */
+.menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu-item {
+    color: var(--texto);
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 45px;
+    font-size: 8px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.menu-item i {
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
+.menu-item:hover {
+    color: var(--destaque);
+    transform: translateY(-1px);
+}
+
+/* MAIN */
+main {
+    padding: 5px 45px 70px;
+    background: var(--fundo);
+}
+
+.titulo-cardapio {
+    margin: 0 0 5px;
+
+    text-align: center;
+    font-size: 21px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* GALERIA */
+.galeria-container {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+.galeria {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    overflow: hidden;
+}
+
+.galeria img {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 130px;
+
+    object-fit: cover;
+    display: block;
+
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.20);
+
+    transition: transform 0.3s ease;
+}
+
+.galeria img:hover {
+    transform: scale(1.04);
+}
+
+/* BOTÕES LATERAIS */
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 48px;
+    height: 128px;
+
+    border: 0;
+    border-radius: 25px;
+
+    background: var(--cinza-seta);
+    z-index: 2;
+
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.seta:hover {
+    background: #949290;
+}
+
+.seta::after {
+    color: #000;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.seta-esquerda {
+    left: -20px;
+}
+
+.seta-esquerda::after {
+    content: "‹";
+}
+
+.seta-direita {
+    right: -20px;
+}
+
+.seta-direita::after {
+    content: "›";
+}
+
+/* SOBRE O RESTAURANTE */
+.sobre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding: 0 25px;
+}
+
+.texto-sobre {
+    width: 60%;
+}
+
+.texto-sobre p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.05;
+}
+
+.imagem-restaurante {
+    width: 300px;
+    height: 140px;
+    object-fit: cover;
+
+    border-radius: 13px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.20);
+}
+
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .galeria {
+        gap: 10px;
+    }
+
+    .galeria img {
+        flex-basis: 21%;
+        width: 21%;
+        height: 120px;
+    }
+
+    .sobre {
+        gap: 20px;
+    }
+
+    .imagem-restaurante {
+        width: 280px;
+    }
+}
+
+@media (max-width: 700px) {
+    .site {
+        width: 100%;
+        margin: 0;
+    }
+
+
+
+    .logo {
+        width: 65px;
+        height: 55px;
+    }
+
+    .titulo {
+        font-size: 22px;
+    }
+
+
+    .galeria-container {
+        height: auto;
+    }
+
+    .galeria {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .galeria img {
+        flex: 0 0 45%;
+        width: 45%;
+        height: 140px;
+    }
+
+    .seta {
+        display: none;
+    }
+
+    .sobre {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .texto-sobre {
+        width: 100%;
+    }
+
+    .imagem-restaurante {
+        width: 100%;
+        height: 180px;
+    }
+
+
+}
+
+ 

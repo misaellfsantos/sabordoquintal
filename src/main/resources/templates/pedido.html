@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description"
+        content="Página de pedidos do restaurante Sabor do Quintal. Escolha seus pratos, bebidas, quantidades e observações.">
+
+    <meta name="keywords"
+        content="Sabor do Quintal, restaurante, pedido, cardápio, comida caseira">
+
+    <meta name="author" content="Luara Pires, Misael fonseca">
+
+    <title>Sabor do Quintal - Pedido</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d5d1ce;
+            color: #2d241e;
+            padding-bottom: 80px;
+        }
+
+        /* CABEÇALHO */
+
+        header {
+            position: relative;
+            height: 90px;
+            background-color: #f5e9cd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        header > a {
+            position: absolute;
+            left: 35px;
+            top: 8px;
+            width: 75px;
+            height: 75px;
+            display: block;
+        }
+
+        .logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 32px;
+            color: #2d241e;
+        }
+
+        /* CONTEÚDO */
+
+        main {
+            width: 100%;
+            padding: 30px 20px;
+        }
+
+        .titulo-pedido {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo-pedido h2 {
+            margin: 0 0 10px;
+            font-family: Georgia, serif;
+            font-size: 28px;
+        }
+
+        .titulo-pedido p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .dia-atual {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 9px 15px;
+            background-color: #f8e9cd;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        /* CARD DO PEDIDO */
+
+        .pedido {
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            background-color: #dfbd8c;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .pedido h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-family: Georgia, serif;
+            font-size: 23px;
+        }
+
+        .secao-pedido {
+            margin-bottom: 30px;
+        }
+
+        /* ITEM */
+
+        .item-pedido {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.28);
+            border-radius: 12px;
+        }
+
+        .campo-principal {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .campo-principal label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* SELECT */
+
+        select {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 9px;
+            background-color: #d96c4c;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            box-shadow: 0 0 0 2px #2d241e;
+        }
+
+        select option {
+            background-color: white;
+            color: #2d241e;
+            font-weight: normal;
+        }
+
+        /* OBSERVAÇÃO */
+
+        .observacao {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .observacao label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .observacao input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 9px;
+            background-color: white;
+            color: #2d241e;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .observacao input:focus {
+            box-shadow: 0 0 0 2px #d96c4c;
+        }
+
+        /* SABOR DO SUCO */
+
+        .sabor-suco {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .sabor-suco label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sabor-suco select {
+            background-color: #d96c4c;
+        }
+
+        /* QUANTIDADE */
+
+        .quantidade {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            height: 44px;
+        }
+
+        .quantidade button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d96c4c;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quantidade button:hover {
+            background-color: #c75b3d;
+        }
+
+        .quantidade span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* REMOVER */
+
+        .btn-remover {
+            height: 40px;
+            padding: 0 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2d241e;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-remover:hover {
+            background-color: #17120f;
+        }
+
+        /* ADICIONAR */
+
+        .btn-adicionar {
+            border: none;
+            border-radius: 9px;
+            padding: 11px 17px;
+            background-color: #d96c4c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-adicionar:hover {
+            background-color: #c75b3d;
+        }
+
+        /* TOTAL */
+
+        .total {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #f8e9cd;
+            border-radius: 12px;
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* BOTÕES */
+
+        .botoes-final {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 13px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-voltar {
+            background-color: #2d241e;
+            color: white;
+        }
+
+        .btn-continuar {
+            background-color: #d96c4c;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* TELAS FINAIS */
+
+        #telaFinal,
+        #telaNota {
+            display: none;
+        }
+
+        .tela-final-card {
+            width: 100%;
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 30px;
+            background-color: #dfbd8c;
+            border-radius: 16px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .tela-final-card h2 {
+            text-align: center;
+            font-family: Georgia, serif;
+            margin-top: 0;
+        }
+
+        .numero-pedido {
+            text-align: center;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .resumo-item {
+            padding: 13px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.45);
+            border-radius: 9px;
+        }
+
+        .observacao-resumo {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .sabor-resumo {
+            display: block;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .resumo-total {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8e9cd;
+            border-radius: 10px;
+            text-align: right;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        /* NOTA */
+
+        .nota {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #f8e9cd;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .nota h2 {
+            text-align: center;
+            font-family: Georgia, serif;
+        }
+
+        .linha-nota {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(45, 36, 30, 0.2);
+        }
+
+        .observacao-nota {
+            margin-top: 8px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        .sabor-nota {
+            margin-top: 8px;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            min-height: 55px;
+            background-color: #f5e9cd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 15px;
+            z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 13px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 1100px) {
+
+            .item-pedido {
+                flex-wrap: wrap;
+                align-items: flex-end;
+            }
+
+            .campo-principal,
+            .observacao,
+            .sabor-suco {
+                width: 100%;
+                min-width: 100%;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            header {
+                height: 85px;
+            }
+
+            header > a {
+                left: 20px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .pedido {
+                padding: 20px;
+            }
+
+            .botoes-final {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding-bottom: 100px;
+            }
+
+            header {
+                height: 80px;
+            }
+
+            header > a {
+                left: 10px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            header h1 {
+                font-size: 22px;
+                margin-left: 45px;
+            }
+
+            main {
+                padding: 20px 10px;
+            }
+
+            .titulo-pedido h2 {
+                font-size: 23px;
+            }
+
+            .pedido {
+                padding: 15px;
+                border-radius: 12px;
+            }
+
+            .item-pedido {
+                padding: 12px;
+            }
+
+            .quantidade {
+                width: 100%;
+            }
+
+            .btn-remover {
+                flex: 1;
+            }
+
+            footer {
+                font-size: 11px;
+            }
+
+        }
+
+        /* IMPRESSÃO */
+
+        @media print {
+
+            header,
+            footer,
+            #telaPedido,
+            #telaFinal,
+            .botoes-nota {
+                display: none !important;
+            }
+
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            #telaNota {
+                display: block !important;
+            }
+
+            .nota {
+                box-shadow: none;
+                margin: 0 auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header>
+
+        <a href="pagina_principal.html"
+            aria-label="Voltar para a página principal">
+
+            <img
+                src="../faviconn.png"
+                class="logo"
+                alt="Logo Sabor do Quintal">
+
+        </a>
+
+        <h1>Sabor do Quintal</h1>
+
+    </header>
+
+
+    <!-- TELA DO PEDIDO -->
+
+    <main id="telaPedido">
+
+        <div class="titulo-pedido">
+
+            <h2>Faça seu pedido</h2>
+
+            <p>
+                Escolha seus pratos, bebidas e quantidades
+            </p>
+
+            <div class="dia-atual">
+
+                📅 Cardápio disponível hoje:
+                <strong id="diaAtual"></strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="pedido">
+
+            <!-- PRATOS -->
+
+            <div class="secao-pedido">
+
+                <h3>🍽️ Escolha seus pratos</h3>
+
+                <div id="listaPratos"></div>
+
+                <button
+                    type="button"
+                    class="btn-adicionar"
+                    onclick="adicionarPrato()">
+
+                    + Adicionar outro prato
+
+                </button>
+
+            </div>
+
+
+            <!-- BEBIDAS -->
+
+            <div class="secao-pedido">
+
+                <h3>🥤 Escolha suas bebidas</h3>
+
+                <div id="listaBebidas"></div>
+
+                <button
+                    type="button"
+                    class="btn-adicionar"
+                    onclick="adicionarBebida()">
+
+                    + Adicionar outra bebida
+
+                </button>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="total">
+
+                Total:
+                <span id="total">R$ 0,00</span>
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="botoes-final">
+
+                <a
+                    href="cardapio.html"
+                    class="btn btn-voltar">
+
+                    VOLTAR
+
+                </a>
+
+                <button
+                    type="button"
+                    class="btn btn-continuar"
+                    onclick="continuar()">
+
+                    CONTINUAR
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- TELA FINAL -->
+
+    <main id="telaFinal">
+
+        <div class="tela-final-card">
+
+            <h2>Pedido realizado!</h2>
+
+            <div class="numero-pedido">
+
+                Pedido
+                <span id="numeroPedidoFinal"></span>
+
+            </div>
+
+            <h3>🍽️ Pratos</h3>
+
+            <div id="resumoPratos"></div>
+
+            <h3>🥤 Bebidas</h3>
+
+            <div id="resumoBebidas"></div>
+
+            <div class="resumo-total">
+
+                Total:
+                <span id="totalFinal"></span>
+
+            </div>
+
+            <div class="botoes-final">
+
+                <button
+                    type="button"
+                    class="btn btn-voltar"
+                    onclick="voltarPedido()">
+
+                    VOLTAR
+
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-continuar"
+                    onclick="mostrarNota()">
+
+                    NOTA FISCAL
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- TELA NOTA -->
+
+    <main id="telaNota">
+
+        <div class="nota">
+
+            <h2>Sabor do Quintal</h2>
+
+            <p style="text-align:center;">
+                Comprovante do pedido
+            </p>
+
+            <hr>
+
+            <p>
+
+                <strong>Número do pedido:</strong>
+
+                <span id="numeroNota"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Cliente:</strong>
+                Cliente
+
+            </p>
+
+            <p>
+
+                <strong>Data:</strong>
+
+                <span id="dataNota"></span>
+
+            </p>
+
+            <hr>
+
+            <h3>Pratos</h3>
+
+            <div id="notaPratos"></div>
+
+            <h3>Bebidas</h3>
+
+            <div id="notaBebidas"></div>
+
+            <hr>
+
+            <div class="linha-nota">
+
+                <strong>Total</strong>
+
+                <strong id="totalNota"></strong>
+
+            </div>
+
+            <div class="botoes-final botoes-nota">
+
+                <button
+                    type="button"
+                    class="btn btn-voltar"
+                    onclick="voltarFinal()">
+
+                    VOLTAR
+
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-continuar"
+                    onclick="imprimirNota()">
+
+                    IMPRIMIR
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <p>
+
+            📞 (11) 9 3275-8484
+
+            &nbsp; | &nbsp;
+
+            ✉️ sabordoquintal@gmail.com
+
+            &nbsp; | &nbsp;
+
+            © Direitos autorais
+
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* =========================
+           CARDÁPIO POR DIA
+        ========================= */
+
+        const cardapioSemanal = {
+
+            0: [
+
+                {
+                    nome: "Costela Bovina com Batatas Rústicas",
+                    preco: 79.90
+                }
+
+            ],
+
+            1: [
+
+                {
+                    nome: "Feijoada Artesanal",
+                    preco: 68.90
+                },
+
+                {
+                    nome: "Frango do Chef",
+                    preco: 59.90
+                }
+
+            ],
+
+            2: [
+
+                {
+                    nome: "Filé ao Molho",
+                    preco: 74.90
+                },
+
+                {
+                    nome: "Cordeiro ao Vinho Tinto",
+                    preco: 118.00
+                }
+
+            ],
+
+            3: [
+
+                {
+                    nome: "Frango Recheado",
+                    preco: 82.00
+                },
+
+                {
+                    nome: "Lombo de Ervas e Limão",
+                    preco: 98.00
+                }
+
+            ],
+
+            4: [
+
+                {
+                    nome: "Ancho ao Molho",
+                    preco: 134.20
+                },
+
+                {
+                    nome: "Nhoque de Costela",
+                    preco: 89.00
+                }
+
+            ],
+
+            5: [
+
+                {
+                    nome: "Lasanha à Bolonhesa",
+                    preco: 75.00
+                },
+
+                {
+                    nome: "Filé Mignon ao Molho",
+                    preco: 112.00
+                }
+
+            ],
+
+            6: [
+
+                {
+                    nome: "Risoto de Costela",
+                    preco: 80.00
+                },
+
+                {
+                    nome: "Cordeiro",
+                    preco: 75.00
+                }
+
+            ]
+
+        };
+
+
+        function pratosDoDia() {
+
+            const dia =
+                new Date().getDay();
+
+            return cardapioSemanal[dia];
+
+        }
+
+
+        function nomeDia() {
+
+            const dias = [
+
+                "Domingo",
+                "Segunda-feira",
+                "Terça-feira",
+                "Quarta-feira",
+                "Quinta-feira",
+                "Sexta-feira",
+                "Sábado"
+
+            ];
+
+            return dias[new Date().getDay()];
+
+        }
+
+
+        const pratos = pratosDoDia();
+
+
+        /* =========================
+           BEBIDAS
+        ========================= */
+
+        const bebidas = [
+
+            {
+                nome: "Coca-Cola",
+                preco: 7.90
+            },
+
+            {
+                nome: "Suco natural",
+                preco: 5.00
+            },
+
+            {
+                nome: "Água",
+                preco: 4.00
+            }
+
+        ];
+
+
+        /* =========================
+           SABORES DOS SUCOS
+        ========================= */
+
+        const saboresSuco = [
+
+            "Laranja",
+            "Limão",
+            "Maracujá",
+            "Abacaxi",
+            "Morango"
+
+        ];
+
+
+        /* =========================
+           FORMATAÇÃO
+        ========================= */
+
+        function formatarDinheiro(valor) {
+
+            return valor.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        /* =========================
+           OPÇÕES DOS PRATOS
+        ========================= */
+
+        function opcoesPratos() {
+
+            let html = `
+
+                <option value="">
+                    Selecione o prato
+                </option>
+
+            `;
+
+            pratos.forEach(
+                (prato, index) => {
+
+                    html += `
+
+                        <option
+                            value="${index}"
+                            data-preco="${prato.preco}">
+
+                            ${prato.nome}
+                            -
+                            ${formatarDinheiro(prato.preco)}
+
+                        </option>
+
+                    `;
+
+                }
+            );
+
+            return html;
+
+        }
+
+
+        /* =========================
+           OPÇÕES DAS BEBIDAS
+        ========================= */
+
+        function opcoesBebidas() {
+
+            let html = `
+
+                <option value="">
+                    Selecione a bebida
+                </option>
+
+            `;
+
+            bebidas.forEach(
+                (bebida, index) => {
+
+                    html += `
+
+                        <option
+                            value="${index}"
+                            data-preco="${bebida.preco}">
+
+                            ${bebida.nome}
+                            -
+                            ${formatarDinheiro(bebida.preco)}
+
+                        </option>
+
+                    `;
+
+                }
+            );
+
+            return html;
+
+        }
+
+
+        /* =========================
+           OPÇÕES DOS SABORES
+        ========================= */
+
+        function opcoesSabores() {
+
+            let html = `
+
+                <option value="">
+                    Selecione o sabor
+                </option>
+
+            `;
+
+            saboresSuco.forEach(
+                sabor => {
+
+                    html += `
+
+                        <option value="${sabor}">
+                            ${sabor}
+                        </option>
+
+                    `;
+
+                }
+            );
+
+            return html;
+
+        }
+
+
+        /* =========================
+           ADICIONAR PRATO
+        ========================= */
+
+        function adicionarPrato() {
+
+            const lista =
+                document.getElementById(
+                    "listaPratos"
+                );
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "item-pedido";
+
+            item.innerHTML = `
+
+                <div class="campo-principal">
+
+                    <label>
+                        Prato
+                    </label>
+
+                    <select
+                        class="select-prato"
+                        onchange="calcularTotal()">
+
+                        ${opcoesPratos()}
+
+                    </select>
+
+                </div>
+
+                <div class="observacao">
+
+                    <label>
+                        Retirar ingredientes / observações
+                    </label>
+
+                    <input
+                        type="text"
+                        class="campo-observacao"
+                        placeholder="Ex.: sem cebola, sem tomate..."
+                        maxlength="150"
+                        oninput="calcularTotal()">
+
+                </div>
+
+                <div class="quantidade">
+
+                    <button
+                        type="button"
+                        onclick="alterarQuantidadeItem(this, -1)">
+
+                        −
+
+                    </button>
+
+                    <span>1</span>
+
+                    <button
+                        type="button"
+                        onclick="alterarQuantidadeItem(this, 1)">
+
+                        +
+
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-remover"
+                    onclick="removerItem(this)">
+
+                    Remover
+
+                </button>
+
+            `;
+
+            lista.appendChild(item);
+
+            calcularTotal();
+
+        }
+
+
+        /* =========================
+           ADICIONAR BEBIDA
+        ========================= */
+
+        function adicionarBebida() {
+
+            const lista =
+                document.getElementById(
+                    "listaBebidas"
+                );
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "item-pedido";
+
+            item.innerHTML = `
+
+                <div class="campo-principal">
+
+                    <label>
+                        Bebida
+                    </label>
+
+                    <select
+                        class="select-bebida"
+                        onchange="verificarSuco(this)">
+
+                        ${opcoesBebidas()}
+
+                    </select>
+
+                </div>
+
+                <div
+                    class="sabor-suco"
+                    style="display:none;">
+
+                    <label>
+                        Sabor do suco
+                    </label>
+
+                    <select
+                        class="select-sabor"
+                        onchange="calcularTotal()">
+
+                        ${opcoesSabores()}
+
+                    </select>
+
+                </div>
+
+                <div class="observacao">
+
+                    <label>
+                        Retirar ingredientes / observações
+                    </label>
+
+                    <input
+                        type="text"
+                        class="campo-observacao"
+                        placeholder="Ex.: sem gelo, sem açúcar..."
+                        maxlength="150"
+                        oninput="calcularTotal()">
+
+                </div>
+
+                <div class="quantidade">
+
+                    <button
+                        type="button"
+                        onclick="alterarQuantidadeItem(this, -1)">
+
+                        −
+
+                    </button>
+
+                    <span>1</span>
+
+                    <button
+                        type="button"
+                        onclick="alterarQuantidadeItem(this, 1)">
+
+                        +
+
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-remover"
+                    onclick="removerItem(this)">
+
+                    Remover
+
+                </button>
+
+            `;
+
+            lista.appendChild(item);
+
+            calcularTotal();
+
+        }
+
+
+        /* =========================
+           VERIFICAR SUCO
+        ========================= */
+
+        function verificarSuco(select) {
+
+            const item =
+                select.closest(".item-pedido");
+
+            const campoSabor =
+                item.querySelector(".sabor-suco");
+
+            const selectSabor =
+                item.querySelector(".select-sabor");
+
+            const bebida =
+                bebidas[
+                    parseInt(select.value)
+                ];
+
+            if (
+                bebida &&
+                bebida.nome === "Suco natural"
+            ) {
+
+                campoSabor.style.display =
+                    "block";
+
+            } else {
+
+                campoSabor.style.display =
+                    "none";
+
+                selectSabor.value =
+                    "";
+
+            }
+
+            calcularTotal();
+
+        }
+
+
+        /* =========================
+           ALTERAR QUANTIDADE
+        ========================= */
+
+        function alterarQuantidadeItem(
+            botao,
+            valor
+        ) {
+
+            const quantidade =
+                botao.parentElement
+                    .querySelector("span");
+
+            let numero =
+                parseInt(
+                    quantidade.textContent
+                );
+
+            numero += valor;
+
+            if (numero < 1) {
+                numero = 1;
+            }
+
+            if (numero > 20) {
+                numero = 20;
+            }
+
+            quantidade.textContent =
+                numero;
+
+            calcularTotal();
+
+        }
+
+
+        /* =========================
+           REMOVER ITEM
+        ========================= */
+
+        function removerItem(botao) {
+
+            const item =
+                botao.closest(
+                    ".item-pedido"
+                );
+
+            const lista =
+                item.parentElement;
+
+            const quantidadeItens =
+                lista.querySelectorAll(
+                    ".item-pedido"
+                ).length;
+
+            if (quantidadeItens > 1) {
+
+                item.remove();
+
+            } else {
+
+                const select =
+                    item.querySelector(
+                        "select"
+                    );
+
+                const quantidade =
+                    item.querySelector(
+                        ".quantidade span"
+                    );
+
+                const observacao =
+                    item.querySelector(
+                        ".campo-observacao"
+                    );
+
+                select.value = "";
+
+                quantidade.textContent =
+                    "1";
+
+                if (observacao) {
+                    observacao.value = "";
+                }
+
+                const campoSabor =
+                    item.querySelector(
+                        ".sabor-suco"
+                    );
+
+                const selectSabor =
+                    item.querySelector(
+                        ".select-sabor"
+                    );
+
+                if (campoSabor) {
+                    campoSabor.style.display =
+                        "none";
+                }
+
+                if (selectSabor) {
+                    selectSabor.value = "";
+                }
+
+            }
+
+            calcularTotal();
+
+        }
+
+
+        /* =========================
+           PEGAR ITENS
+        ========================= */
+
+        function pegarItens(
+            classeSelect,
+            listaProdutos
+        ) {
+
+            const itens = [];
+
+            document
+                .querySelectorAll(
+                    classeSelect
+                )
+                .forEach(select => {
+
+                    if (select.value !== "") {
+
+                        const item =
+                            select.closest(
+                                ".item-pedido"
+                            );
+
+                        const quantidade =
+                            parseInt(
+                                item.querySelector(
+                                    ".quantidade span"
+                                ).textContent
+                            );
+
+                        const produto =
+                            listaProdutos[
+                                parseInt(
+                                    select.value
+                                )
+                            ];
+
+                        const campoObservacao =
+                            item.querySelector(
+                                ".campo-observacao"
+                            );
+
+                        const observacao =
+                            campoObservacao
+                                ? campoObservacao.value.trim()
+                                : "";
+
+                        let sabor = "";
+
+                        if (
+                            produto.nome ===
+                            "Suco natural"
+                        ) {
+
+                            const selectSabor =
+                                item.querySelector(
+                                    ".select-sabor"
+                                );
+
+                            sabor =
+                                selectSabor
+                                    ? selectSabor.value
+                                    : "";
+
+                        }
+
+                        itens.push({
+
+                            nome:
+                                produto.nome,
+
+                            preco:
+                                produto.preco,
+
+                            quantidade:
+                                quantidade,
+
+                            subtotal:
+                                produto.preco *
+                                quantidade,
+
+                            observacao:
+                                observacao,
+
+                            sabor:
+                                sabor
+
+                        });
+
+                    }
+
+                });
+
+            return itens;
+
+        }
+
+
+        /* =========================
+           CALCULAR TOTAL
+        ========================= */
+
+        function calcularTotal() {
+
+            const listaPratos =
+                pegarItens(
+                    ".select-prato",
+                    pratos
+                );
+
+            const listaBebidas =
+                pegarItens(
+                    ".select-bebida",
+                    bebidas
+                );
+
+            let total = 0;
+
+            listaPratos.forEach(
+                item => {
+
+                    total +=
+                        item.subtotal;
+
+                }
+            );
+
+            listaBebidas.forEach(
+                item => {
+
+                    total +=
+                        item.subtotal;
+
+                }
+            );
+
+            document.getElementById(
+                "total"
+            ).textContent =
+                formatarDinheiro(total);
+
+        }
+
+
+        /* =========================
+           ESCAPAR TEXTO
+        ========================= */
+
+        function escaparTexto(texto) {
+
+            return String(texto)
+
+                .replace(/&/g, "&amp;")
+
+                .replace(/</g, "&lt;")
+
+                .replace(/>/g, "&gt;")
+
+                .replace(/"/g, "&quot;")
+
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =========================
+           NÚMERO DO PEDIDO
+        ========================= */
+
+        function gerarNumeroPedido() {
+
+            let numero =
+                parseInt(
+                    localStorage.getItem(
+                        "numeroPedidoSaborQuintal"
+                    )
+                ) || 0;
+
+            numero++;
+
+            localStorage.setItem(
+                "numeroPedidoSaborQuintal",
+                numero
+            );
+
+            return "#" +
+                String(numero)
+                    .padStart(6, "0");
+
+        }
+
+
+        /* =========================
+           CONTINUAR
+        ========================= */
+
+        function continuar() {
+
+            const listaPratos =
+                pegarItens(
+                    ".select-prato",
+                    pratos
+                );
+
+            const listaBebidas =
+                pegarItens(
+                    ".select-bebida",
+                    bebidas
+                );
+
+            if (
+                listaPratos.length === 0
+            ) {
+
+                alert(
+                    "Selecione pelo menos um prato."
+                );
+
+                return;
+
+            }
+
+            if (
+                listaBebidas.length === 0
+            ) {
+
+                alert(
+                    "Selecione pelo menos uma bebida."
+                );
+
+                return;
+
+            }
+
+
+            /* VERIFICAÇÃO DO SABOR */
+
+            const sucoSemSabor =
+                listaBebidas.some(
+                    bebida =>
+                        bebida.nome ===
+                        "Suco natural" &&
+                        bebida.sabor === ""
+                );
+
+            if (sucoSemSabor) {
+
+                alert(
+                    "Selecione o sabor de todos os sucos naturais."
+                );
+
+                return;
+
+            }
+
+
+            let total = 0;
+
+            listaPratos.forEach(
+                item => {
+
+                    total +=
+                        item.subtotal;
+
+                }
+            );
+
+            listaBebidas.forEach(
+                item => {
+
+                    total +=
+                        item.subtotal;
+
+                }
+            );
+
+
+            const numeroPedido =
+                gerarNumeroPedido();
+
+
+            const pedido = {
+
+                numeroPedido:
+                    numeroPedido,
+
+                pratos:
+                    listaPratos,
+
+                bebidas:
+                    listaBebidas,
+
+                total:
+                    total
+
+            };
+
+
+            localStorage.setItem(
+                "pedidoSaborQuintal",
+                JSON.stringify(pedido)
+            );
+
+
+            document.getElementById(
+                "numeroPedidoFinal"
+            ).textContent =
+                numeroPedido;
+
+
+            document.getElementById(
+                "resumoPratos"
+            ).innerHTML =
+                gerarResumo(
+                    listaPratos
+                );
+
+
+            document.getElementById(
+                "resumoBebidas"
+            ).innerHTML =
+                gerarResumo(
+                    listaBebidas
+                );
+
+
+            document.getElementById(
+                "totalFinal"
+            ).textContent =
+                formatarDinheiro(total);
+
+
+            document.getElementById(
+                "telaPedido"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "telaFinal"
+            ).style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           RESUMO
+        ========================= */
+
+        function gerarResumo(itens) {
+
+            let html = "";
+
+            itens.forEach(
+                item => {
+
+                    html += `
+
+                        <div class="resumo-item">
+
+                            <strong>
+                                ${escaparTexto(
+                                    item.nome
+                                )}
+                            </strong>
+
+                            ${
+                                item.sabor
+                                    ? `
+
+                                        <span class="sabor-resumo">
+
+                                            🥤 Sabor:
+                                            <strong>
+                                                ${escaparTexto(
+                                                    item.sabor
+                                                )}
+                                            </strong>
+
+                                        </span>
+
+                                      `
+                                    : ""
+                            }
+
+                            <br>
+
+                            Quantidade:
+                            ${item.quantidade}
+
+                            <br>
+
+                            Subtotal:
+                            ${formatarDinheiro(
+                                item.subtotal
+                            )}
+
+                            ${
+                                item.observacao
+                                    ? `
+
+                                        <span
+                                            class="observacao-resumo">
+
+                                            📝 Observação:
+                                            ${escaparTexto(
+                                                item.observacao
+                                            )}
+
+                                        </span>
+
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+            return html;
+
+        }
+
+
+        /* =========================
+           VOLTAR PARA O PEDIDO
+        ========================= */
+
+        function voltarPedido() {
+
+            document.getElementById(
+                "telaFinal"
+            ).style.display =
+                "none";
+
+            document.getElementById(
+                "telaPedido"
+            ).style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           MOSTRAR NOTA
+        ========================= */
+
+        function mostrarNota() {
+
+            const dados =
+                localStorage.getItem(
+                    "pedidoSaborQuintal"
+                );
+
+            if (!dados) {
+
+                alert(
+                    "Não foi possível encontrar o pedido."
+                );
+
+                return;
+
+            }
+
+            const pedido =
+                JSON.parse(dados);
+
+
+            document.getElementById(
+                "numeroNota"
+            ).textContent =
+                pedido.numeroPedido;
+
+
+            document.getElementById(
+                "dataNota"
+            ).textContent =
+                new Date().toLocaleString(
+                    "pt-BR"
+                );
+
+
+            document.getElementById(
+                "notaPratos"
+            ).innerHTML =
+                gerarNotaItens(
+                    pedido.pratos
+                );
+
+
+            document.getElementById(
+                "notaBebidas"
+            ).innerHTML =
+                gerarNotaItens(
+                    pedido.bebidas
+                );
+
+
+            document.getElementById(
+                "totalNota"
+            ).textContent =
+                formatarDinheiro(
+                    pedido.total
+                );
+
+
+            document.getElementById(
+                "telaFinal"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "telaNota"
+            ).style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           ITENS DA NOTA
+        ========================= */
+
+        function gerarNotaItens(itens) {
+
+            let html = "";
+
+            itens.forEach(
+                item => {
+
+                    html += `
+
+                        <div class="linha-nota">
+
+                            <span>
+
+                                ${escaparTexto(
+                                    item.nome
+                                )}
+
+                                <br>
+
+                                ${item.quantidade}x
+
+                            </span>
+
+                            <strong>
+
+                                ${formatarDinheiro(
+                                    item.subtotal
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        ${
+                            item.sabor
+                                ? `
+
+                                    <div
+                                        class="sabor-nota">
+
+                                        🥤
+                                        <strong>
+                                            Sabor:
+                                        </strong>
+
+                                        ${escaparTexto(
+                                            item.sabor
+                                        )}
+
+                                    </div>
+
+                                  `
+                                : ""
+                        }
+
+
+                        ${
+                            item.observacao
+                                ? `
+
+                                    <p
+                                        class="observacao-nota">
+
+                                        📝
+
+                                        <strong>
+                                            Observação:
+                                        </strong>
+
+                                        ${escaparTexto(
+                                            item.observacao
+                                        )}
+
+                                    </p>
+
+                                  `
+                                : ""
+                        }
+
+                    `;
+
+                }
+            );
+
+            return html;
+
+        }
+
+
+        /* =========================
+           VOLTAR DA NOTA
+        ========================= */
+
+        function voltarFinal() {
+
+            document.getElementById(
+                "telaNota"
+            ).style.display =
+                "none";
+
+            document.getElementById(
+                "telaFinal"
+            ).style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           IMPRIMIR
+        ========================= */
+
+        function imprimirNota() {
+
+            window.print();
+
+        }
+
+
+        /* =========================
+           INICIALIZAÇÃO
+        ========================= */
+
+        document.getElementById(
+            "diaAtual"
+        ).textContent =
+            nomeDia();
+
+
+        adicionarPrato();
+
+        adicionarBebida();
+
+        calcularTotal();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="../faviconn.png">
+
+    <meta name="author" content="Misael fonseca">
+
+    <title>
+        Nota - Sabor do Quintal
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            background-color: #d5d1ce;
+
+            font-family: Arial, sans-serif;
+
+            color: #000;
+        }
+
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header {
+
+            height: 90px;
+
+            background-color: #f5e8cf;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-bottom: 2px solid #dfd0b5;
+
+            position: relative;
+        }
+
+
+        header h1 {
+
+            font-family: Georgia, serif;
+
+            font-size: 28px;
+
+            font-style: italic;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           LOGO CLICÁVEL
+        ========================= */
+
+        .logo-link {
+
+            position: absolute;
+
+            left: 20px;
+
+            width: 65px;
+
+            height: 65px;
+
+            display: block;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+
+        .logo-link:hover {
+
+            transform: scale(1.08);
+
+            cursor: pointer;
+        }
+
+
+        .logo {
+
+            width: 65px;
+
+            height: 65px;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+
+        /* =========================
+           ÁREA PRINCIPAL
+        ========================= */
+
+        main {
+
+            min-height: calc(100vh - 145px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+        }
+
+
+        /* =========================
+           NOTA
+        ========================= */
+
+        .nota {
+
+            width: 430px;
+
+            background-color: #dfbd8d;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        .titulo {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        .titulo h2 {
+
+            font-family: Georgia, serif;
+
+            font-size: 23px;
+
+            font-style: italic;
+        }
+
+
+        .titulo p {
+
+            font-size: 12px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           LINHAS
+        ========================= */
+
+        .linha {
+
+            border: none;
+
+            border-top:
+                2px dashed #8b6345;
+
+            margin: 15px 0;
+        }
+
+
+        /* =========================
+           DADOS DO PEDIDO
+        ========================= */
+
+        .dados {
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        .dados p {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        /* =========================
+           PRODUTOS
+        ========================= */
+
+        .produto {
+
+            margin: 18px 0;
+        }
+
+
+        .produto-nome {
+
+            font-weight: bold;
+
+            font-size: 15px;
+        }
+
+
+        .produto-descricao {
+
+            font-size: 12px;
+
+            line-height: 1.4;
+
+            margin-top: 5px;
+        }
+
+
+        .produto-preco {
+
+            text-align: right;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           TOTAL
+        ========================= */
+
+        .total {
+
+            background-color: #df6547;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-weight: bold;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           AGRADECIMENTO
+        ========================= */
+
+        .agradecimento {
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-top: 20px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        .botoes {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .botoes button {
+
+            border: none;
+
+            background-color: #df6547;
+
+            color: #000;
+
+            padding: 12px 30px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+
+        .botoes button:hover {
+
+            background-color: #c95236;
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+
+            height: 55px;
+
+            background-color: #f5e8cf;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           IMPRESSÃO
+        ========================= */
+
+        @media print {
+
+            body {
+
+                background-color: #d5d1ce !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            header {
+
+                background-color: #f5e8cf !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            main {
+
+                min-height: auto;
+
+                padding: 10px;
+            }
+
+
+            .nota {
+
+                width: 100%;
+
+                max-width: 430px;
+
+                box-shadow: none;
+
+                background-color: #dfbd8d !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            /* NÃO IMPRIME OS BOTÕES */
+
+            .botoes {
+
+                display: none;
+            }
+
+
+            .total {
+
+                background-color: #df6547 !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            footer {
+
+                background-color: #f5e8cf !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            @page {
+
+                size: A4;
+
+                margin: 10mm;
+            }
+
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+
+                height: 80px;
+            }
+
+
+            header h1 {
+
+                font-size: 23px;
+            }
+
+
+            .logo-link {
+
+                left: 15px;
+
+                width: 55px;
+
+                height: 55px;
+            }
+
+
+            .logo {
+
+                width: 55px;
+
+                height: 55px;
+            }
+
+
+            main {
+
+                padding: 20px 15px;
+            }
+
+
+            .nota {
+
+                width: 100%;
+
+                max-width: 430px;
+
+                padding: 25px 20px;
+            }
+
+
+            .botoes {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .botoes button {
+
+                width: 210px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
+
+    <header>
+
+
+        <!-- LOGO CLICÁVEL -->
+
+        <a
+            href="pagina_principal.html"
+            class="logo-link"
+            title="Voltar para a página principal"
+        >
+
+            <img
+                src="../faviconn.png"
+                class="logo"
+                alt="Logo Sabor do Quintal"
+            >
+
+        </a>
+
+
+        <h1>
+            Sabor do Quintal
+        </h1>
+
+    </header>
+
+
+
+    <!-- =========================
+         NOTA
+    ========================= -->
+
+    <main>
+
+        <div>
+
+
+            <div class="nota">
+
+
+                <!-- TÍTULO -->
+
+                <div class="titulo">
+
+                    <h2>
+                        Nota do Pedido
+                    </h2>
+
+                    <p>
+                        Comprovante de compra
+                    </p>
+
+                </div>
+
+
+                <hr class="linha">
+
+
+                <!-- =========================
+                     DADOS
+                ========================= -->
+
+                <div class="dados">
+
+                    <p>
+
+                        <span>
+                            Número do pedido:
+                        </span>
+
+                        <strong id="numeroPedido">
+                            #000125
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+
+                        <span>
+                            Data:
+                        </span>
+
+                        <strong id="dataPedido">
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+
+                        <span>
+                            Cliente:
+                        </span>
+
+                        <strong>
+                            Cliente
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <hr class="linha">
+
+
+                <!-- =========================
+                     PRATO
+                ========================= -->
+
+                <div class="produto">
+
+                    <div class="produto-nome">
+
+                        <span id="nomePrato">
+                            Prato
+                        </span>
+
+                        x
+
+                        <span id="quantidadePrato">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="produto-descricao"
+                        id="descricaoPrato">
+
+                        Nenhum prato selecionado.
+
+                    </div>
+
+
+                    <div
+                        class="produto-preco"
+                        id="precoPrato">
+
+                        R$ 0,00
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     BEBIDA
+                ========================= -->
+
+                <div class="produto">
+
+                    <div class="produto-nome">
+
+                        <span id="nomeBebida">
+                            Bebida
+                        </span>
+
+                        x
+
+                        <span id="quantidadeBebida">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="produto-descricao"
+                        id="descricaoBebida">
+
+                        Nenhuma bebida selecionada.
+
+                    </div>
+
+
+                    <div
+                        class="produto-preco"
+                        id="precoBebida">
+
+                        R$ 0,00
+
+                    </div>
+
+                </div>
+
+
+                <hr class="linha">
+
+
+                <!-- =========================
+                     TOTAL
+                ========================= -->
+
+                <div class="total">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <span id="totalPedido">
+                        R$ 0,00
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     AGRADECIMENTO
+                ========================= -->
+
+                <div class="agradecimento">
+
+                    Obrigado pela preferência!
+
+                    <br>
+
+                    Sabor do Quintal
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 BOTÕES
+            ========================= -->
+
+            <div class="botoes">
+
+
+                <button
+                    type="button"
+                    onclick="voltarPagina()">
+
+                    ← VOLTAR
+
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="imprimirNota()">
+
+                    🖨️ IMPRIMIR NOTA
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================= -->
+
+    <footer>
+
+        © 2026 Sabor do Quintal -
+        Todos os direitos reservados
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           CARREGAR PEDIDO
+        ========================= */
+
+        function carregarPedido() {
+
+
+            let dados =
+                localStorage.getItem(
+                    "pedidoSaborQuintal"
+                );
+
+
+            /* Se não existir pedido */
+
+            if (!dados) {
+
+                alert(
+                    "Nenhum pedido encontrado."
+                );
+
+                return;
+            }
+
+
+            /* Converte os dados */
+
+            let pedido =
+                JSON.parse(dados);
+
+
+            /* =========================
+               PRATO
+            ========================= */
+
+            document.getElementById(
+                "nomePrato"
+            ).innerHTML =
+                pedido.prato;
+
+
+            document.getElementById(
+                "quantidadePrato"
+            ).innerHTML =
+                pedido.quantidadePrato;
+
+
+            let totalPrato =
+                pedido.precoPrato *
+                pedido.quantidadePrato;
+
+
+            document.getElementById(
+                "descricaoPrato"
+            ).innerHTML =
+
+                "Prato escolhido: " +
+                pedido.prato;
+
+
+            document.getElementById(
+                "precoPrato"
+            ).innerHTML =
+
+                "R$ " +
+                totalPrato
+                    .toFixed(2)
+                    .replace(".", ",");
+
+
+            /* =========================
+               BEBIDA
+            ========================= */
+
+            document.getElementById(
+                "nomeBebida"
+            ).innerHTML =
+                pedido.bebida;
+
+
+            document.getElementById(
+                "quantidadeBebida"
+            ).innerHTML =
+                pedido.quantidadeBebida;
+
+
+            let totalBebida =
+                pedido.precoBebida *
+                pedido.quantidadeBebida;
+
+
+            document.getElementById(
+                "descricaoBebida"
+            ).innerHTML =
+
+                "Bebida escolhida: " +
+                pedido.bebida;
+
+
+            document.getElementById(
+                "precoBebida"
+            ).innerHTML =
+
+                "R$ " +
+                totalBebida
+                    .toFixed(2)
+                    .replace(".", ",");
+
+
+            /* =========================
+               TOTAL
+            ========================= */
+
+            document.getElementById(
+                "totalPedido"
+            ).innerHTML =
+
+                "R$ " +
+                pedido.total
+                    .toFixed(2)
+                    .replace(".", ",");
+
+
+            /* =========================
+               DATA
+            ========================= */
+
+            let data =
+                new Date();
+
+
+            let dia =
+                String(data.getDate())
+                    .padStart(2, "0");
+
+
+            let mes =
+                String(data.getMonth() + 1)
+                    .padStart(2, "0");
+
+
+            let ano =
+                data.getFullYear();
+
+
+            document.getElementById(
+                "dataPedido"
+            ).innerHTML =
+
+                dia + "/" +
+                mes + "/" +
+                ano;
+
+        }
+
+
+        /* =========================
+           IMPRIMIR
+        ========================= */
+
+        function imprimirNota() {
+
+            window.print();
+
+        }
+
+
+        /* =========================
+           VOLTAR
+        ========================= */
+
+        function voltarPagina() {
+
+            window.history.back();
+
+        }
+
+
+        /* =========================
+           EXECUTA AO ABRIR A PÁGINA
+        ========================= */
+
+        window.onload =
+            carregarPedido;
+
+
+    </script>
+
+
+</body>
+
+</html>
