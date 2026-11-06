@@ -1,0 +1,708 @@
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #d3d0ce;
+            color: #111;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .site {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background-color: #f4e7cf;
+            width: 100%;
+        }
+
+        .navbar {
+            min-height: 80px;
+            padding: 5px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .navbar-brand {
+            color: #111;
+            font-size: 27px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .navbar-brand:hover {
+            color: #111;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+        }
+
+        /* ================= MENU ================= */
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-nav > li,
+        .navbar-nav > a {
+            list-style: none;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .nav-item {
+            text-align: center;
+        }
+
+        .nav-item a,
+        .navbar-nav > a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .nav-item i,
+        .navbar-nav > a i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item span,
+        .navbar-nav > a span {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .nav-item:hover i,
+        .nav-item:hover span,
+        .navbar-nav > a:hover i,
+        .navbar-nav > a:hover span {
+            color: #6b3d22;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            flex: 1;
+        }
+
+        /* ================= TÍTULO ================= */
+
+        .titulo-cardapio {
+            text-align: center;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            margin: 7px 0 12px;
+            color: #111;
+            width: 100%;
+            padding: 0 0 55px;
+            overflow: hidden;
+        }
+
+        /* ================= CARROSSEL ================= */
+
+        .galeria-cardapio {
+            margin-bottom: 30px;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 45px;
+            overflow: hidden;
+        }
+
+        .galeria {
+            display: flex;
+            gap: 28px;
+            transition: transform 0.8s ease-in-out;
+            will-change: transform;
+        }
+
+        .item-galeria {
+            flex: 0 0 calc(25% - 21px);
+            height: 220px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background-color: #aaa5a0;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-galeria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .item-galeria:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ================= SOBRE ================= */
+
+        .sobre {
+            width: 90%;
+            max-width: 1250px;
+            margin: 0 auto 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .texto-sobre p {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1.02;
+            margin: 0;
+            text-align: left;
+        }
+
+        .imagem-restaurante {
+            width: 42%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ================= CARDS PRATOS DO DIA ================= */
+
+        .pratos {
+            width: 100%;
+            padding: 30px 0 50px;
+        }
+
+        .titulo-pratos-dia {
+            text-align: center;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .pratos .card {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            border: none;
+            border-radius: 35px;
+            overflow: hidden;
+            background-color: #f4e7cf;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .prato-card {
+            min-height: 250px;
+        }
+
+        .prato-card-imagem {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .prato-card .card-body {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .card-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-family: Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        .preco-prato {
+            font-family: Arial, sans-serif;
+            font-size: 19px;
+            color: #c96d4b;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+
+        .tempo-preparo {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #6b3d22;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .dia-atual {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin-top: -15px;
+            margin-bottom: 25px;
+            color: #6b3d22;
+            font-weight: bold;
+        }
+
+        .botao-prato {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #d96a4a;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .botao-prato:hover {
+            background-color: #c95538;
+            color: white;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            width: 100%;
+            min-height: 40px;
+            background-color: #f4e7cf;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 30px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= TELA PERFIL ================= */
+
+        .tela-perfil {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .tela-perfil.ativa {
+            display: flex;
+        }
+
+        .perfil-card {
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: #f4e7cf;
+            border-radius: 30px;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .perfil-fechar {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            border: none;
+            background: transparent;
+            font-size: 32px;
+            color: #111;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .perfil-fechar:hover {
+            color: #6b3d22;
+        }
+
+        .foto-perfil-container {
+            position: relative;
+            width: 125px;
+            height: 125px;
+            margin: 0 auto 15px;
+        }
+
+        .foto-perfil {
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #d3d0ce;
+            background-color: #d3d0ce;
+        }
+
+        .botao-foto {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #f4e7cf;
+            background-color: #6b3d22;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .botao-foto:hover {
+            background-color: #4f2c18;
+        }
+
+        #inputFoto {
+            display: none;
+        }
+
+        .perfil-titulo {
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .dados-perfil {
+            background-color: #ead9bd;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .dado {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            word-break: break-word;
+        }
+
+        .dado:last-child {
+            margin-bottom: 0;
+        }
+
+        .dado i {
+            font-size: 20px;
+            color: #6b3d22;
+            min-width: 25px;
+        }
+
+        .perfil-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .perfil-opcao {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 15px;
+            background-color: #d8c3a5;
+            color: #111;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+        }
+
+        .perfil-opcao:hover {
+            background-color: #c9ad89;
+            color: #111;
+        }
+
+        .perfil-sair {
+            background-color: #df6a4b;
+            margin-top: 5px;
+        }
+
+        .perfil-sair:hover {
+            background-color: #c95538;
+        }
+
+        /* ================= RESERVAS ================= */
+
+        .tela-reservas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .tela-reservas.ativa {
+            display: flex;
+        }
+
+        .reservas-card {
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: #f4e7cf;
+            border-radius: 30px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .titulo-reservas {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        .botao-voltar-reservas {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 15px;
+            background-color: #6b3d22;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .botao-voltar-reservas:hover {
+            background-color: #4f2c18;
+        }
+
+        .reserva-item {
+            background-color: #ead9bd;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .reserva-titulo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .reserva-dado {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .reserva-dado i {
+            color: #6b3d22;
+            min-width: 20px;
+        }
+
+        .sem-reservas {
+            text-align: center;
+            padding: 25px 10px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 992px) {
+
+            .item-galeria {
+                flex: 0 0 calc(33.333% - 19px);
+                height: 210px;
+            }
+
+            .sobre {
+                gap: 30px;
+            }
+
+            .texto-sobre p {
+                font-size: 18px;
+            }
+
+            .imagem-restaurante {
+                width: 40%;
+            }
+        }
+
+        /* ================= CELULAR ================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 5px 15px;
+            }
+
+            .navbar-brand {
+                font-size: 22px;
+            }
+
+            .logo {
+                width: 55px;
+                height: 55px;
+            }
+
+            .navbar-nav {
+                gap: 10px;
+                margin-top: 15px;
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .titulo-cardapio {
+                font-size: 24px;
+            }
+
+            .carousel-wrapper {
+                padding: 0 35px;
+            }
+
+            .galeria {
+                gap: 15px;
+            }
+
+            .item-galeria {
+                flex: 0 0 calc(50% - 8px);
+                height: 190px;
+            }
+
+            .sobre {
+                width: 90%;
+                flex-direction: column;
+                gap: 25px;
+                margin-bottom: 35px;
+            }
+
+            .texto-sobre p {
+                font-size: 18px;
+                line-height: 1.1;
+            }
+
+            .imagem-restaurante {
+                width: 100%;
+                height: 220px;
+            }
+
+            .titulo-pratos-dia {
+                font-size: 24px;
+            }
+
+            .prato-card-imagem {
+                height: 220px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .perfil-card {
+                width: 95%;
+                padding: 30px 20px;
+            }
+
+            .reservas-card {
+                width: 95%;
+                padding: 25px 18px;
+            }
+        }
+
+        /* ================= CELULAR PEQUENO ================= */
+
+        @media (max-width: 500px) {
+
+            .titulo-cardapio {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+
+            .item-galeria {
+                flex: 0 0 100%;
+                height: 230px;
+            }
+
+            .sobre {
+                width: 88%;
+            }
+
+            .texto-sobre p {
+                font-size: 17px;
+            }
+
+            .prato-card-imagem {
+                height: 230px;
+            }
+
+        }
+
