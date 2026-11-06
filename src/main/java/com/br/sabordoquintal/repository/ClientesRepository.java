@@ -1,4 +1,8 @@
+
 package com.br.sabordoquintal.repository;
 
-public interface ClientesRepository {
+import com.br.sabordoquintal.model.clientes;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ClientesRepository extends JpaRepository<clientes, Long> {
 }
