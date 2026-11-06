@@ -1,0 +1,509 @@
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            background-color: #d8d5d2;
+            font-family: "Baloo 2", cursive;
+            color: #111;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            height: 95px;
+
+            background-color: #f8e8c9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 8px 30px 8px 25px;
+
+            border-bottom: 2px solid #ddd;
+        }
+
+
+        /* LINK DA LOGO */
+
+        .logo-link {
+
+            display: flex;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+
+        .logo-link:hover {
+
+            transform: scale(1.05);
+        }
+
+
+        .logo {
+
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .titulo {
+
+            font-size: 36px;
+
+            font-weight: 800;
+
+            font-style: italic;
+
+            margin-left: 80px;
+        }
+
+
+        .home {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #000;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            transition: 0.2s;
+        }
+
+
+        .home i {
+
+            font-size: 29px;
+        }
+
+
+        .home:hover {
+
+            transform: scale(1.08);
+        }
+
+
+        /* ================= MAIN ================= */
+
+        main {
+
+            min-height: calc(100vh - 127px);
+
+            padding: 35px 40px;
+        }
+
+
+        .container-principal {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 45px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        /* ================= FORMULÁRIO ================= */
+
+        .formulario {
+
+            background-color: #dfbd8b;
+
+            padding: 25px 35px 30px;
+
+            border-radius: 25px;
+
+            box-shadow: 12px 10px 0 #dd6849;
+        }
+
+
+        .titulo-formulario {
+
+            text-align: center;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+
+        .campo {
+
+            margin-bottom: 13px;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            font-style: italic;
+
+            margin-left: 8px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            height: 38px;
+
+            border: none;
+
+            outline: none;
+
+            border-radius: 10px;
+
+            padding: 0 15px;
+
+            font-family: "Baloo 2", cursive;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            background-color: white;
+        }
+
+
+        .campo input:focus {
+
+            box-shadow: 0 0 0 3px #dd6849;
+        }
+
+
+        /* ================= BOTÃO ================= */
+
+        .btn-continuar {
+
+            display: block;
+
+            margin: 20px auto 0;
+
+            width: 210px;
+
+            height: 44px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background-color: #dd6849;
+
+            color: #000;
+
+            font-family: "Baloo 2", cursive;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .btn-continuar:hover {
+
+            background-color: #c9573a;
+
+            transform: scale(1.03);
+        }
+
+
+        /* ================= MENSAGEM ================= */
+
+        #mensagem {
+
+            display: none;
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            font-weight: 700;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MAPA ================= */
+
+        .mapa {
+
+            width: 100%;
+
+            height: 330px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            background-color: white;
+
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
+        }
+
+
+        .mapa iframe {
+
+            width: 100%;
+
+            height: 100%;
+
+            border: 0;
+        }
+
+
+        /* ================= DESCRIÇÃO ================= */
+
+        .descricao {
+
+            background-color: #dfbd8b;
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            min-height: 120px;
+
+            margin-top: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 16px;
+
+            line-height: 1.3;
+        }
+
+
+        .descricao i {
+
+            font-size: 24px;
+
+            margin-right: 5px;
+        }
+
+
+        /* ================= CONTATO ================= */
+
+        .contato {
+
+            width: 90%;
+
+            min-height: 125px;
+
+            background-color: #dfbd8b;
+
+            border-radius: 20px;
+
+            margin: 35px auto 0;
+
+            padding: 20px;
+
+            font-size: 17px;
+
+            text-align: center;
+        }
+
+
+        .telefone {
+
+            margin-top: 15px;
+
+            font-size: 19px;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= FOTO ================= */
+
+        .foto-restaurante {
+
+            width: 80%;
+
+            height: 200px;
+
+            margin: 25px auto 0;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+        }
+
+
+        .foto-restaurante img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            min-height: 32px;
+
+            background-color: #f8e8c9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 5px 20px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 10px;
+        }
+
+
+        .direitos {
+
+            font-family: "Courier New", monospace;
+
+            font-size: 12px;
+        }
+
+
+        .email {
+
+            font-weight: bold;
+        }
+
+
+        /* ================= RESPONSIVO ================= */
+
+        @media (max-width: 768px) {
+
+            header {
+
+                height: 80px;
+
+                padding: 5px 15px;
+            }
+
+
+            .logo {
+
+                width: 65px;
+
+                height: 65px;
+            }
+
+
+            .titulo {
+
+                font-size: 25px;
+
+                margin-left: 0;
+            }
+
+
+            main {
+
+                padding: 25px 15px;
+            }
+
+
+            .container-principal {
+
+                grid-template-columns: 1fr;
+
+                gap: 30px;
+            }
+
+
+            .formulario {
+
+                padding: 20px;
+            }
+
+
+            .mapa {
+
+                height: 300px;
+            }
+
+
+            .contato {
+
+                width: 100%;
+            }
+
+
+            .foto-restaurante {
+
+                width: 100%;
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                gap: 5px;
+
+                padding: 8px;
+            }
+
+        }
+

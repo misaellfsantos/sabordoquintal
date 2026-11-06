@@ -1,0 +1,580 @@
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d5d1ce;
+            color: #2d241e;
+            padding-bottom: 80px;
+        }
+
+        /* CABEÇALHO */
+
+        header {
+            position: relative;
+            height: 90px;
+            background-color: #f5e9cd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        header > a {
+            position: absolute;
+            left: 35px;
+            top: 8px;
+            width: 75px;
+            height: 75px;
+            display: block;
+        }
+
+        .logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 32px;
+            color: #2d241e;
+        }
+
+        /* CONTEÚDO */
+
+        main {
+            width: 100%;
+            padding: 30px 20px;
+        }
+
+        .titulo-pedido {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo-pedido h2 {
+            margin: 0 0 10px;
+            font-family: Georgia, serif;
+            font-size: 28px;
+        }
+
+        .titulo-pedido p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .dia-atual {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 9px 15px;
+            background-color: #f8e9cd;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        /* CARD DO PEDIDO */
+
+        .pedido {
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            background-color: #dfbd8c;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .pedido h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-family: Georgia, serif;
+            font-size: 23px;
+        }
+
+        .secao-pedido {
+            margin-bottom: 30px;
+        }
+
+        /* ITEM */
+
+        .item-pedido {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.28);
+            border-radius: 12px;
+        }
+
+        .campo-principal {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .campo-principal label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* SELECT */
+
+        select {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 9px;
+            background-color: #d96c4c;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            box-shadow: 0 0 0 2px #2d241e;
+        }
+
+        select option {
+            background-color: white;
+            color: #2d241e;
+            font-weight: normal;
+        }
+
+        /* OBSERVAÇÃO */
+
+        .observacao {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .observacao label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .observacao input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 9px;
+            background-color: white;
+            color: #2d241e;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .observacao input:focus {
+            box-shadow: 0 0 0 2px #d96c4c;
+        }
+
+        /* SABOR DO SUCO */
+
+        .sabor-suco {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .sabor-suco label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sabor-suco select {
+            background-color: #d96c4c;
+        }
+
+        /* QUANTIDADE */
+
+        .quantidade {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            height: 44px;
+        }
+
+        .quantidade button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d96c4c;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quantidade button:hover {
+            background-color: #c75b3d;
+        }
+
+        .quantidade span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* REMOVER */
+
+        .btn-remover {
+            height: 40px;
+            padding: 0 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2d241e;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-remover:hover {
+            background-color: #17120f;
+        }
+
+        /* ADICIONAR */
+
+        .btn-adicionar {
+            border: none;
+            border-radius: 9px;
+            padding: 11px 17px;
+            background-color: #d96c4c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-adicionar:hover {
+            background-color: #c75b3d;
+        }
+
+        /* TOTAL */
+
+        .total {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #f8e9cd;
+            border-radius: 12px;
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* BOTÕES */
+
+        .botoes-final {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 13px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-voltar {
+            background-color: #2d241e;
+            color: white;
+        }
+
+        .btn-continuar {
+            background-color: #d96c4c;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* TELAS FINAIS */
+
+        #telaFinal,
+        #telaNota {
+            display: none;
+        }
+
+        .tela-final-card {
+            width: 100%;
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 30px;
+            background-color: #dfbd8c;
+            border-radius: 16px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .tela-final-card h2 {
+            text-align: center;
+            font-family: Georgia, serif;
+            margin-top: 0;
+        }
+
+        .numero-pedido {
+            text-align: center;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .resumo-item {
+            padding: 13px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.45);
+            border-radius: 9px;
+        }
+
+        .observacao-resumo {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .sabor-resumo {
+            display: block;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .resumo-total {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8e9cd;
+            border-radius: 10px;
+            text-align: right;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        /* NOTA */
+
+        .nota {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #f8e9cd;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .nota h2 {
+            text-align: center;
+            font-family: Georgia, serif;
+        }
+
+        .linha-nota {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(45, 36, 30, 0.2);
+        }
+
+        .observacao-nota {
+            margin-top: 8px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        .sabor-nota {
+            margin-top: 8px;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            min-height: 55px;
+            background-color: #f5e9cd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 15px;
+            z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 13px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 1100px) {
+
+            .item-pedido {
+                flex-wrap: wrap;
+                align-items: flex-end;
+            }
+
+            .campo-principal,
+            .observacao,
+            .sabor-suco {
+                width: 100%;
+                min-width: 100%;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            header {
+                height: 85px;
+            }
+
+            header > a {
+                left: 20px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .pedido {
+                padding: 20px;
+            }
+
+            .botoes-final {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding-bottom: 100px;
+            }
+
+            header {
+                height: 80px;
+            }
+
+            header > a {
+                left: 10px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            header h1 {
+                font-size: 22px;
+                margin-left: 45px;
+            }
+
+            main {
+                padding: 20px 10px;
+            }
+
+            .titulo-pedido h2 {
+                font-size: 23px;
+            }
+
+            .pedido {
+                padding: 15px;
+                border-radius: 12px;
+            }
+
+            .item-pedido {
+                padding: 12px;
+            }
+
+            .quantidade {
+                width: 100%;
+            }
+
+            .btn-remover {
+                flex: 1;
+            }
+
+            footer {
+                font-size: 11px;
+            }
+
+        }
+
+        /* IMPRESSÃO */
+
+        @media print {
+
+            header,
+            footer,
+            #telaPedido,
+            #telaFinal,
+            .botoes-nota {
+                display: none !important;
+            }
+
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            #telaNota {
+                display: block !important;
+            }
+
+            .nota {
+                box-shadow: none;
+                margin: 0 auto;
+            }
+
+        }
+
