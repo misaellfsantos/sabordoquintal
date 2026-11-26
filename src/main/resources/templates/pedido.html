@@ -30,22 +30,8 @@
 
 <!-- CABEÇALHO -->
 
-<header>
-
-    <a th:href="@{/inicio}"
-       aria-label="Voltar para a página principal">
-
-        <img
-                th:src="@{/img/favicon.png}"
-                class="logo"
-                alt="Logo Sabor do Quintal">
-
-    </a>
-
-    <h1>Sabor do Quintal</h1>
-
-</header>
-
+<!-- ================= HEADER ================= -->
+<div th:replace="~{fragments/menu :: menu}"></div>
 
 <!-- TELA DO PEDIDO -->
 

@@ -20,6 +20,9 @@ public class conta {
     @Column(nullable = false)
     private String senha;
 
+    @Column
+    private String telefone;
+
     public conta() {
     }
 
@@ -51,6 +54,14 @@ public class conta {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getSenha() {

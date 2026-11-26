@@ -37,56 +37,8 @@
 
 <body>
 
-<header>
-
-    <nav class="navbar">
-
-        <div class="container d-flex justify-content-between align-items-center">
-
-            <!-- LOGO CLICÁVEL -->
-            <a class="navbar-brand d-flex align-items-center"
-               th:href="@{/inicio}"
-               title="Voltar para a página principal">
-
-                <img th:src="@{/img/logo.png}"
-                     class="rounded-circle logo me-3"
-                     alt="Logo Sabor do Quintal">
-
-                Sabor do Quintal
-
-            </a>
-
-            <!-- MENU -->
-            <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/inicio}">
-                        <i class="bi bi-journal-text"></i>
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/reserva}">
-                        <i class="bi bi-calendar3"></i>
-                        Reserva
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/localizacao}">
-                        <i class="bi bi-geo-alt"></i>
-                        Localização
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </nav>
-
-</header>
+<!-- ================= HEADER ================= -->
+<div th:replace="~{fragments/menu :: menu}"></div>
 
 <main>
 

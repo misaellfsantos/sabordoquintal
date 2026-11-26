@@ -2,47 +2,95 @@
 package com.br.sabordoquintal.controller;
 
 import com.br.sabordoquintal.model.conta;
-import com.br.sabordoquintal.service.ContaService;
+import com.br.sabordoquintal.repository.ContaRepository;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Map;
 
 @RestController
-@RequestMapping("/contas")
+@RequestMapping("/api/auth")
 public class ContaController {
 
-    private final ContaService service;
+    private final ContaRepository repository;
+    private final BCryptPasswordEncoder passwordEncoder =
+            new BCryptPasswordEncoder();
 
-    public ContaController(ContaService service) {
-        this.service = service;
+    public ContaController(ContaRepository repository) {
+        this.repository = repository;
     }
 
-    @GetMapping
-    public List<conta> listar() {
-        return service.listar();
+    // CADASTRO
+    @PostMapping("/cadastro")
+    public ResponseEntity<?> cadastrar(
+            @RequestBody Map<String, String> dados) {
+
+        String nome = dados.get("nome");
+        String email = dados.get("email");
+        String telefone = dados.get("telefone");
+        String senha = dados.get("senha");
+
+        if (nome == null || email == null || senha == null ||
+                nome.isBlank() || email.isBlank() || senha.isBlank()) {
+
+            return ResponseEntity.badRequest()
+                    .body(Map.of("mensagem", "Preencha todos os campos obrigatórios."));
+        }
+
+        email = email.trim().toLowerCase();
+
+        if (repository.existsByEmail(email)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Map.of("mensagem", "Este e-mail já está cadastrado."));
+        }
+
+        conta novaConta = new conta();
+        novaConta.setNome(nome.trim());
+        novaConta.setEmail(email);
+        novaConta.setTelefone(telefone);
+        novaConta.setSenha(passwordEncoder.encode(senha));
+
+        repository.save(novaConta);
+
+        return ResponseEntity.ok(
+                Map.of("mensagem", "Cadastro realizado com sucesso!")
+        );
     }
 
-    @GetMapping("/{id}")
-    public conta buscar(@PathVariable Long id) {
-        return service.buscarPorId(id).orElse(null);
-    }
+    // LOGIN
+    @PostMapping("/login")
+    public ResponseEntity<?> login(
+            @RequestBody Map<String, String> dados) {
 
-    @PostMapping
-    public conta cadastrar(@RequestBody conta conta) {
-        return service.salvar(conta);
-    }
+        String email = dados.get("email");
+        String senha = dados.get("senha");
 
-    @PutMapping("/{id}")
-    public conta atualizar(
-            @PathVariable Long id,
-            @RequestBody conta conta) {
+        if (email == null || senha == null) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("mensagem", "Informe o e-mail e a senha."));
+        }
 
-        conta.setId(id);
-        return service.salvar(conta);
-    }
+        conta usuario = repository.findByEmail(
+                email.trim().toLowerCase()
+        ).orElse(null);
 
-    @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
-        service.excluir(id);
+        if (usuario == null ||
+                !passwordEncoder.matches(senha, usuario.getSenha())) {
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("mensagem", "E-mail ou senha incorretos."));
+        }
+
+        return ResponseEntity.ok(Map.of(
+                "mensagem", "Login realizado com sucesso!",
+                "nome", usuario.getNome(),
+                "email", usuario.getEmail(),
+                "telefone", usuario.getTelefone() == null
+                        ? "" : usuario.getTelefone()
+        ));
     }
 }

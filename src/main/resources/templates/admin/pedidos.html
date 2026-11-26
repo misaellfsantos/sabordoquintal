@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerenciar Pedidos | Sabor do Quintal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --laranja: #c85c3b;
+            --laranja-hover: #a9482e;
+            --bege: #f5e9cd;
+            --fundo: #f4f0e8;
+            --marrom: #2d241e;
+            --marrom-claro: #6b5748;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--fundo);
+            color: var(--marrom);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* HEADER */
+
+        .admin-header {
+            background: var(--marrom);
+            color: var(--bege);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,.15);
+        }
+
+        .admin-header h1 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+            margin: 0;
+        }
+
+        .admin-header a {
+            color: var(--bege);
+            text-decoration: none;
+        }
+
+        /* CONTEÚDO */
+
+        .container-admin {
+            max-width: 1250px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .titulo-pagina {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .descricao {
+            color: var(--marrom-claro);
+            margin-bottom: 30px;
+        }
+
+        /* RESUMO */
+
+        .resumo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+            height: 100%;
+        }
+
+        .resumo-card i {
+            font-size: 25px;
+            color: var(--laranja);
+        }
+
+        .resumo-card h3 {
+            font-size: 27px;
+            font-weight: bold;
+            margin: 12px 0 3px;
+        }
+
+        .resumo-card p {
+            color: #777;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* TABELA */
+
+        .tabela-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+        }
+
+        .table {
+            vertical-align: middle;
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: #f5e9cd;
+            color: var(--marrom);
+            font-size: 13px;
+            padding: 16px;
+            white-space: nowrap;
+        }
+
+        .table tbody td {
+            padding: 16px;
+            font-size: 14px;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .PENDENTE {
+            background: #fff0d5;
+            color: #946000;
+        }
+
+        .RECEBIDO {
+            background: #e8e2d8;
+            color: #554536;
+        }
+
+        .EM_PREPARO {
+            background: #fce0d5;
+            color: #a9482e;
+        }
+
+        .PRONTO {
+            background: #e5e5e5;
+            color: #454545;
+        }
+
+        .ENTREGUE {
+            background: #e8eadf;
+            color: #52603b;
+        }
+
+        .CANCELADO {
+            background: #f5dada;
+            color: #a32626;
+        }
+
+        /* BOTÕES */
+
+        .btn-status {
+            background: var(--laranja);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .btn-status:hover {
+            background: var(--laranja-hover);
+            color: white;
+        }
+
+        .btn-excluir {
+            background: #f5dada;
+            color: #a32626;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .btn-excluir:hover {
+            background: #e9bcbc;
+        }
+
+        .form-select {
+            min-width: 145px;
+            font-size: 13px;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            background: var(--marrom);
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            margin-bottom: 25px;
+        }
+
+        .btn-voltar:hover {
+            background: var(--marrom-claro);
+            color: white;
+        }
+
+        .vazio {
+            padding: 45px !important;
+            text-align: center;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .container-admin {
+                margin: 25px auto;
+            }
+
+            .tabela-container {
+                padding: 15px;
+            }
+
+            .titulo-pagina {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="admin-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1>
+            <i class="bi bi-shop"></i>
+            Sabor do Quintal
+        </h1>
+
+        <a th:href="@{/admin}">
+            <i class="bi bi-speedometer2"></i>
+            Painel administrativo
+        </a>
+    </div>
+</header>
+
+<main class="container-admin">
+
+    <a th:href="@{/admin}" class="btn-voltar">
+        <i class="bi bi-arrow-left"></i>
+        Voltar ao painel
+    </a>
+
+    <h2 class="titulo-pagina">Gerenciamento de pedidos</h2>
+
+    <p class="descricao">
+        Consulte os pedidos realizados e acompanhe o andamento de cada um.
+    </p>
+
+    <!-- RESUMO -->
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <div class="resumo-card">
+                <i class="bi bi-receipt"></i>
+                <h3 th:text="${#lists.size(pedidos)}">0</h3>
+                <p>Total de pedidos</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="resumo-card">
+                <i class="bi bi-clock-history"></i>
+                <h3 th:text="${#lists.size(pedidos.?[status == 'PENDENTE'])}">0</h3>
+                <p>Pedidos pendentes</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="resumo-card">
+                <i class="bi bi-check-circle"></i>
+                <h3 th:text="${#lists.size(pedidos.?[status == 'ENTREGUE'])}">0</h3>
+                <p>Pedidos entregues</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABELA -->
+
+    <section class="tabela-container">
+
+        <h4 class="mb-4">
+            <i class="bi bi-list-ul"></i>
+            Pedidos cadastrados
+        </h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Atualizar</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="pedido : ${pedidos}">
+
+                    <td th:text="${pedido.id}"></td>
+
+                    <td th:text="${pedido.cliente != null ? pedido.cliente : 'Cliente não informado'}"></td>
+
+                    <td th:text="${pedido.dataPedido != null ? #temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm') : '-'}"></td>
+
+                    <td th:text="${pedido.total != null ? 'R$ ' + #numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA') : 'R$ 0,00'}"></td>
+
+                    <td>
+                        <span class="status"
+                              th:classappend="${pedido.status}"
+                              th:text="${pedido.status}">
+                        </span>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/admin/pedidos/status/{id}(id=${pedido.id})}"
+                              method="post"
+                              class="d-flex gap-2">
+
+                            <select name="status" class="form-select">
+
+                                <option value="PENDENTE"
+                                        th:selected="${pedido.status == 'PENDENTE'}">
+                                    Pendente
+                                </option>
+
+                                <option value="RECEBIDO"
+                                        th:selected="${pedido.status == 'RECEBIDO'}">
+                                    Recebido
+                                </option>
+
+                                <option value="EM_PREPARO"
+                                        th:selected="${pedido.status == 'EM_PREPARO'}">
+                                    Em preparo
+                                </option>
+
+                                <option value="PRONTO"
+                                        th:selected="${pedido.status == 'PRONTO'}">
+                                    Pronto
+                                </option>
+
+                                <option value="ENTREGUE"
+                                        th:selected="${pedido.status == 'ENTREGUE'}">
+                                    Entregue
+                                </option>
+
+                                <option value="CANCELADO"
+                                        th:selected="${pedido.status == 'CANCELADO'}">
+                                    Cancelado
+                                </option>
+
+                            </select>
+
+                            <button type="submit" class="btn-status">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+
+                        </form>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/admin/pedidos/excluir/{id}(id=${pedido.id})}"
+                              method="post"
+                              onsubmit="return confirm('Deseja realmente excluir este pedido?')">
+
+                            <button type="submit" class="btn-excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(pedidos)}">
+                    <td colspan="7" class="vazio">
+                        <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                        Nenhum pedido cadastrado até o momento.
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

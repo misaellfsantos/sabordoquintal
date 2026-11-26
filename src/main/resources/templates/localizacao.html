@@ -47,34 +47,7 @@
 <body>
 
 <!-- ================= HEADER ================= -->
-
-<header>
-
-    <!-- LOGO CLICÁVEL -->
-    <a th:href="@{/inicio}"
-       class="logo-link"
-       title="Voltar para a página principal">
-
-        <img th:src="@{/img/logo.png}"
-             alt="Logo Sabor do Quintal"
-             class="logo">
-
-    </a>
-
-    <h1 class="titulo">
-        Sabor do Quintal
-    </h1>
-
-    <a th:href="@{/inicio}" class="home">
-
-        <i class="bi bi-house-door"></i>
-
-        <span>Home</span>
-
-    </a>
-
-</header>
-
+<div th:replace="~{fragments/menu :: menu}"></div>
 
 <!-- ================= MAIN ================= -->
 

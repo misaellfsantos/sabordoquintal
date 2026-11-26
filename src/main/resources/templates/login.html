@@ -10,11 +10,11 @@
 
     <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
 
-    <!-- Bootstrap primeiro -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- CSS próprio depois do Bootstrap -->
+    <!-- CSS próprio -->
     <link rel="stylesheet" th:href="@{/css/login.css}">
 
     <title>Login - Sabor do Quintal</title>
@@ -59,7 +59,8 @@
                         <input type="email"
                                class="form-control"
                                id="emailLogin"
-                               placeholder="Digite seu e-mail">
+                               placeholder="Digite seu e-mail"
+                               required>
 
                     </div>
 
@@ -72,7 +73,8 @@
                         <input type="password"
                                class="form-control"
                                id="senhaLogin"
-                               placeholder="Digite sua senha">
+                               placeholder="Digite sua senha"
+                               required>
 
                     </div>
 
@@ -181,7 +183,8 @@
                     </div>
 
                     <button type="submit"
-                            class="btn btn-entrar w-100">
+                            class="btn btn-entrar w-100"
+                            id="btnCadastrar">
 
                         Cadastrar
 
@@ -293,7 +296,6 @@
     // VOLTAR PARA LOGIN
 
     btnVoltarLogin.addEventListener("click", mostrarLogin);
-
     btnVoltarRecuperar.addEventListener("click", mostrarLogin);
 
     // MOSTRAR RECUPERAÇÃO DE SENHA
@@ -308,59 +310,87 @@
 
     });
 
-    // BUSCAR CONTAS CADASTRADAS
+    // LOGIN - CONSULTAR BANCO DE DADOS
 
-    function buscarContas() {
-
-        try {
-
-            return JSON.parse(
-                localStorage.getItem("contasSaborQuintal")
-            ) || [];
-
-        } catch (erro) {
-
-            return [];
-
-        }
-
-    }
-
-    // LOGIN DIRETO PARA TESTE
-
-    formLogin.addEventListener("submit", function (event) {
+    formLogin.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        localStorage.setItem("usuarioLogado", "true");
+        const email = document.getElementById("emailLogin")
+            .value.trim().toLowerCase();
 
-        localStorage.setItem("nomeUsuario", "Visitante");
+        const senha = document.getElementById("senhaLogin").value;
 
-        localStorage.setItem(
-            "emailUsuario",
-            "visitante@sabordoquintal.com"
-        );
+        const botao = document.getElementById("btnEnviar");
 
-        localStorage.setItem("telefoneUsuario", "");
+        botao.disabled = true;
+        botao.textContent = "Entrando...";
 
-        localStorage.setItem(
-            "usuarioSaborQuintal",
-            JSON.stringify({
-                nome: "Visitante",
-                email: "visitante@sabordoquintal.com",
-                telefone: ""
-            })
-        );
+        try {
 
-        alert("Entrada realizada com sucesso!");
+            const resposta = await fetch("/api/auth/login", {
 
-        window.location.href = "/inicio";
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+
+            });
+
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+
+                alert(dados.mensagem || "E-mail ou senha incorretos.");
+                return;
+
+            }
+
+            // SALVAR DADOS BÁSICOS DO USUÁRIO
+
+            localStorage.setItem("usuarioLogado", "true");
+
+            localStorage.setItem("nomeUsuario", dados.nome);
+            localStorage.setItem("emailUsuario", dados.email);
+            localStorage.setItem("telefoneUsuario", dados.telefone || "");
+
+            localStorage.setItem(
+                "usuarioSaborQuintal",
+                JSON.stringify({
+                    nome: dados.nome,
+                    email: dados.email,
+                    telefone: dados.telefone || ""
+                })
+            );
+
+            alert("Login realizado com sucesso!");
+
+            window.location.href = "/inicio";
+
+        } catch (erro) {
+
+            console.error("Erro no login:", erro);
+
+            alert("Não foi possível conectar ao servidor.");
+
+        } finally {
+
+            botao.disabled = false;
+            botao.textContent = "Entrar";
+
+        }
 
     });
 
-    // CADASTRO
+    // CADASTRO - SALVAR NO MYSQL
 
-    formCadastro.addEventListener("submit", function (event) {
+    formCadastro.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
@@ -378,6 +408,8 @@
         const confirmarSenha = document.getElementById("confirmarSenha")
             .value;
 
+        const botao = document.getElementById("btnCadastrar");
+
         if (senha.length < 6) {
 
             alert("A senha deve possuir pelo menos 6 caracteres.");
@@ -392,50 +424,61 @@
 
         }
 
-        const contas = buscarContas();
+        botao.disabled = true;
+        botao.textContent = "Cadastrando...";
 
-        const emailExiste = contas.some(function (conta) {
+        try {
 
-            return conta.email.toLowerCase() === email;
+            const resposta = await fetch("/api/auth/cadastro", {
 
-        });
+                method: "POST",
 
-        if (emailExiste) {
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            alert("Este e-mail já está cadastrado.");
-            return;
+                body: JSON.stringify({
+
+                    nome: nome,
+                    email: email,
+                    telefone: telefone,
+                    senha: senha
+
+                })
+
+            });
+
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+
+                alert(dados.mensagem || "Não foi possível realizar o cadastro.");
+                return;
+
+            }
+
+            alert(dados.mensagem);
+
+            // LIMPAR FORMULÁRIO E VOLTAR PARA LOGIN
+
+            formCadastro.reset();
+
+            document.getElementById("emailLogin").value = email;
+
+            mostrarLogin();
+
+        } catch (erro) {
+
+            console.error("Erro no cadastro:", erro);
+
+            alert("Não foi possível conectar ao servidor.");
+
+        } finally {
+
+            botao.disabled = false;
+            botao.textContent = "Cadastrar";
 
         }
-
-        const novaConta = {
-
-            nome: nome,
-            email: email,
-            telefone: telefone,
-            senha: senha
-
-        };
-
-        contas.push(novaConta);
-
-        localStorage.setItem(
-            "contasSaborQuintal",
-            JSON.stringify(contas)
-        );
-
-        localStorage.setItem("usuarioLogado", "true");
-        localStorage.setItem("nomeUsuario", nome);
-        localStorage.setItem("emailUsuario", email);
-        localStorage.setItem("telefoneUsuario", telefone);
-
-        localStorage.setItem(
-            "usuarioSaborQuintal",
-            JSON.stringify(novaConta)
-        );
-
-        alert("Cadastro realizado com sucesso!");
-
-        window.location.href = "/inicio";
 
     });
 
@@ -445,26 +488,8 @@
 
         event.preventDefault();
 
-        const email = document.getElementById("emailRecuperar")
-            .value.trim().toLowerCase();
-
-        const contas = buscarContas();
-
-        const usuario = contas.find(function (conta) {
-
-            return conta.email.toLowerCase() === email;
-
-        });
-
-        if (!usuario) {
-
-            alert("Não encontramos uma conta com esse e-mail.");
-            return;
-
-        }
-
         alert(
-            "Conta encontrada! Entre em contato com o restaurante para recuperar sua senha."
+            "A recuperação de senha ainda não está configurada no servidor. Entre em contato com o restaurante."
         );
 
     });
