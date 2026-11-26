@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -8,459 +9,412 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
-        content="Página oficial do Sabor do Quintal, restaurante rural com comida caseira e saborosa.">
+          content="Página oficial do Sabor do Quintal, restaurante rural com comida caseira e saborosa.">
 
     <meta name="keywords"
-        content="Sabor do Quintal, restaurante rural, restaurante, comida caseira, localização">
+          content="Sabor do Quintal, restaurante rural, restaurante, comida caseira, localização">
 
     <meta name="author" content="Luara Pires">
 
-    <link rel="icon" type="image/png" href="../faviconn.png">
+    <!-- FAVICON -->
+    <link rel="icon"
+          type="image/png"
+          th:href="@{/img/favicon.png}">
 
     <title>Sabor do Quintal - Localização</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="icon"
-          th:href="@{/img/favicon.png}"
-          type="image/x-icon">
-
-    <!-- Fonte -->
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/localizacao.css}">
+          rel="stylesheet">
 
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/localizacao.css}">
 
 </head>
 
-
 <body>
 
+<!-- ================= HEADER ================= -->
 
-    <!-- ================= HEADER ================= -->
+<header>
 
-    <header>
+    <!-- LOGO CLICÁVEL -->
+    <a th:href="@{/inicio}"
+       class="logo-link"
+       title="Voltar para a página principal">
 
-        <!-- LOGO CLICÁVEL -->
+        <img th:src="@{/img/logo.png}"
+             alt="Logo Sabor do Quintal"
+             class="logo">
 
-        <a
-            href="pagina_principal.html"
-            class="logo-link"
-            title="Voltar para a página principal"
-        >
+    </a>
 
-            <img
-                src="../imagem/logo.png"
-                alt="Logo Sabor do Quintal"
-                class="logo"
-            >
+    <h1 class="titulo">
+        Sabor do Quintal
+    </h1>
 
-        </a>
+    <a th:href="@{/inicio}" class="home">
 
+        <i class="bi bi-house-door"></i>
 
-        <h1 class="titulo">
-            Sabor do Quintal
-        </h1>
+        <span>Home</span>
 
+    </a>
 
-        <a
-            href="pagina_principal.html"
-            class="home"
-        >
-
-            <i class="bi bi-house-door"></i>
-
-            <span>Home</span>
-
-        </a>
-
-    </header>
+</header>
 
 
+<!-- ================= MAIN ================= -->
 
-    <!-- ================= MAIN ================= -->
+<main>
 
-    <main>
+    <div class="container-principal">
 
-        <div class="container-principal">
+        <!-- ================= COLUNA ESQUERDA ================= -->
 
+        <section>
 
-            <!-- ================= COLUNA ESQUERDA ================= -->
+            <div class="formulario">
 
-            <section>
+                <h2 class="titulo-formulario">
 
+                    <i class="bi bi-geo-alt"></i>
 
-                <div class="formulario">
+                    Encontre nosso restaurante
 
-                    <h2 class="titulo-formulario">
+                </h2>
 
-                        <i class="bi bi-geo-alt"></i>
+                <!-- ESTADO -->
 
-                        Encontre nosso restaurante
+                <div class="campo">
 
-                    </h2>
+                    <label for="estado">
+                        Estado:
+                    </label>
 
-
-                    <!-- ESTADO -->
-
-                    <div class="campo">
-
-                        <label for="estado">
-                            Estado:
-                        </label>
-
-                        <input
+                    <input
                             type="text"
                             id="estado"
                             value="São Paulo"
-                            placeholder="Ex: São Paulo"
-                        >
+                            placeholder="Ex: São Paulo">
 
-                    </div>
+                </div>
 
 
-                    <!-- CIDADE -->
+                <!-- CIDADE -->
 
-                    <div class="campo">
+                <div class="campo">
 
-                        <label for="cidade">
-                            Cidade:
-                        </label>
+                    <label for="cidade">
+                        Cidade:
+                    </label>
 
-                        <input
+                    <input
                             type="text"
                             id="cidade"
                             value="São Roque"
-                            placeholder="Ex: São Roque"
-                        >
+                            placeholder="Ex: São Roque">
 
-                    </div>
+                </div>
 
 
-                    <!-- BAIRRO -->
+                <!-- BAIRRO -->
 
-                    <div class="campo">
+                <div class="campo">
 
-                        <label for="bairro">
-                            Bairro:
-                        </label>
+                    <label for="bairro">
+                        Bairro:
+                    </label>
 
-                        <input
+                    <input
                             type="text"
                             id="bairro"
                             value="Canguera"
-                            placeholder="Ex: Canguera"
-                        >
+                            placeholder="Ex: Canguera">
 
-                    </div>
+                </div>
 
 
-                    <!-- RUA -->
+                <!-- RUA -->
 
-                    <div class="campo">
+                <div class="campo">
 
-                        <label for="rua">
-                            Rua / número:
-                        </label>
+                    <label for="rua">
+                        Rua / número:
+                    </label>
 
-                        <input
+                    <input
                             type="text"
                             id="rua"
                             value="Estrada do Vinho, 2450"
-                            placeholder="Ex: Estrada do Vinho, 2450"
-                        >
+                            placeholder="Ex: Estrada do Vinho, 2450">
 
-                    </div>
-
-
-                    <div id="mensagem"></div>
+                </div>
 
 
-                    <!-- BOTÃO -->
+                <div id="mensagem"></div>
 
-                    <button
+
+                <!-- BOTÃO -->
+
+                <button
                         type="button"
                         class="btn-continuar"
-                        onclick="mostrarMapa()"
-                    >
+                        onclick="mostrarMapa()">
 
-                        <i class="bi bi-map"></i>
+                    <i class="bi bi-map"></i>
 
-                        Encontrar no mapa
+                    Encontrar no mapa
 
-                    </button>
+                </button>
 
-                </div>
-
+            </div>
 
 
-                <!-- CONTATO -->
+            <!-- CONTATO -->
 
-                <div class="contato">
+            <div class="contato">
 
-                    <p>
+                <p>
+                    Caso tenha alguma dúvida,
+                    entre em contato conosco.
+                </p>
 
-                        Caso tenha alguma dúvida,
-                        entre em contato conosco.
+                <p class="telefone">
 
-                    </p>
+                    <i class="bi bi-telephone"></i>
 
+                    (11) 9 3275-8484
 
-                    <p class="telefone">
+                </p>
 
-                        <i class="bi bi-telephone"></i>
+            </div>
 
-                        (11) 9 3275-8484
-
-                    </p>
-
-                </div>
-
-            </section>
+        </section>
 
 
+        <!-- ================= COLUNA DIREITA ================= -->
 
-            <!-- ================= COLUNA DIREITA ================= -->
+        <section>
 
-            <section>
+            <!-- MAPA -->
 
+            <div class="mapa">
 
-                <!-- MAPA -->
-
-                <div class="mapa">
-
-                    <iframe
+                <iframe
                         id="mapaGoogle"
                         src="https://www.google.com/maps?q=Estrada%20do%20Vinho%2C%202450%2C%20Canguera%2C%20São%20Roque%2C%20São%20Paulo%2C%2018145-000&output=embed"
                         loading="lazy"
                         allowfullscreen>
-                    </iframe>
+                </iframe>
 
-                </div>
+            </div>
 
 
+            <!-- DESCRIÇÃO -->
 
-                <!-- DESCRIÇÃO -->
+            <div class="descricao">
 
-                <div class="descricao">
+                <p>
 
-                    <p>
+                    <i class="bi bi-geo-alt-fill"></i>
 
-                        <i class="bi bi-geo-alt-fill"></i>
+                    <strong>
+                        Sabor do Quintal – Restaurante Rural
+                    </strong>
 
-                        <strong>Sabor do Quintal – Restaurante Rural</strong><br>
+                    <br>
 
-                        Estrada do Vinho, 2450 – Canguera<br>
+                    Estrada do Vinho, 2450 – Canguera
 
-                        São Roque – SP | CEP 18145-000
+                    <br>
 
-                    </p>
+                    São Roque – SP | CEP 18145-000
 
-                </div>
+                </p>
 
+            </div>
 
 
-                <!-- FOTO -->
+            <!-- FOTO -->
 
-                <div class="foto-restaurante">
+            <div class="foto-restaurante">
 
-                    <img
-                        src="../imagem/entrada_restaurante.png"
-                        alt="Entrada do restaurante Sabor do Quintal"
-                    >
+                <img
+                        th:src="@{/img/entrada_restaurante.png}"
+                        alt="Entrada do restaurante Sabor do Quintal">
 
-                </div>
+            </div>
 
-            </section>
+        </section>
 
-        </div>
+    </div>
 
-    </main>
+</main>
 
 
+<!-- ================= FOOTER ================= -->
 
-    <!-- ================= FOOTER ================= -->
+<footer>
 
-    <footer>
+    <div>
 
-        <div>
+        <i class="bi bi-telephone"></i>
 
-            <i class="bi bi-telephone"></i>
+        (11) 9 3275-8484
 
-            (11) 9 3275-8484
+    </div>
 
-        </div>
 
+    <div class="direitos">
 
-        <div class="direitos">
+        © Direitos autorais
 
-            © Direitos autorais
+    </div>
 
-        </div>
 
+    <div class="email">
 
-        <div class="email">
+        sabordoquintal@gmail.com
 
-            sabordoquintal@gmail.com
+    </div>
 
-        </div>
+</footer>
 
-    </footer>
 
+<!-- ================= JAVASCRIPT ================= -->
 
+<script>
 
-    <!-- ================= JAVASCRIPT ================= -->
+    function mostrarMapa() {
 
-    <script>
+        // Pega os valores digitados
 
-        function mostrarMapa() {
+        const estado =
+            document.getElementById("estado").value.trim();
 
-            // Pega os valores digitados
+        const cidade =
+            document.getElementById("cidade").value.trim();
 
-            const estado =
-                document.getElementById("estado").value.trim();
+        const bairro =
+            document.getElementById("bairro").value.trim();
 
-            const cidade =
-                document.getElementById("cidade").value.trim();
+        const rua =
+            document.getElementById("rua").value.trim();
 
-            const bairro =
-                document.getElementById("bairro").value.trim();
 
-            const rua =
-                document.getElementById("rua").value.trim();
+        const mensagem =
+            document.getElementById("mensagem");
 
 
-            const mensagem =
-                document.getElementById("mensagem");
+        // Verifica os campos
 
-
-            // Verifica os campos
-
-            if (
-                estado === "" ||
-                cidade === "" ||
-                bairro === ""
-            ) {
-
-                mensagem.style.display = "block";
-
-                mensagem.style.color = "#a00000";
-
-                mensagem.innerHTML =
-                    "Preencha Estado, Cidade e Bairro.";
-
-                return;
-
-            }
-
-
-            /*
-                Monta o endereço.
-
-                Aqui NÃO colocamos o nome do restaurante,
-                pois queremos que o Google Maps procure
-                diretamente pelo endereço.
-            */
-
-            let endereco = "";
-
-
-            if (rua !== "") {
-
-                endereco += rua + ", ";
-
-            }
-
-
-            endereco +=
-                bairro + ", " +
-                cidade + ", " +
-                estado;
-
-
-            /*
-                Transforma o endereço em formato
-                adequado para a URL.
-            */
-
-            const enderecoMapa =
-                encodeURIComponent(endereco);
-
-
-            /*
-                Atualiza o mapa que aparece
-                dentro da página.
-            */
-
-            const mapa =
-                document.getElementById("mapaGoogle");
-
-
-            mapa.src =
-                "https://www.google.com/maps?q=" +
-                enderecoMapa +
-                "&output=embed";
-
-
-            /*
-                Mostra confirmação.
-            */
+        if (
+            estado === "" ||
+            cidade === "" ||
+            bairro === ""
+        ) {
 
             mensagem.style.display = "block";
 
-            mensagem.style.color = "#155724";
+            mensagem.style.color = "#a00000";
 
-            mensagem.innerHTML =
-                "Localização atualizada no mapa!";
+            mensagem.textContent =
+                "Preencha Estado, Cidade e Bairro.";
 
-
-            /*
-                Leva o usuário até o mapa.
-            */
-
-            document.querySelector(".mapa").scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "center"
-
-            });
+            return;
 
         }
 
 
-        /*
-            Permite usar a tecla ENTER
-            para pesquisar.
-        */
+        // Monta o endereço
 
-        document.querySelectorAll(".campo input").forEach(function(input) {
+        let endereco = "";
 
-            input.addEventListener("keydown", function(event) {
 
-                if (event.key === "Enter") {
+        if (rua !== "") {
 
-                    mostrarMapa();
+            endereco += rua + ", ";
 
-                }
+        }
 
-            });
+
+        endereco +=
+            bairro + ", " +
+            cidade + ", " +
+            estado;
+
+
+        // Codifica o endereço para a URL
+
+        const enderecoMapa =
+            encodeURIComponent(endereco);
+
+
+        // Atualiza o mapa
+
+        const mapa =
+            document.getElementById("mapaGoogle");
+
+
+        mapa.src =
+            "https://www.google.com/maps?q=" +
+            enderecoMapa +
+            "&output=embed";
+
+
+        // Mostra confirmação
+
+        mensagem.style.display = "block";
+
+        mensagem.style.color = "#155724";
+
+        mensagem.textContent =
+            "Localização atualizada no mapa!";
+
+
+        // Leva o usuário até o mapa
+
+        document.querySelector(".mapa").scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
 
         });
 
-    </script>
+    }
 
+
+    // Permite usar ENTER para pesquisar
+
+    document.querySelectorAll(".campo input").forEach(function(input) {
+
+        input.addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+
+                mostrarMapa();
+
+            }
+
+        });
+
+    });
+
+</script>
 
 </body>
-
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservas | Sabor do Quintal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+
+<header class="p-3 shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h3>Sabor do Quintal</h3>
+        <a th:href="@{/admin}" class="btn btn-outline-dark">
+            Voltar ao painel
+        </a>
+    </div>
+</header>
+
+<main class="container py-5">
+
+    <h2 class="mb-2">Gerenciamento de reservas</h2>
+    <p class="text-muted mb-4">
+        Consulte e gerencie as reservas realizadas pelos clientes.
+    </p>
+
+    <div th:if="${reservas == null or #lists.isEmpty(reservas)}"
+         class="alert alert-info">
+        Nenhuma reserva cadastrada até o momento.
+    </div>
+
+    <div class="table-responsive"
+         th:if="${reservas != null and !#lists.isEmpty(reservas)}">
+
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Pessoas</th>
+                <th>Ambiente</th>
+                <th>Mesa</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="reserva : ${reservas}">
+
+                <td th:text="${reserva.nomeCliente}"></td>
+                <td th:text="${reserva.telefone}"></td>
+                <td th:text="${reserva.dataReserva}"></td>
+                <td th:text="${reserva.horario}"></td>
+                <td th:text="${reserva.quantidadePessoas}"></td>
+                <td th:text="${reserva.ambiente}"></td>
+                <td th:text="${reserva.mesa}"></td>
+                <td>
+                    <span class="badge bg-warning text-dark"
+                          th:text="${reserva.status}"></span>
+                </td>
+
+                <td>
+                    <form th:action="@{/admin/reservas/excluir/{id}(id=${reserva.id})}"
+                          method="post"
+                          onsubmit="return confirm('Deseja realmente excluir esta reserva?')">
+
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Excluir
+                        </button>
+
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>

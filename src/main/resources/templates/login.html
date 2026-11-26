@@ -3,236 +3,94 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Acesse sua conta do Sabor do Quintal.">
 
-    <meta name="description"
-          content="Página oficial do Sabor do Quintal.">
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
 
-    <meta name="author"
-          content="Luara Pires">
-
-    <link rel="icon"
-          th:href="@{/img/favicon.png}"
-          type="image/x-icon">
-
-    <title>Sabor do Quintal - Login</title>
-
-    <!-- Bootstrap -->
+    <!-- Bootstrap primeiro -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet"
-          th:href="@{/css/login.css}">
+    <!-- CSS próprio depois do Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 
+    <title>Login - Sabor do Quintal</title>
 </head>
 
 <body>
 
-<header>
+<div class="container">
 
-    <div class="container text-center">
+    <div class="row justify-content-center align-items-center min-vh-100">
 
-        <img th:src="@{/img/favicon.png}"
-             class="rounded-circle"
-             alt="Logo Sabor do Quintal">
+        <div class="col-12 col-md-8 col-lg-5">
 
-    </div>
+            <div class="card shadow p-4">
 
-</header>
+                <div class="text-center mb-4">
 
+                    <img th:src="@{/img/logo.png}"
+                         class="rounded-circle"
+                         alt="Logo Sabor do Quintal"
+                         width="110"
+                         height="110">
 
-<main class="container">
+                    <h2 class="mt-3">Sabor do Quintal</h2>
 
-    <div class="row justify-content-center align-items-center g-5">
+                    <p>Bem-vindo ao nosso restaurante!</p>
 
-        <!-- TEXTO -->
+                </div>
 
-        <div class="col-12 col-md-6 login-text">
+                <!-- FORMULÁRIO DE LOGIN -->
 
-            <h1>
+                <form id="formLogin">
 
-                Bem-vindo ao
-
-                <span>
-                    Sabor do Quintal!
-                </span>
-
-            </h1>
-
-            <p>
-
-                Acesse sua conta para continuar e aproveitar
-                todos os recursos do nosso restaurante.
-
-            </p>
-
-        </div>
-
-
-        <!-- FORMULÁRIO -->
-
-        <div class="col-12 col-md-6 col-lg-5">
-
-            <div class="login-container">
-
-                <form id="formLogin" novalidate>
-
-                    <h2 class="login-title text-center"
-                        id="tituloFormulario">
-
-                        Entrar
-
-                    </h2>
-
-
-                    <!-- NOME -->
+                    <h4 class="text-center mb-3">Entrar</h4>
 
                     <div class="mb-3">
 
-                        <label for="nome"
-                               class="form-label">
-
-                            Nome:
-
-                        </label>
-
-                        <input type="text"
-                               id="nome"
-                               name="nome"
-                               class="form-control"
-                               placeholder="Digite seu nome"
-                               autocomplete="name"
-                               minlength="3">
-
-                        <div class="invalid-feedback">
-
-                            Digite seu nome.
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- EMAIL -->
-
-                    <div class="mb-3">
-
-                        <label for="email"
-                               class="form-label">
-
-                            E-mail:
-
+                        <label for="emailLogin" class="form-label">
+                            E-mail
                         </label>
 
                         <input type="email"
-                               id="email"
-                               name="email"
                                class="form-control"
-                               placeholder="Digite seu e-mail"
-                               autocomplete="email"
-                               required>
-
-                        <div class="invalid-feedback">
-
-                            Digite um e-mail válido.
-
-                        </div>
+                               id="emailLogin"
+                               placeholder="Digite seu e-mail">
 
                     </div>
-
-
-                    <!-- TELEFONE -->
 
                     <div class="mb-3">
 
-                        <label for="telefone"
-                               class="form-label">
-
-                            Telefone:
-
-                        </label>
-
-                        <input type="tel"
-                               id="telefone"
-                               name="telefone"
-                               class="form-control"
-                               placeholder="(00) 00000-0000"
-                               autocomplete="tel"
-                               inputmode="numeric"
-                               maxlength="15">
-
-                        <div class="invalid-feedback">
-
-                            Digite um telefone válido.
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- SENHA -->
-
-                    <div class="mb-2">
-
-                        <label for="senha"
-                               class="form-label">
-
-                            Senha:
-
+                        <label for="senhaLogin" class="form-label">
+                            Senha
                         </label>
 
                         <input type="password"
-                               id="senha"
-                               name="senha"
                                class="form-control"
-                               placeholder="Digite sua senha"
-                               autocomplete="current-password"
-                               required
-                               minlength="6">
-
-                        <div class="invalid-feedback">
-
-                            A senha deve ter pelo menos
-                            6 caracteres.
-
-                        </div>
+                               id="senhaLogin"
+                               placeholder="Digite sua senha">
 
                     </div>
 
+                    <div class="text-end mb-3">
 
-                    <!-- ESQUECEU SENHA -->
-
-                    <div class="text-end mb-4"
-                         id="areaEsqueceuSenha">
-
-                        <a href="#"
-                           class="esqueceu-senha"
-                           data-bs-toggle="modal"
-                           data-bs-target="#modalSenha">
-
-                            Esqueceu a senha?
-
+                        <a href="#" id="linkRecuperar">
+                            Esqueceu sua senha?
                         </a>
 
                     </div>
 
-
-                    <!-- ENTRAR / CADASTRAR -->
-
-                    <a th:href="@{/inicio}"
-                       class="btn btn-entrar w-100"
-                       id="btnEnviar">
+                    <button type="submit"
+                            class="btn btn-entrar w-100"
+                            id="btnEnviar">
 
                         Entrar
 
-                    </a>
-
-
-                    <!-- CRIAR CONTA -->
+                    </button>
 
                     <button type="button"
                             class="btn btn-outline-secondary w-100 mt-3"
@@ -242,15 +100,139 @@
 
                     </button>
 
+                </form>
 
-                    <!-- VOLTAR -->
+                <!-- FORMULÁRIO DE CADASTRO -->
+
+                <form id="formCadastro" style="display: none;">
+
+                    <h4 class="text-center mb-3">Criar conta</h4>
+
+                    <div class="mb-3">
+
+                        <label for="nomeCadastro" class="form-label">
+                            Nome completo
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="nomeCadastro"
+                               placeholder="Digite seu nome"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="emailCadastro" class="form-label">
+                            E-mail
+                        </label>
+
+                        <input type="email"
+                               class="form-control"
+                               id="emailCadastro"
+                               placeholder="Digite seu e-mail"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="telefoneCadastro" class="form-label">
+                            Telefone
+                        </label>
+
+                        <input type="tel"
+                               class="form-control"
+                               id="telefoneCadastro"
+                               placeholder="(11) 99999-9999"
+                               maxlength="15"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="senhaCadastro" class="form-label">
+                            Senha
+                        </label>
+
+                        <input type="password"
+                               class="form-control"
+                               id="senhaCadastro"
+                               placeholder="Crie uma senha"
+                               minlength="6"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="confirmarSenha" class="form-label">
+                            Confirmar senha
+                        </label>
+
+                        <input type="password"
+                               class="form-control"
+                               id="confirmarSenha"
+                               placeholder="Confirme sua senha"
+                               required>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-entrar w-100">
+
+                        Cadastrar
+
+                    </button>
 
                     <button type="button"
                             class="btn btn-outline-secondary w-100 mt-3"
-                            id="btnVoltarLogin"
-                            style="display: none;">
+                            id="btnVoltarLogin">
 
-                        Voltar para entrar
+                        Voltar para o login
+
+                    </button>
+
+                </form>
+
+                <!-- RECUPERAÇÃO DE SENHA -->
+
+                <form id="formRecuperar" style="display: none;">
+
+                    <h4 class="text-center mb-3">Recuperar senha</h4>
+
+                    <p class="text-center">
+                        Informe seu e-mail cadastrado.
+                    </p>
+
+                    <div class="mb-3">
+
+                        <label for="emailRecuperar" class="form-label">
+                            E-mail
+                        </label>
+
+                        <input type="email"
+                               class="form-control"
+                               id="emailRecuperar"
+                               placeholder="Digite seu e-mail"
+                               required>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-entrar w-100">
+
+                        Recuperar
+
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-secondary w-100 mt-3"
+                            id="btnVoltarRecuperar">
+
+                        Voltar para o login
 
                     </button>
 
@@ -258,81 +240,14 @@
 
             </div>
 
-        </div>
-
-    </div>
-
-</main>
-
-
-<!-- MODAL RECUPERAR SENHA -->
-
-<div class="modal fade"
-     id="modalSenha"
-     tabindex="-1"
-     aria-labelledby="modalSenhaLabel"
-     aria-hidden="true">
-
-    <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-
-                <h5 class="modal-title"
-                    id="modalSenhaLabel">
-
-                    Recuperar senha
-
-                </h5>
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Fechar">
-
-                </button>
-
-            </div>
-
-            <div class="modal-body">
+            <footer class="text-center mt-4">
 
                 <p>
-
-                    Digite seu e-mail para verificar
-                    sua conta.
-
+                    © 2026 Sabor do Quintal.
+                    Todos os direitos reservados.
                 </p>
 
-                <form id="formRecuperar">
-
-                    <label for="emailRecuperar"
-                           class="form-label">
-
-                        E-mail:
-
-                    </label>
-
-                    <input type="email"
-                           id="emailRecuperar"
-                           class="form-control"
-                           placeholder="Digite seu e-mail"
-                           required>
-
-                    <div class="d-grid mt-3">
-
-                        <button type="submit"
-                                class="btn btn-recuperar">
-
-                            Recuperar senha
-
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </div>
+            </footer>
 
         </div>
 
@@ -340,564 +255,260 @@
 
 </div>
 
-
-<!-- FOOTER -->
-
-<footer>
-
-    <p>
-        📞 (11) 93275-8484
-    </p>
-
-    <p>
-        © 2026 Sabor do Quintal -
-        Todos os direitos reservados
-    </p>
-
-    <a href="mailto:sabordoquintal@email.com">
-
-        ✉ sabordoquintal@email.com
-
-    </a>
-
-</footer>
-
-
-<!-- BOOTSTRAP -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
-
-
-<!-- JAVASCRIPT LOGIN -->
-
 <script>
 
-    document.addEventListener("DOMContentLoaded", function () {
+    // ELEMENTOS DOS FORMULÁRIOS
 
-        const formLogin = document.getElementById("formLogin");
+    const formLogin = document.getElementById("formLogin");
+    const formCadastro = document.getElementById("formCadastro");
+    const formRecuperar = document.getElementById("formRecuperar");
 
-        const campoNome = document.getElementById("nome");
+    // BOTÕES
 
-        const campoEmail = document.getElementById("email");
+    const btnCriarConta = document.getElementById("btnCriarConta");
+    const btnVoltarLogin = document.getElementById("btnVoltarLogin");
+    const btnVoltarRecuperar = document.getElementById("btnVoltarRecuperar");
+    const linkRecuperar = document.getElementById("linkRecuperar");
 
-        const campoTelefone = document.getElementById("telefone");
+    // MOSTRAR LOGIN
 
-        const campoSenha = document.getElementById("senha");
+    function mostrarLogin() {
 
-        const btnEnviar = document.getElementById("btnEnviar");
+        formLogin.style.display = "block";
+        formCadastro.style.display = "none";
+        formRecuperar.style.display = "none";
 
-        const btnCriarConta = document.getElementById("btnCriarConta");
+    }
 
-        const btnVoltarLogin = document.getElementById("btnVoltarLogin");
+    // MOSTRAR CADASTRO
 
-        const tituloFormulario = document.getElementById("tituloFormulario");
+    btnCriarConta.addEventListener("click", function () {
 
-        const areaEsqueceuSenha = document.getElementById("areaEsqueceuSenha");
+        formLogin.style.display = "none";
+        formCadastro.style.display = "block";
+        formRecuperar.style.display = "none";
 
-        const formRecuperar = document.getElementById("formRecuperar");
+    });
 
-        const campoEmailRecuperar = document.getElementById("emailRecuperar");
+    // VOLTAR PARA LOGIN
 
+    btnVoltarLogin.addEventListener("click", mostrarLogin);
 
-        let modoFormulario = "login";
+    btnVoltarRecuperar.addEventListener("click", mostrarLogin);
 
+    // MOSTRAR RECUPERAÇÃO DE SENHA
 
-        // ==========================================
-        // CONTAS
-        // ==========================================
+    linkRecuperar.addEventListener("click", function (event) {
 
-        function pegarContas() {
+        event.preventDefault();
 
-            try {
+        formLogin.style.display = "none";
+        formCadastro.style.display = "none";
+        formRecuperar.style.display = "block";
 
-                const contas = JSON.parse(
-                    localStorage.getItem("contasSaborQuintal") || "[]"
-                );
+    });
 
-                return Array.isArray(contas) ? contas : [];
+    // BUSCAR CONTAS CADASTRADAS
 
-            }
+    function buscarContas() {
 
-            catch (erro) {
+        try {
 
-                console.error("Erro ao carregar contas:", erro);
+            return JSON.parse(
+                localStorage.getItem("contasSaborQuintal")
+            ) || [];
 
-                return [];
+        } catch (erro) {
 
-            }
-
-        }
-
-
-        function salvarContas(contas) {
-
-            localStorage.setItem(
-                "contasSaborQuintal",
-                JSON.stringify(contas)
-            );
-
-        }
-
-
-        function normalizarEmail(email) {
-
-            return email.trim().toLowerCase();
+            return [];
 
         }
 
+    }
 
-        // ==========================================
-        // LOGIN
-        // ==========================================
+    // LOGIN DIRETO PARA TESTE
 
-        function configurarLogin() {
+    formLogin.addEventListener("submit", function (event) {
 
-            modoFormulario = "login";
+        event.preventDefault();
 
-            tituloFormulario.textContent = "Entrar";
+        localStorage.setItem("usuarioLogado", "true");
 
-            btnEnviar.textContent = "Entrar";
+        localStorage.setItem("nomeUsuario", "Visitante");
 
-            btnCriarConta.style.display = "block";
+        localStorage.setItem(
+            "emailUsuario",
+            "visitante@sabordoquintal.com"
+        );
 
-            btnVoltarLogin.style.display = "none";
+        localStorage.setItem("telefoneUsuario", "");
 
-            areaEsqueceuSenha.style.display = "block";
+        localStorage.setItem(
+            "usuarioSaborQuintal",
+            JSON.stringify({
+                nome: "Visitante",
+                email: "visitante@sabordoquintal.com",
+                telefone: ""
+            })
+        );
 
+        alert("Entrada realizada com sucesso!");
 
-            campoNome.required = false;
+        window.location.href = "/inicio";
 
-            campoTelefone.required = false;
+    });
 
-            campoEmail.required = true;
+    // CADASTRO
 
-            campoSenha.required = true;
+    formCadastro.addEventListener("submit", function (event) {
 
+        event.preventDefault();
 
-            formLogin.classList.remove("was-validated");
+        const nome = document.getElementById("nomeCadastro")
+            .value.trim();
 
-            campoNome.setCustomValidity("");
+        const email = document.getElementById("emailCadastro")
+            .value.trim().toLowerCase();
 
-            campoEmail.setCustomValidity("");
+        const telefone = document.getElementById("telefoneCadastro")
+            .value.trim();
 
-            campoTelefone.setCustomValidity("");
+        const senha = document.getElementById("senhaCadastro").value;
 
-            campoSenha.setCustomValidity("");
+        const confirmarSenha = document.getElementById("confirmarSenha")
+            .value;
 
-        }
+        if (senha.length < 6) {
 
-
-        // ==========================================
-        // CADASTRO
-        // ==========================================
-
-        function configurarCadastro() {
-
-            modoFormulario = "cadastro";
-
-            tituloFormulario.textContent = "Criar conta";
-
-            btnEnviar.textContent = "Cadastrar";
-
-            btnCriarConta.style.display = "none";
-
-            btnVoltarLogin.style.display = "block";
-
-            areaEsqueceuSenha.style.display = "none";
-
-
-            campoNome.required = true;
-
-            campoTelefone.required = true;
-
-            campoEmail.required = true;
-
-            campoSenha.required = true;
-
-
-            campoNome.value = "";
-
-            campoEmail.value = "";
-
-            campoTelefone.value = "";
-
-            campoSenha.value = "";
-
-
-            formLogin.classList.remove("was-validated");
-
-            campoNome.setCustomValidity("");
-
-            campoEmail.setCustomValidity("");
-
-            campoTelefone.setCustomValidity("");
-
-            campoSenha.setCustomValidity("");
-
-
-            campoNome.focus();
+            alert("A senha deve possuir pelo menos 6 caracteres.");
+            return;
 
         }
 
+        if (senha !== confirmarSenha) {
 
-        // ==========================================
-        // MÁSCARA TELEFONE
-        // ==========================================
+            alert("As senhas não são iguais.");
+            return;
 
-        campoTelefone.addEventListener("input", function () {
+        }
 
-            let numero = this.value.replace(/\D/g, "");
+        const contas = buscarContas();
 
-            numero = numero.substring(0, 11);
+        const emailExiste = contas.some(function (conta) {
 
-
-            if (numero.length > 10) {
-
-                this.value =
-                    "(" + numero.substring(0, 2) + ") " +
-                    numero.substring(2, 7) + "-" +
-                    numero.substring(7, 11);
-
-            }
-
-            else if (numero.length > 6) {
-
-                this.value =
-                    "(" + numero.substring(0, 2) + ") " +
-                    numero.substring(2, 6) + "-" +
-                    numero.substring(6, 10);
-
-            }
-
-            else if (numero.length > 2) {
-
-                this.value =
-                    "(" + numero.substring(0, 2) + ") " +
-                    numero.substring(2);
-
-            }
-
-            else {
-
-                this.value = numero;
-
-            }
-
-            campoTelefone.setCustomValidity("");
+            return conta.email.toLowerCase() === email;
 
         });
 
+        if (emailExiste) {
 
-        // ==========================================
-        // BOTÃO CRIAR CONTA
-        // ==========================================
+            alert("Este e-mail já está cadastrado.");
+            return;
 
-        btnCriarConta.addEventListener("click", function () {
+        }
 
-            configurarCadastro();
+        const novaConta = {
+
+            nome: nome,
+            email: email,
+            telefone: telefone,
+            senha: senha
+
+        };
+
+        contas.push(novaConta);
+
+        localStorage.setItem(
+            "contasSaborQuintal",
+            JSON.stringify(contas)
+        );
+
+        localStorage.setItem("usuarioLogado", "true");
+        localStorage.setItem("nomeUsuario", nome);
+        localStorage.setItem("emailUsuario", email);
+        localStorage.setItem("telefoneUsuario", telefone);
+
+        localStorage.setItem(
+            "usuarioSaborQuintal",
+            JSON.stringify(novaConta)
+        );
+
+        alert("Cadastro realizado com sucesso!");
+
+        window.location.href = "/inicio";
+
+    });
+
+    // RECUPERAÇÃO DE SENHA
+
+    formRecuperar.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("emailRecuperar")
+            .value.trim().toLowerCase();
+
+        const contas = buscarContas();
+
+        const usuario = contas.find(function (conta) {
+
+            return conta.email.toLowerCase() === email;
 
         });
 
+        if (!usuario) {
 
-        // ==========================================
-        // BOTÃO VOLTAR
-        // ==========================================
+            alert("Não encontramos uma conta com esse e-mail.");
+            return;
 
-        btnVoltarLogin.addEventListener("click", function () {
+        }
 
-            configurarLogin();
+        alert(
+            "Conta encontrada! Entre em contato com o restaurante para recuperar sua senha."
+        );
 
-            campoEmail.focus();
+    });
 
-        });
+    // MÁSCARA DE TELEFONE
 
+    const telefoneCadastro = document.getElementById("telefoneCadastro");
 
-        // ==========================================
-        // ENTRAR / CADASTRAR
-        // ==========================================
+    telefoneCadastro.addEventListener("input", function () {
 
-        formLogin.addEventListener("submit", function (event) {
+        let telefone = telefoneCadastro.value.replace(/\D/g, "");
 
-            event.preventDefault();
+        telefone = telefone.substring(0, 11);
 
+        if (telefone.length > 10) {
 
-            campoNome.setCustomValidity("");
-
-            campoEmail.setCustomValidity("");
-
-            campoTelefone.setCustomValidity("");
-
-            campoSenha.setCustomValidity("");
-
-
-            // Validar nome no cadastro
-
-            if (modoFormulario === "cadastro" &&
-                campoNome.value.trim().length < 3) {
-
-                campoNome.setCustomValidity(
-                    "Digite seu nome completo."
-                );
-
-            }
-
-
-            // Validar telefone no cadastro
-
-            if (modoFormulario === "cadastro") {
-
-                const telefone = campoTelefone.value.replace(/\D/g, "");
-
-                if (telefone.length !== 10 && telefone.length !== 11) {
-
-                    campoTelefone.setCustomValidity(
-                        "Digite um telefone válido."
-                    );
-
-                }
-
-            }
-
-
-            // Validar senha
-
-            if (campoSenha.value.length < 6) {
-
-                campoSenha.setCustomValidity(
-                    "A senha deve ter pelo menos 6 caracteres."
-                );
-
-            }
-
-
-            // Validar formulário
-
-            if (!formLogin.checkValidity()) {
-
-                formLogin.classList.add("was-validated");
-
-                return;
-
-            }
-
-
-            const nome = campoNome.value.trim();
-
-            const email = normalizarEmail(campoEmail.value);
-
-            const telefone = campoTelefone.value.replace(/\D/g, "");
-
-            const senha = campoSenha.value;
-
-
-            let contas = pegarContas();
-
-
-            const contaExistente = contas.find(function (conta) {
-
-                return normalizarEmail(conta.email) === email;
-
-            });
-
-
-            // ======================================
-            // CADASTRO
-            // ======================================
-
-            if (modoFormulario === "cadastro") {
-
-                if (contaExistente) {
-
-                    alert("Este e-mail já está cadastrado.");
-
-                    campoEmail.focus();
-
-                    return;
-
-                }
-
-
-                const novaConta = {
-
-                    nome: nome,
-
-                    email: email,
-
-                    telefone: telefone,
-
-                    senha: senha,
-
-                    foto: ""
-
-                };
-
-
-                contas.push(novaConta);
-
-                salvarContas(contas);
-
-
-                localStorage.setItem("nomeUsuario", nome);
-
-                localStorage.setItem("emailUsuario", email);
-
-                localStorage.setItem("telefoneUsuario", telefone);
-
-                localStorage.setItem("usuarioLogado", "true");
-
-                localStorage.setItem(
-                    "usuarioSaborQuintal",
-                    JSON.stringify(novaConta)
-                );
-
-
-                alert("Cadastro realizado com sucesso!");
-
-
-                window.location.href = "/inicio";
-
-                return;
-
-            }
-
-
-            // ======================================
-            // LOGIN
-            // ======================================
-
-            if (!contaExistente) {
-
-                alert(
-                    "Esta conta não está cadastrada.\n\n" +
-                    "Clique em Criar conta."
-                );
-
-                campoEmail.focus();
-
-                return;
-
-            }
-
-
-            if (contaExistente.senha !== senha) {
-
-                alert("E-mail ou senha incorretos.");
-
-                campoSenha.value = "";
-
-                campoSenha.focus();
-
-                return;
-
-            }
-
-
-            // ======================================
-            // SALVAR USUÁRIO LOGADO
-            // ======================================
-
-            localStorage.setItem(
-                "nomeUsuario",
-                contaExistente.nome
+            telefone = telefone.replace(
+                /^(\d{2})(\d{5})(\d{4})$/,
+                "($1) $2-$3"
             );
 
-            localStorage.setItem(
-                "emailUsuario",
-                contaExistente.email
+        } else if (telefone.length > 6) {
+
+            telefone = telefone.replace(
+                /^(\d{2})(\d{4})(\d{0,4})$/,
+                "($1) $2-$3"
             );
 
-            localStorage.setItem(
-                "telefoneUsuario",
-                contaExistente.telefone
+        } else if (telefone.length > 2) {
+
+            telefone = telefone.replace(
+                /^(\d{2})(\d{0,5})$/,
+                "($1) $2"
             );
 
-            localStorage.setItem(
-                "usuarioLogado",
-                "true"
-            );
+        }
 
-            localStorage.setItem(
-                "usuarioSaborQuintal",
-                JSON.stringify(contaExistente)
-            );
-
-
-            if (contaExistente.foto) {
-
-                localStorage.setItem(
-                    "usuarioFoto",
-                    contaExistente.foto
-                );
-
-            }
-
-
-            alert("Login realizado com sucesso!");
-
-
-            window.location.href = "/inicio";
-
-        });
-
-
-        // ==========================================
-        // RECUPERAR SENHA
-        // ==========================================
-
-        formRecuperar.addEventListener("submit", function (event) {
-
-            event.preventDefault();
-
-
-            const email = normalizarEmail(
-                campoEmailRecuperar.value
-            );
-
-
-            const contas = pegarContas();
-
-
-            const conta = contas.find(function (item) {
-
-                return normalizarEmail(item.email) === email;
-
-            });
-
-
-            if (conta) {
-
-                alert(
-                    "Conta encontrada.\n\n" +
-                    "A recuperação real da senha precisa " +
-                    "ser configurada no sistema."
-                );
-
-            }
-
-            else {
-
-                alert("Não encontramos uma conta com esse e-mail.");
-
-            }
-
-
-            formRecuperar.reset();
-
-        });
-
-
-        // ==========================================
-        // INICIAR
-        // ==========================================
-
-        configurarLogin();
-
+        telefoneCadastro.value = telefone;
 
     });
 
 </script>
 
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+</body>
 </html>

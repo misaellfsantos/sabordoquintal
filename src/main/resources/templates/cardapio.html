@@ -1,5 +1,6 @@
+
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -8,620 +9,503 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
-        content="Cardápio do restaurante Sabor do Quintal, especializado em comida caseira e pratos preparados com ingredientes selecionados. No Sabor do Quintal, cada prato é preparado com carinho, ingredientes frescos e aquele tempero especial que lembra a comida feita em casa.">
+          content="Cardápio do restaurante Sabor do Quintal, especializado em comida caseira e pratos preparados com ingredientes selecionados.">
 
     <meta name="keywords"
-        content="Sabor do Quintal, restaurante, comida caseira, São Roque, cardápio, almoço, comida de fazenda">
+          content="Sabor do Quintal, restaurante, comida caseira, São Roque, cardápio, almoço, comida de fazenda">
 
     <meta name="author" content="Luara Pires">
 
     <link rel="icon"
-          th:href="@{/img/favicon.png}"
-          type="image/x-icon">
+          type="image/png"
+          th:href="@{/img/favicon.png}">
 
     <title>Sabor do Quintal - Cardápio</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/cardapio.css}">
-
-
 
 </head>
 
 <body>
 
-    <header>
+<header>
 
-        <nav class="navbar">
+    <nav class="navbar">
 
-            <div class="container d-flex justify-content-between align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
 
-                <!-- LOGO CLICÁVEL -->
-                <a class="navbar-brand d-flex align-items-center"
-                    href="pagina_principal.html"
-                    title="Voltar para a página principal">
+            <!-- LOGO CLICÁVEL -->
+            <a class="navbar-brand d-flex align-items-center"
+               th:href="@{/inicio}"
+               title="Voltar para a página principal">
 
-                    <img src="../imagem/logo.png"
-                        class="rounded-circle logo me-3"
-                        alt="Logo Sabor do Quintal">
+                <img th:src="@{/img/logo.png}"
+                     class="rounded-circle logo me-3"
+                     alt="Logo Sabor do Quintal">
 
-                    Sabor do Quintal
+                Sabor do Quintal
 
-                </a>
+            </a>
 
+            <!-- MENU -->
+            <ul class="navbar-nav">
 
-                <!-- MENU -->
-                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/inicio}">
+                        <i class="bi bi-journal-text"></i>
+                        Home
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="pagina_principal.html">
-                            <i class="bi bi-journal-text"></i>
-                            Home
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/reserva}">
+                        <i class="bi bi-calendar3"></i>
+                        Reserva
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="reserva.html">
-                            <i class="bi bi-calendar3"></i>
-                            Reserva
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/localizacao}">
+                        <i class="bi bi-geo-alt"></i>
+                        Localização
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="localizacao.html">
-                            <i class="bi bi-geo-alt"></i>
-                            Localização
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-
-    <main>
-
-        <div class="container">
-
-            <!-- SEGUNDA -->
-            <section class="dia" id="segunda">
-
-                <h1 class="titulo-dia">
-                    Segunda-feira
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/feijoada.png"
-                                class="imagem-prato"
-                                alt="Feijoada artesanal">
-
-                            <h2 class="nome-prato">
-                                Feijoada Artesanal
-                            </h2>
-
-                            <p class="descricao">
-                                Feijão preto encorpado com carnes selecionadas,
-                                arroz, couve refogada, farofa e laranja.
-                            </p>
-
-                            <p class="preco">
-                                R$ 68,90
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/Frango.png"
-                                class="imagem-prato"
-                                alt="Frango do Chef">
-
-                            <h2 class="nome-prato">
-                                Frango do Chef
-                            </h2>
-
-                            <p class="descricao">
-                                Galeto assado na brasa com molho de ervas,
-                                batatas rústicas, farofa artesanal e salada.
-                            </p>
-
-                            <p class="preco">
-                                R$ 59,90
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- TERÇA -->
-            <section class="dia" id="terca">
-
-                <h1 class="titulo-dia">
-                    Terça-feira
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/file.png"
-                                class="imagem-prato"
-                                alt="Filé ao molho">
-
-                            <h2 class="nome-prato">
-                                Filé ao Molho
-                            </h2>
-
-                            <p class="descricao">
-                                Filé mignon ao molho madeira com champignons.
-                                Acompanha purê cremoso e massa.
-                            </p>
-
-                            <p class="preco">
-                                R$ 74,90
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/cordeiro.png"
-                                class="imagem-prato"
-                                alt="Cordeiro ao vinho tinto">
-
-                            <h2 class="nome-prato">
-                                Cordeiro ao Vinho Tinto
-                            </h2>
-
-                            <p class="descricao">
-                                Cordeiro braseado servido com mousseline
-                                de mandioca e crispy de couve-manteiga.
-                            </p>
-
-                            <p class="preco">
-                                R$ 118,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- QUARTA -->
-            <section class="dia" id="quarta">
-
-                <h1 class="titulo-dia">
-                    Quarta-feira
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/frangorecheado.png"
-                                class="imagem-prato"
-                                alt="Frango recheado">
-
-                            <h2 class="nome-prato">
-                                Frango Recheado
-                            </h2>
-
-                            <p class="descricao">
-                                Peito de frango recheado com queijo artesanal
-                                e ervas finas, acompanhado de polenta cremosa.
-                            </p>
-
-                            <p class="preco">
-                                R$ 82,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/lombo.png"
-                                class="imagem-prato"
-                                alt="Lombo de ervas e limão">
-
-                            <h2 class="nome-prato">
-                                Lombo de Ervas e Limão
-                            </h2>
-
-                            <p class="descricao">
-                                Lombo grelhado com ervas e limão,
-                                acompanhado de risoto cremoso e aspargos.
-                            </p>
-
-                            <p class="preco">
-                                R$ 98,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- QUINTA -->
-            <section class="dia" id="quinta">
-
-                <h1 class="titulo-dia">
-                    Quinta-feira
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/ancho.png"
-                                class="imagem-prato"
-                                alt="Ancho ao molho">
-
-                            <h2 class="nome-prato">
-                                Ancho ao Molho
-                            </h2>
-
-                            <p class="descricao">
-                                Corte Angus preparado com molho especial,
-                                queijos e farofa de pão de queijo.
-                            </p>
-
-                            <p class="preco">
-                                R$ 134,20
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/nhoque.png"
-                                class="imagem-prato"
-                                alt="Nhoque de costela">
-
-                            <h2 class="nome-prato">
-                                Nhoque de Costela
-                            </h2>
-
-                            <p class="descricao">
-                                Nhoque artesanal de batata-baroa,
-                                costela bovina braseada e lascas de queijo.
-                            </p>
-
-                            <p class="preco">
-                                R$ 89,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- SEXTA -->
-            <section class="dia" id="sexta">
-
-                <h1 class="titulo-dia">
-                    Sexta-feira
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/lasanha.png"
-                                class="imagem-prato"
-                                alt="Lasanha à bolonhesa">
-
-                            <h2 class="nome-prato">
-                                Lasanha à Bolonhesa
-                            </h2>
-
-                            <p class="descricao">
-                                Massa artesanal recheada com molho de carne,
-                                queijo derretido e manjericão.
-                            </p>
-
-                            <p class="preco">
-                                R$ 75,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/fileminhon.png"
-                                class="imagem-prato"
-                                alt="Filé mignon ao molho">
-
-                            <h2 class="nome-prato">
-                                Filé Mignon ao Molho
-                            </h2>
-
-                            <p class="descricao">
-                                Filé bovino ao molho de vinho tinto,
-                                servido com batatas, cogumelos e aspargos.
-                            </p>
-
-                            <p class="preco">
-                                R$ 112,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- SÁBADO -->
-            <section class="dia" id="sabado">
-
-                <h1 class="titulo-dia">
-                    Sábado
-                </h1>
-
-                <div class="row g-4">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/risoto.png"
-                                class="imagem-prato"
-                                alt="Risoto de costela">
-
-                            <h2 class="nome-prato">
-                                Risoto de Costela
-                            </h2>
-
-                            <p class="descricao">
-                                Risoto cremoso com costela desfiada,
-                                ervas frescas e toque crocante.
-                            </p>
-
-                            <p class="preco">
-                                R$ 80,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/cordeiro.png"
-                                class="imagem-prato"
-                                alt="Cordeiro com arroz, feijão e legumes">
-
-                            <h2 class="nome-prato">
-                                Cordeiro
-                            </h2>
-
-                            <p class="descricao">
-                                Cordeiro servido com arroz,
-                                feijão e legumes frescos.
-                            </p>
-
-                            <p class="preco">
-                                R$ 75,00
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- DOMINGO -->
-            <section class="dia" id="domingo">
-
-                <h1 class="titulo-dia">
-                    Domingo
-                </h1>
-
-                <div class="row g-4 justify-content-center">
-
-                    <div class="col-md-6">
-
-                        <article class="prato">
-
-                            <img src="../imagem/costelabovina.png"
-                                class="imagem-prato"
-                                alt="Costela bovina com batatas rústicas">
-
-                            <h2 class="nome-prato">
-                                Costela Bovina com Batatas Rústicas
-                            </h2>
-
-                            <p class="descricao">
-                                Costela bovina assada lentamente,
-                                acompanhada de batatas rústicas
-                                e temperos especiais da casa.
-                            </p>
-
-                            <p class="preco">
-                                R$ 79,90
-                            </p>
-
-                            <a href="pedido.html" class="btn btn-pedir">
-                                <i class="bi bi-cart-plus"></i>
-                                Pedir agora
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
+            </ul>
 
         </div>
 
-    </main>
+    </nav>
 
+</header>
 
-    <!-- FOOTER -->
+<main>
 
-    <footer>
+    <div class="container">
 
-        <p>
-            📞 (11) 93275-8484
-        </p>
+        <!-- SEGUNDA -->
+        <section class="dia" id="segunda">
 
-        <p>
-            © 2026 Sabor do Quintal -
-            Todos os direitos reservados
-        </p>
+            <h1 class="titulo-dia">Segunda-feira</h1>
 
-        <a href="mailto:sabordoquintal@email.com">
-            ✉ sabordoquintal@email.com
-        </a>
+            <div class="row g-4">
 
-    </footer>
+                <div class="col-md-6">
+                    <article class="prato">
 
+                        <img th:src="@{/img/feijoada.png}"
+                             class="imagem-prato"
+                             alt="Feijoada artesanal">
 
-    <!-- Bootstrap JS -->
+                        <h2 class="nome-prato">Feijoada Artesanal</h2>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+                        <p class="descricao">
+                            Feijão preto encorpado com carnes selecionadas,
+                            arroz, couve refogada, farofa e laranja.
+                        </p>
+
+                        <p class="preco">R$ 68,90</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/Frango.png}"
+                             class="imagem-prato"
+                             alt="Frango do Chef">
+
+                        <h2 class="nome-prato">Frango do Chef</h2>
+
+                        <p class="descricao">
+                            Galeto assado na brasa com molho de ervas,
+                            batatas rústicas, farofa artesanal e salada.
+                        </p>
+
+                        <p class="preco">R$ 59,90</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TERÇA -->
+        <section class="dia" id="terca">
+
+            <h1 class="titulo-dia">Terça-feira</h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/file.png}"
+                             class="imagem-prato"
+                             alt="Filé ao molho">
+
+                        <h2 class="nome-prato">Filé ao Molho</h2>
+
+                        <p class="descricao">
+                            Filé mignon ao molho madeira com champignons.
+                            Acompanha purê cremoso e massa.
+                        </p>
+
+                        <p class="preco">R$ 74,90</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/cordeiro.png}"
+                             class="imagem-prato"
+                             alt="Cordeiro ao vinho tinto">
+
+                        <h2 class="nome-prato">Cordeiro ao Vinho Tinto</h2>
+
+                        <p class="descricao">
+                            Cordeiro braseado servido com mousseline
+                            de mandioca e crispy de couve-manteiga.
+                        </p>
+
+                        <p class="preco">R$ 118,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- QUARTA -->
+        <section class="dia" id="quarta">
+
+            <h1 class="titulo-dia">Quarta-feira</h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/frangorecheado.png}"
+                             class="imagem-prato"
+                             alt="Frango recheado">
+
+                        <h2 class="nome-prato">Frango Recheado</h2>
+
+                        <p class="descricao">
+                            Peito de frango recheado com queijo artesanal
+                            e ervas finas, acompanhado de polenta cremosa.
+                        </p>
+
+                        <p class="preco">R$ 82,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/lombo.png}"
+                             class="imagem-prato"
+                             alt="Lombo de ervas e limão">
+
+                        <h2 class="nome-prato">Lombo de Ervas e Limão</h2>
+
+                        <p class="descricao">
+                            Lombo grelhado com ervas e limão,
+                            acompanhado de risoto cremoso e aspargos.
+                        </p>
+
+                        <p class="preco">R$ 98,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- QUINTA -->
+        <section class="dia" id="quinta">
+
+            <h1 class="titulo-dia">Quinta-feira</h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/ancho.png}"
+                             class="imagem-prato"
+                             alt="Ancho ao molho">
+
+                        <h2 class="nome-prato">Ancho ao Molho</h2>
+
+                        <p class="descricao">
+                            Corte Angus preparado com molho especial,
+                            queijos e farofa de pão de queijo.
+                        </p>
+
+                        <p class="preco">R$ 134,20</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/nhoque.png}"
+                             class="imagem-prato"
+                             alt="Nhoque de costela">
+
+                        <h2 class="nome-prato">Nhoque de Costela</h2>
+
+                        <p class="descricao">
+                            Nhoque artesanal de batata-baroa,
+                            costela bovina braseada e lascas de queijo.
+                        </p>
+
+                        <p class="preco">R$ 89,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SEXTA -->
+        <section class="dia" id="sexta">
+
+            <h1 class="titulo-dia">Sexta-feira</h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/lasanha.png}"
+                             class="imagem-prato"
+                             alt="Lasanha à bolonhesa">
+
+                        <h2 class="nome-prato">Lasanha à Bolonhesa</h2>
+
+                        <p class="descricao">
+                            Massa artesanal recheada com molho de carne,
+                            queijo derretido e manjericão.
+                        </p>
+
+                        <p class="preco">R$ 75,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/fileminhon.png}"
+                             class="imagem-prato"
+                             alt="Filé mignon ao molho">
+
+                        <h2 class="nome-prato">Filé Mignon ao Molho</h2>
+
+                        <p class="descricao">
+                            Filé bovino ao molho de vinho tinto,
+                            servido com batatas, cogumelos e aspargos.
+                        </p>
+
+                        <p class="preco">R$ 112,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SÁBADO -->
+        <section class="dia" id="sabado">
+
+            <h1 class="titulo-dia">Sábado</h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/risoto.png}"
+                             class="imagem-prato"
+                             alt="Risoto de costela">
+
+                        <h2 class="nome-prato">Risoto de Costela</h2>
+
+                        <p class="descricao">
+                            Risoto cremoso com costela desfiada,
+                            ervas frescas e toque crocante.
+                        </p>
+
+                        <p class="preco">R$ 80,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/cordeiro.png}"
+                             class="imagem-prato"
+                             alt="Cordeiro com arroz, feijão e legumes">
+
+                        <h2 class="nome-prato">Cordeiro</h2>
+
+                        <p class="descricao">
+                            Cordeiro servido com arroz,
+                            feijão e legumes frescos.
+                        </p>
+
+                        <p class="preco">R$ 75,00</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DOMINGO -->
+        <section class="dia" id="domingo">
+
+            <h1 class="titulo-dia">Domingo</h1>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-md-6">
+                    <article class="prato">
+
+                        <img th:src="@{/img/costelabovina.png}"
+                             class="imagem-prato"
+                             alt="Costela bovina com batatas rústicas">
+
+                        <h2 class="nome-prato">
+                            Costela Bovina com Batatas Rústicas
+                        </h2>
+
+                        <p class="descricao">
+                            Costela bovina assada lentamente,
+                            acompanhada de batatas rústicas
+                            e temperos especiais da casa.
+                        </p>
+
+                        <p class="preco">R$ 79,90</p>
+
+                        <a th:href="@{/pedido}" class="btn btn-pedir">
+                            <i class="bi bi-cart-plus"></i>
+                            Pedir agora
+                        </a>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+
+    <p>📞 (11) 93275-8484</p>
+
+    <p>
+        © 2026 Sabor do Quintal -
+        Todos os direitos reservados
+    </p>
+
+    <a href="mailto:sabordoquintal@email.com">
+        ✉ sabordoquintal@email.com
+    </a>
+
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

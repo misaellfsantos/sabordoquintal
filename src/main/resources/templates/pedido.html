@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -8,10 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
-        content="Página de pedidos do restaurante Sabor do Quintal. Escolha seus pratos, bebidas, quantidades e observações.">
+          content="Página de pedidos do restaurante Sabor do Quintal. Escolha seus pratos, bebidas, quantidades e observações.">
 
     <meta name="keywords"
-        content="Sabor do Quintal, restaurante, pedido, cardápio, comida caseira">
+          content="Sabor do Quintal, restaurante, pedido, cardápio, comida caseira">
 
     <meta name="author" content="Luara Pires, Misael fonseca">
 
@@ -21,1616 +22,1204 @@
 
     <link rel="icon"
           th:href="@{/img/favicon.png}"
-          type="image/x-icon">
+          type="image/png">
 
 </head>
 
 <body>
 
-    <!-- CABEÇALHO -->
+<!-- CABEÇALHO -->
 
-    <header>
+<header>
 
-        <a href="pagina_principal.html"
-            aria-label="Voltar para a página principal">
+    <a th:href="@{/inicio}"
+       aria-label="Voltar para a página principal">
 
-            <img
-                src="../faviconn.png"
+        <img
+                th:src="@{/img/favicon.png}"
                 class="logo"
                 alt="Logo Sabor do Quintal">
 
-        </a>
+    </a>
 
-        <h1>Sabor do Quintal</h1>
+    <h1>Sabor do Quintal</h1>
 
-    </header>
+</header>
 
 
-    <!-- TELA DO PEDIDO -->
+<!-- TELA DO PEDIDO -->
 
-    <main id="telaPedido">
+<main id="telaPedido">
 
-        <div class="titulo-pedido">
+    <div class="titulo-pedido">
 
-            <h2>Faça seu pedido</h2>
+        <h2>Faça seu pedido</h2>
 
-            <p>
-                Escolha seus pratos, bebidas e quantidades
-            </p>
+        <p>
+            Escolha seus pratos, bebidas e quantidades
+        </p>
 
-            <div class="dia-atual">
+        <div class="dia-atual">
 
-                📅 Cardápio disponível hoje:
-                <strong id="diaAtual"></strong>
-
-            </div>
+            📅 Cardápio disponível hoje:
+            <strong id="diaAtual"></strong>
 
         </div>
 
+    </div>
 
-        <div class="pedido">
 
-            <!-- PRATOS -->
+    <div class="pedido">
 
-            <div class="secao-pedido">
+        <!-- PRATOS -->
 
-                <h3>🍽️ Escolha seus pratos</h3>
+        <div class="secao-pedido">
 
-                <div id="listaPratos"></div>
+            <h3>🍽️ Escolha seus pratos</h3>
 
-                <button
+            <div id="listaPratos"></div>
+
+            <button
                     type="button"
                     class="btn-adicionar"
                     onclick="adicionarPrato()">
 
-                    + Adicionar outro prato
+                + Adicionar outro prato
 
-                </button>
+            </button>
 
-            </div>
+        </div>
 
 
-            <!-- BEBIDAS -->
+        <!-- BEBIDAS -->
 
-            <div class="secao-pedido">
+        <div class="secao-pedido">
 
-                <h3>🥤 Escolha suas bebidas</h3>
+            <h3>🥤 Escolha suas bebidas</h3>
 
-                <div id="listaBebidas"></div>
+            <div id="listaBebidas"></div>
 
-                <button
+            <button
                     type="button"
                     class="btn-adicionar"
                     onclick="adicionarBebida()">
 
-                    + Adicionar outra bebida
+                + Adicionar outra bebida
 
-                </button>
+            </button>
 
-            </div>
-
-
-            <!-- TOTAL -->
-
-            <div class="total">
-
-                Total:
-                <span id="total">R$ 0,00</span>
-
-            </div>
+        </div>
 
 
-            <!-- BOTÕES -->
+        <!-- TOTAL -->
 
-            <div class="botoes-final">
+        <div class="total">
 
-                <a
-                    href="cardapio.html"
+            Total:
+            <span id="total">R$ 0,00</span>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+
+        <div class="botoes-final">
+
+            <a
+                    th:href="@{/cardapio}"
                     class="btn btn-voltar">
 
-                    VOLTAR
+                VOLTAR
 
-                </a>
+            </a>
 
-                <button
+            <button
                     type="button"
                     class="btn btn-continuar"
                     onclick="continuar()">
 
-                    CONTINUAR
+                CONTINUAR
 
-                </button>
-
-            </div>
+            </button>
 
         </div>
 
-    </main>
+    </div>
+
+</main>
 
 
-    <!-- TELA FINAL -->
+<!-- TELA FINAL -->
 
-    <main id="telaFinal">
+<main id="telaFinal">
 
-        <div class="tela-final-card">
+    <div class="tela-final-card">
 
-            <h2>Pedido realizado!</h2>
+        <h2>Pedido realizado!</h2>
 
-            <div class="numero-pedido">
+        <div class="numero-pedido">
 
-                Pedido
-                <span id="numeroPedidoFinal"></span>
+            Pedido
+            <span id="numeroPedidoFinal"></span>
 
-            </div>
+        </div>
 
-            <h3>🍽️ Pratos</h3>
+        <h3>🍽️ Pratos</h3>
 
-            <div id="resumoPratos"></div>
+        <div id="resumoPratos"></div>
 
-            <h3>🥤 Bebidas</h3>
+        <h3>🥤 Bebidas</h3>
 
-            <div id="resumoBebidas"></div>
+        <div id="resumoBebidas"></div>
 
-            <div class="resumo-total">
+        <div class="resumo-total">
 
-                Total:
-                <span id="totalFinal"></span>
+            Total:
+            <span id="totalFinal"></span>
 
-            </div>
+        </div>
 
-            <div class="botoes-final">
+        <div class="botoes-final">
 
-                <button
+            <button
                     type="button"
                     class="btn btn-voltar"
                     onclick="voltarPedido()">
 
-                    VOLTAR
+                VOLTAR
 
-                </button>
+            </button>
 
-                <button
+            <button
                     type="button"
                     class="btn btn-continuar"
                     onclick="mostrarNota()">
 
-                    NOTA FISCAL
+                NOTA FISCAL
 
-                </button>
-
-            </div>
+            </button>
 
         </div>
 
-    </main>
+    </div>
+
+</main>
 
 
-    <!-- TELA NOTA -->
+<!-- TELA NOTA -->
 
-    <main id="telaNota">
+<main id="telaNota">
 
-        <div class="nota">
+    <div class="nota">
 
-            <h2>Sabor do Quintal</h2>
+        <h2>Sabor do Quintal</h2>
 
-            <p style="text-align:center;">
-                Comprovante do pedido
-            </p>
+        <p style="text-align:center;">
+            Comprovante do pedido
+        </p>
 
-            <hr>
+        <hr>
 
-            <p>
+        <p>
+            <strong>Número do pedido:</strong>
+            <span id="numeroNota"></span>
+        </p>
 
-                <strong>Número do pedido:</strong>
+        <p>
+            <strong>Cliente:</strong>
+            Cliente
+        </p>
 
-                <span id="numeroNota"></span>
+        <p>
+            <strong>Data:</strong>
+            <span id="dataNota"></span>
+        </p>
 
-            </p>
+        <hr>
 
-            <p>
+        <h3>Pratos</h3>
 
-                <strong>Cliente:</strong>
-                Cliente
+        <div id="notaPratos"></div>
 
-            </p>
+        <h3>Bebidas</h3>
 
-            <p>
+        <div id="notaBebidas"></div>
 
-                <strong>Data:</strong>
+        <hr>
 
-                <span id="dataNota"></span>
+        <div class="linha-nota">
 
-            </p>
+            <strong>Total</strong>
 
-            <hr>
+            <strong id="totalNota"></strong>
 
-            <h3>Pratos</h3>
+        </div>
 
-            <div id="notaPratos"></div>
+        <div class="botoes-final botoes-nota">
 
-            <h3>Bebidas</h3>
-
-            <div id="notaBebidas"></div>
-
-            <hr>
-
-            <div class="linha-nota">
-
-                <strong>Total</strong>
-
-                <strong id="totalNota"></strong>
-
-            </div>
-
-            <div class="botoes-final botoes-nota">
-
-                <button
+            <button
                     type="button"
                     class="btn btn-voltar"
                     onclick="voltarFinal()">
 
-                    VOLTAR
+                VOLTAR
 
-                </button>
+            </button>
 
-                <button
+            <button
                     type="button"
                     class="btn btn-continuar"
                     onclick="imprimirNota()">
 
-                    IMPRIMIR
+                IMPRIMIR
 
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- RODAPÉ -->
+
+<footer>
+
+    <p>
+        📞 (11) 9 3275-8484
+        &nbsp; | &nbsp;
+        ✉️ sabordoquintal@gmail.com
+        &nbsp; | &nbsp;
+        © Direitos autorais
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* =========================
+       CARDÁPIO POR DIA
+    ========================= */
+
+    const cardapioSemanal = {
+
+        0: [
+            {
+                nome: "Costela Bovina com Batatas Rústicas",
+                preco: 79.90
+            }
+        ],
+
+        1: [
+            {
+                nome: "Feijoada Artesanal",
+                preco: 68.90
+            },
+            {
+                nome: "Frango do Chef",
+                preco: 59.90
+            }
+        ],
+
+        2: [
+            {
+                nome: "Filé ao Molho",
+                preco: 74.90
+            },
+            {
+                nome: "Cordeiro ao Vinho Tinto",
+                preco: 118.00
+            }
+        ],
+
+        3: [
+            {
+                nome: "Frango Recheado",
+                preco: 82.00
+            },
+            {
+                nome: "Lombo de Ervas e Limão",
+                preco: 98.00
+            }
+        ],
+
+        4: [
+            {
+                nome: "Ancho ao Molho",
+                preco: 134.20
+            },
+            {
+                nome: "Nhoque de Costela",
+                preco: 89.00
+            }
+        ],
+
+        5: [
+            {
+                nome: "Lasanha à Bolonhesa",
+                preco: 75.00
+            },
+            {
+                nome: "Filé Mignon ao Molho",
+                preco: 112.00
+            }
+        ],
+
+        6: [
+            {
+                nome: "Risoto de Costela",
+                preco: 80.00
+            },
+            {
+                nome: "Cordeiro",
+                preco: 75.00
+            }
+        ]
+
+    };
+
+
+    function pratosDoDia() {
+
+        const dia = new Date().getDay();
+
+        return cardapioSemanal[dia] || [];
+
+    }
+
+
+    function nomeDia() {
+
+        const dias = [
+            "Domingo",
+            "Segunda-feira",
+            "Terça-feira",
+            "Quarta-feira",
+            "Quinta-feira",
+            "Sexta-feira",
+            "Sábado"
+        ];
+
+        return dias[new Date().getDay()];
+
+    }
+
+
+    const pratos = pratosDoDia();
+
+
+    /* =========================
+       BEBIDAS
+    ========================= */
+
+    const bebidas = [
+
+        {
+            nome: "Coca-Cola",
+            preco: 7.90
+        },
+
+        {
+            nome: "Suco natural",
+            preco: 5.00
+        },
+
+        {
+            nome: "Água",
+            preco: 4.00
+        }
+
+    ];
+
+
+    /* =========================
+       SABORES DOS SUCOS
+    ========================= */
+
+    const saboresSuco = [
+        "Laranja",
+        "Limão",
+        "Maracujá",
+        "Abacaxi",
+        "Morango"
+    ];
+
+
+    /* =========================
+       FORMATAÇÃO
+    ========================= */
+
+    function formatarDinheiro(valor) {
+
+        return valor.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+    }
+
+
+    /* =========================
+       OPÇÕES DOS PRATOS
+    ========================= */
+
+    function opcoesPratos() {
+
+        let html = `
+            <option value="">Selecione o prato</option>
+        `;
+
+        pratos.forEach((prato, index) => {
+
+            html += `
+                <option value="${index}">
+                    ${prato.nome} - ${formatarDinheiro(prato.preco)}
+                </option>
+            `;
+
+        });
+
+        return html;
+
+    }
+
+
+    /* =========================
+       OPÇÕES DAS BEBIDAS
+    ========================= */
+
+    function opcoesBebidas() {
+
+        let html = `
+            <option value="">Selecione a bebida</option>
+        `;
+
+        bebidas.forEach((bebida, index) => {
+
+            html += `
+                <option value="${index}">
+                    ${bebida.nome} - ${formatarDinheiro(bebida.preco)}
+                </option>
+            `;
+
+        });
+
+        return html;
+
+    }
+
+
+    /* =========================
+       OPÇÕES DOS SABORES
+    ========================= */
+
+    function opcoesSabores() {
+
+        let html = `
+            <option value="">Selecione o sabor</option>
+        `;
+
+        saboresSuco.forEach(sabor => {
+
+            html += `
+                <option value="${sabor}">
+                    ${sabor}
+                </option>
+            `;
+
+        });
+
+        return html;
+
+    }
+
+
+    /* =========================
+       ADICIONAR PRATO
+    ========================= */
+
+    function adicionarPrato() {
+
+        const lista = document.getElementById("listaPratos");
+
+        const item = document.createElement("div");
+
+        item.className = "item-pedido";
+
+        item.innerHTML = `
+
+            <div class="campo-principal">
+
+                <label>Prato</label>
+
+                <select
+                    class="select-prato"
+                    onchange="calcularTotal()">
+
+                    ${opcoesPratos()}
+
+                </select>
+
+            </div>
+
+            <div class="observacao">
+
+                <label>
+                    Retirar ingredientes / observações
+                </label>
+
+                <input
+                    type="text"
+                    class="campo-observacao"
+                    placeholder="Ex.: sem cebola, sem tomate..."
+                    maxlength="150"
+                    oninput="calcularTotal()">
+
+            </div>
+
+            <div class="quantidade">
+
+                <button
+                    type="button"
+                    onclick="alterarQuantidadeItem(this, -1)">
+                    −
+                </button>
+
+                <span>1</span>
+
+                <button
+                    type="button"
+                    onclick="alterarQuantidadeItem(this, 1)">
+                    +
                 </button>
 
             </div>
 
-        </div>
+            <button
+                type="button"
+                class="btn-remover"
+                onclick="removerItem(this)">
 
-    </main>
+                Remover
 
+            </button>
 
-    <!-- RODAPÉ -->
+        `;
 
-    <footer>
-
-        <p>
-
-            📞 (11) 9 3275-8484
-
-            &nbsp; | &nbsp;
-
-            ✉️ sabordoquintal@gmail.com
-
-            &nbsp; | &nbsp;
-
-            © Direitos autorais
-
-        </p>
-
-    </footer>
-
-
-    <script>
-
-        /* =========================
-           CARDÁPIO POR DIA
-        ========================= */
-
-        const cardapioSemanal = {
-
-            0: [
-
-                {
-                    nome: "Costela Bovina com Batatas Rústicas",
-                    preco: 79.90
-                }
-
-            ],
-
-            1: [
-
-                {
-                    nome: "Feijoada Artesanal",
-                    preco: 68.90
-                },
-
-                {
-                    nome: "Frango do Chef",
-                    preco: 59.90
-                }
-
-            ],
-
-            2: [
-
-                {
-                    nome: "Filé ao Molho",
-                    preco: 74.90
-                },
-
-                {
-                    nome: "Cordeiro ao Vinho Tinto",
-                    preco: 118.00
-                }
-
-            ],
-
-            3: [
-
-                {
-                    nome: "Frango Recheado",
-                    preco: 82.00
-                },
-
-                {
-                    nome: "Lombo de Ervas e Limão",
-                    preco: 98.00
-                }
-
-            ],
-
-            4: [
-
-                {
-                    nome: "Ancho ao Molho",
-                    preco: 134.20
-                },
-
-                {
-                    nome: "Nhoque de Costela",
-                    preco: 89.00
-                }
-
-            ],
-
-            5: [
-
-                {
-                    nome: "Lasanha à Bolonhesa",
-                    preco: 75.00
-                },
-
-                {
-                    nome: "Filé Mignon ao Molho",
-                    preco: 112.00
-                }
-
-            ],
-
-            6: [
-
-                {
-                    nome: "Risoto de Costela",
-                    preco: 80.00
-                },
-
-                {
-                    nome: "Cordeiro",
-                    preco: 75.00
-                }
-
-            ]
-
-        };
-
-
-        function pratosDoDia() {
-
-            const dia =
-                new Date().getDay();
-
-            return cardapioSemanal[dia];
-
-        }
-
-
-        function nomeDia() {
-
-            const dias = [
-
-                "Domingo",
-                "Segunda-feira",
-                "Terça-feira",
-                "Quarta-feira",
-                "Quinta-feira",
-                "Sexta-feira",
-                "Sábado"
-
-            ];
-
-            return dias[new Date().getDay()];
-
-        }
-
-
-        const pratos = pratosDoDia();
-
-
-        /* =========================
-           BEBIDAS
-        ========================= */
-
-        const bebidas = [
-
-            {
-                nome: "Coca-Cola",
-                preco: 7.90
-            },
-
-            {
-                nome: "Suco natural",
-                preco: 5.00
-            },
-
-            {
-                nome: "Água",
-                preco: 4.00
-            }
-
-        ];
-
-
-        /* =========================
-           SABORES DOS SUCOS
-        ========================= */
-
-        const saboresSuco = [
-
-            "Laranja",
-            "Limão",
-            "Maracujá",
-            "Abacaxi",
-            "Morango"
-
-        ];
-
-
-        /* =========================
-           FORMATAÇÃO
-        ========================= */
-
-        function formatarDinheiro(valor) {
-
-            return valor.toLocaleString(
-                "pt-BR",
-                {
-                    style: "currency",
-                    currency: "BRL"
-                }
-            );
-
-        }
-
-
-        /* =========================
-           OPÇÕES DOS PRATOS
-        ========================= */
-
-        function opcoesPratos() {
-
-            let html = `
-
-                <option value="">
-                    Selecione o prato
-                </option>
-
-            `;
-
-            pratos.forEach(
-                (prato, index) => {
-
-                    html += `
-
-                        <option
-                            value="${index}"
-                            data-preco="${prato.preco}">
-
-                            ${prato.nome}
-                            -
-                            ${formatarDinheiro(prato.preco)}
-
-                        </option>
-
-                    `;
-
-                }
-            );
-
-            return html;
-
-        }
-
-
-        /* =========================
-           OPÇÕES DAS BEBIDAS
-        ========================= */
-
-        function opcoesBebidas() {
-
-            let html = `
-
-                <option value="">
-                    Selecione a bebida
-                </option>
-
-            `;
-
-            bebidas.forEach(
-                (bebida, index) => {
-
-                    html += `
-
-                        <option
-                            value="${index}"
-                            data-preco="${bebida.preco}">
-
-                            ${bebida.nome}
-                            -
-                            ${formatarDinheiro(bebida.preco)}
-
-                        </option>
-
-                    `;
-
-                }
-            );
-
-            return html;
-
-        }
-
-
-        /* =========================
-           OPÇÕES DOS SABORES
-        ========================= */
-
-        function opcoesSabores() {
-
-            let html = `
-
-                <option value="">
-                    Selecione o sabor
-                </option>
-
-            `;
-
-            saboresSuco.forEach(
-                sabor => {
-
-                    html += `
-
-                        <option value="${sabor}">
-                            ${sabor}
-                        </option>
-
-                    `;
-
-                }
-            );
-
-            return html;
-
-        }
-
-
-        /* =========================
-           ADICIONAR PRATO
-        ========================= */
-
-        function adicionarPrato() {
-
-            const lista =
-                document.getElementById(
-                    "listaPratos"
-                );
-
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "item-pedido";
-
-            item.innerHTML = `
-
-                <div class="campo-principal">
-
-                    <label>
-                        Prato
-                    </label>
-
-                    <select
-                        class="select-prato"
-                        onchange="calcularTotal()">
-
-                        ${opcoesPratos()}
-
-                    </select>
-
-                </div>
-
-                <div class="observacao">
-
-                    <label>
-                        Retirar ingredientes / observações
-                    </label>
-
-                    <input
-                        type="text"
-                        class="campo-observacao"
-                        placeholder="Ex.: sem cebola, sem tomate..."
-                        maxlength="150"
-                        oninput="calcularTotal()">
-
-                </div>
-
-                <div class="quantidade">
-
-                    <button
-                        type="button"
-                        onclick="alterarQuantidadeItem(this, -1)">
-
-                        −
-
-                    </button>
-
-                    <span>1</span>
-
-                    <button
-                        type="button"
-                        onclick="alterarQuantidadeItem(this, 1)">
-
-                        +
-
-                    </button>
-
-                </div>
-
-                <button
-                    type="button"
-                    class="btn-remover"
-                    onclick="removerItem(this)">
-
-                    Remover
-
-                </button>
-
-            `;
-
-            lista.appendChild(item);
-
-            calcularTotal();
-
-        }
-
-
-        /* =========================
-           ADICIONAR BEBIDA
-        ========================= */
-
-        function adicionarBebida() {
-
-            const lista =
-                document.getElementById(
-                    "listaBebidas"
-                );
-
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "item-pedido";
-
-            item.innerHTML = `
-
-                <div class="campo-principal">
-
-                    <label>
-                        Bebida
-                    </label>
-
-                    <select
-                        class="select-bebida"
-                        onchange="verificarSuco(this)">
-
-                        ${opcoesBebidas()}
-
-                    </select>
-
-                </div>
-
-                <div
-                    class="sabor-suco"
-                    style="display:none;">
-
-                    <label>
-                        Sabor do suco
-                    </label>
-
-                    <select
-                        class="select-sabor"
-                        onchange="calcularTotal()">
-
-                        ${opcoesSabores()}
-
-                    </select>
-
-                </div>
-
-                <div class="observacao">
-
-                    <label>
-                        Retirar ingredientes / observações
-                    </label>
-
-                    <input
-                        type="text"
-                        class="campo-observacao"
-                        placeholder="Ex.: sem gelo, sem açúcar..."
-                        maxlength="150"
-                        oninput="calcularTotal()">
-
-                </div>
-
-                <div class="quantidade">
-
-                    <button
-                        type="button"
-                        onclick="alterarQuantidadeItem(this, -1)">
-
-                        −
-
-                    </button>
-
-                    <span>1</span>
-
-                    <button
-                        type="button"
-                        onclick="alterarQuantidadeItem(this, 1)">
-
-                        +
-
-                    </button>
-
-                </div>
-
-                <button
-                    type="button"
-                    class="btn-remover"
-                    onclick="removerItem(this)">
-
-                    Remover
-
-                </button>
-
-            `;
-
-            lista.appendChild(item);
-
-            calcularTotal();
-
-        }
-
-
-        /* =========================
-           VERIFICAR SUCO
-        ========================= */
-
-        function verificarSuco(select) {
-
-            const item =
-                select.closest(".item-pedido");
-
-            const campoSabor =
-                item.querySelector(".sabor-suco");
-
-            const selectSabor =
-                item.querySelector(".select-sabor");
-
-            const bebida =
-                bebidas[
-                    parseInt(select.value)
-                ];
-
-            if (
-                bebida &&
-                bebida.nome === "Suco natural"
-            ) {
-
-                campoSabor.style.display =
-                    "block";
-
-            } else {
-
-                campoSabor.style.display =
-                    "none";
-
-                selectSabor.value =
-                    "";
-
-            }
-
-            calcularTotal();
-
-        }
-
-
-        /* =========================
-           ALTERAR QUANTIDADE
-        ========================= */
-
-        function alterarQuantidadeItem(
-            botao,
-            valor
-        ) {
-
-            const quantidade =
-                botao.parentElement
-                    .querySelector("span");
-
-            let numero =
-                parseInt(
-                    quantidade.textContent
-                );
-
-            numero += valor;
-
-            if (numero < 1) {
-                numero = 1;
-            }
-
-            if (numero > 20) {
-                numero = 20;
-            }
-
-            quantidade.textContent =
-                numero;
-
-            calcularTotal();
-
-        }
-
-
-        /* =========================
-           REMOVER ITEM
-        ========================= */
-
-        function removerItem(botao) {
-
-            const item =
-                botao.closest(
-                    ".item-pedido"
-                );
-
-            const lista =
-                item.parentElement;
-
-            const quantidadeItens =
-                lista.querySelectorAll(
-                    ".item-pedido"
-                ).length;
-
-            if (quantidadeItens > 1) {
-
-                item.remove();
-
-            } else {
-
-                const select =
-                    item.querySelector(
-                        "select"
-                    );
-
-                const quantidade =
-                    item.querySelector(
-                        ".quantidade span"
-                    );
-
-                const observacao =
-                    item.querySelector(
-                        ".campo-observacao"
-                    );
-
-                select.value = "";
-
-                quantidade.textContent =
-                    "1";
-
-                if (observacao) {
-                    observacao.value = "";
-                }
-
-                const campoSabor =
-                    item.querySelector(
-                        ".sabor-suco"
-                    );
-
-                const selectSabor =
-                    item.querySelector(
-                        ".select-sabor"
-                    );
-
-                if (campoSabor) {
-                    campoSabor.style.display =
-                        "none";
-                }
-
-                if (selectSabor) {
-                    selectSabor.value = "";
-                }
-
-            }
-
-            calcularTotal();
-
-        }
-
-
-        /* =========================
-           PEGAR ITENS
-        ========================= */
-
-        function pegarItens(
-            classeSelect,
-            listaProdutos
-        ) {
-
-            const itens = [];
-
-            document
-                .querySelectorAll(
-                    classeSelect
-                )
-                .forEach(select => {
-
-                    if (select.value !== "") {
-
-                        const item =
-                            select.closest(
-                                ".item-pedido"
-                            );
-
-                        const quantidade =
-                            parseInt(
-                                item.querySelector(
-                                    ".quantidade span"
-                                ).textContent
-                            );
-
-                        const produto =
-                            listaProdutos[
-                                parseInt(
-                                    select.value
-                                )
-                            ];
-
-                        const campoObservacao =
-                            item.querySelector(
-                                ".campo-observacao"
-                            );
-
-                        const observacao =
-                            campoObservacao
-                                ? campoObservacao.value.trim()
-                                : "";
-
-                        let sabor = "";
-
-                        if (
-                            produto.nome ===
-                            "Suco natural"
-                        ) {
-
-                            const selectSabor =
-                                item.querySelector(
-                                    ".select-sabor"
-                                );
-
-                            sabor =
-                                selectSabor
-                                    ? selectSabor.value
-                                    : "";
-
-                        }
-
-                        itens.push({
-
-                            nome:
-                                produto.nome,
-
-                            preco:
-                                produto.preco,
-
-                            quantidade:
-                                quantidade,
-
-                            subtotal:
-                                produto.preco *
-                                quantidade,
-
-                            observacao:
-                                observacao,
-
-                            sabor:
-                                sabor
-
-                        });
-
-                    }
-
-                });
-
-            return itens;
-
-        }
-
-
-        /* =========================
-           CALCULAR TOTAL
-        ========================= */
-
-        function calcularTotal() {
-
-            const listaPratos =
-                pegarItens(
-                    ".select-prato",
-                    pratos
-                );
-
-            const listaBebidas =
-                pegarItens(
-                    ".select-bebida",
-                    bebidas
-                );
-
-            let total = 0;
-
-            listaPratos.forEach(
-                item => {
-
-                    total +=
-                        item.subtotal;
-
-                }
-            );
-
-            listaBebidas.forEach(
-                item => {
-
-                    total +=
-                        item.subtotal;
-
-                }
-            );
-
-            document.getElementById(
-                "total"
-            ).textContent =
-                formatarDinheiro(total);
-
-        }
-
-
-        /* =========================
-           ESCAPAR TEXTO
-        ========================= */
-
-        function escaparTexto(texto) {
-
-            return String(texto)
-
-                .replace(/&/g, "&amp;")
-
-                .replace(/</g, "&lt;")
-
-                .replace(/>/g, "&gt;")
-
-                .replace(/"/g, "&quot;")
-
-                .replace(/'/g, "&#039;");
-
-        }
-
-
-        /* =========================
-           NÚMERO DO PEDIDO
-        ========================= */
-
-        function gerarNumeroPedido() {
-
-            let numero =
-                parseInt(
-                    localStorage.getItem(
-                        "numeroPedidoSaborQuintal"
-                    )
-                ) || 0;
-
-            numero++;
-
-            localStorage.setItem(
-                "numeroPedidoSaborQuintal",
-                numero
-            );
-
-            return "#" +
-                String(numero)
-                    .padStart(6, "0");
-
-        }
-
-
-        /* =========================
-           CONTINUAR
-        ========================= */
-
-        function continuar() {
-
-            const listaPratos =
-                pegarItens(
-                    ".select-prato",
-                    pratos
-                );
-
-            const listaBebidas =
-                pegarItens(
-                    ".select-bebida",
-                    bebidas
-                );
-
-            if (
-                listaPratos.length === 0
-            ) {
-
-                alert(
-                    "Selecione pelo menos um prato."
-                );
-
-                return;
-
-            }
-
-            if (
-                listaBebidas.length === 0
-            ) {
-
-                alert(
-                    "Selecione pelo menos uma bebida."
-                );
-
-                return;
-
-            }
-
-
-            /* VERIFICAÇÃO DO SABOR */
-
-            const sucoSemSabor =
-                listaBebidas.some(
-                    bebida =>
-                        bebida.nome ===
-                        "Suco natural" &&
-                        bebida.sabor === ""
-                );
-
-            if (sucoSemSabor) {
-
-                alert(
-                    "Selecione o sabor de todos os sucos naturais."
-                );
-
-                return;
-
-            }
-
-
-            let total = 0;
-
-            listaPratos.forEach(
-                item => {
-
-                    total +=
-                        item.subtotal;
-
-                }
-            );
-
-            listaBebidas.forEach(
-                item => {
-
-                    total +=
-                        item.subtotal;
-
-                }
-            );
-
-
-            const numeroPedido =
-                gerarNumeroPedido();
-
-
-            const pedido = {
-
-                numeroPedido:
-                    numeroPedido,
-
-                pratos:
-                    listaPratos,
-
-                bebidas:
-                    listaBebidas,
-
-                total:
-                    total
-
-            };
-
-
-            localStorage.setItem(
-                "pedidoSaborQuintal",
-                JSON.stringify(pedido)
-            );
-
-
-            document.getElementById(
-                "numeroPedidoFinal"
-            ).textContent =
-                numeroPedido;
-
-
-            document.getElementById(
-                "resumoPratos"
-            ).innerHTML =
-                gerarResumo(
-                    listaPratos
-                );
-
-
-            document.getElementById(
-                "resumoBebidas"
-            ).innerHTML =
-                gerarResumo(
-                    listaBebidas
-                );
-
-
-            document.getElementById(
-                "totalFinal"
-            ).textContent =
-                formatarDinheiro(total);
-
-
-            document.getElementById(
-                "telaPedido"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "telaFinal"
-            ).style.display =
-                "block";
-
-        }
-
-
-        /* =========================
-           RESUMO
-        ========================= */
-
-        function gerarResumo(itens) {
-
-            let html = "";
-
-            itens.forEach(
-                item => {
-
-                    html += `
-
-                        <div class="resumo-item">
-
-                            <strong>
-                                ${escaparTexto(
-                                    item.nome
-                                )}
-                            </strong>
-
-                            ${
-                                item.sabor
-                                    ? `
-
-                                        <span class="sabor-resumo">
-
-                                            🥤 Sabor:
-                                            <strong>
-                                                ${escaparTexto(
-                                                    item.sabor
-                                                )}
-                                            </strong>
-
-                                        </span>
-
-                                      `
-                                    : ""
-                            }
-
-                            <br>
-
-                            Quantidade:
-                            ${item.quantidade}
-
-                            <br>
-
-                            Subtotal:
-                            ${formatarDinheiro(
-                                item.subtotal
-                            )}
-
-                            ${
-                                item.observacao
-                                    ? `
-
-                                        <span
-                                            class="observacao-resumo">
-
-                                            📝 Observação:
-                                            ${escaparTexto(
-                                                item.observacao
-                                            )}
-
-                                        </span>
-
-                                      `
-                                    : ""
-                            }
-
-                        </div>
-
-                    `;
-
-                }
-            );
-
-            return html;
-
-        }
-
-
-        /* =========================
-           VOLTAR PARA O PEDIDO
-        ========================= */
-
-        function voltarPedido() {
-
-            document.getElementById(
-                "telaFinal"
-            ).style.display =
-                "none";
-
-            document.getElementById(
-                "telaPedido"
-            ).style.display =
-                "block";
-
-        }
-
-
-        /* =========================
-           MOSTRAR NOTA
-        ========================= */
-
-        function mostrarNota() {
-
-            const dados =
-                localStorage.getItem(
-                    "pedidoSaborQuintal"
-                );
-
-            if (!dados) {
-
-                alert(
-                    "Não foi possível encontrar o pedido."
-                );
-
-                return;
-
-            }
-
-            const pedido =
-                JSON.parse(dados);
-
-
-            document.getElementById(
-                "numeroNota"
-            ).textContent =
-                pedido.numeroPedido;
-
-
-            document.getElementById(
-                "dataNota"
-            ).textContent =
-                new Date().toLocaleString(
-                    "pt-BR"
-                );
-
-
-            document.getElementById(
-                "notaPratos"
-            ).innerHTML =
-                gerarNotaItens(
-                    pedido.pratos
-                );
-
-
-            document.getElementById(
-                "notaBebidas"
-            ).innerHTML =
-                gerarNotaItens(
-                    pedido.bebidas
-                );
-
-
-            document.getElementById(
-                "totalNota"
-            ).textContent =
-                formatarDinheiro(
-                    pedido.total
-                );
-
-
-            document.getElementById(
-                "telaFinal"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "telaNota"
-            ).style.display =
-                "block";
-
-        }
-
-
-        /* =========================
-           ITENS DA NOTA
-        ========================= */
-
-        function gerarNotaItens(itens) {
-
-            let html = "";
-
-            itens.forEach(
-                item => {
-
-                    html += `
-
-                        <div class="linha-nota">
-
-                            <span>
-
-                                ${escaparTexto(
-                                    item.nome
-                                )}
-
-                                <br>
-
-                                ${item.quantidade}x
-
-                            </span>
-
-                            <strong>
-
-                                ${formatarDinheiro(
-                                    item.subtotal
-                                )}
-
-                            </strong>
-
-                        </div>
-
-
-                        ${
-                            item.sabor
-                                ? `
-
-                                    <div
-                                        class="sabor-nota">
-
-                                        🥤
-                                        <strong>
-                                            Sabor:
-                                        </strong>
-
-                                        ${escaparTexto(
-                                            item.sabor
-                                        )}
-
-                                    </div>
-
-                                  `
-                                : ""
-                        }
-
-
-                        ${
-                            item.observacao
-                                ? `
-
-                                    <p
-                                        class="observacao-nota">
-
-                                        📝
-
-                                        <strong>
-                                            Observação:
-                                        </strong>
-
-                                        ${escaparTexto(
-                                            item.observacao
-                                        )}
-
-                                    </p>
-
-                                  `
-                                : ""
-                        }
-
-                    `;
-
-                }
-            );
-
-            return html;
-
-        }
-
-
-        /* =========================
-           VOLTAR DA NOTA
-        ========================= */
-
-        function voltarFinal() {
-
-            document.getElementById(
-                "telaNota"
-            ).style.display =
-                "none";
-
-            document.getElementById(
-                "telaFinal"
-            ).style.display =
-                "block";
-
-        }
-
-
-        /* =========================
-           IMPRIMIR
-        ========================= */
-
-        function imprimirNota() {
-
-            window.print();
-
-        }
-
-
-        /* =========================
-           INICIALIZAÇÃO
-        ========================= */
-
-        document.getElementById(
-            "diaAtual"
-        ).textContent =
-            nomeDia();
-
-
-        adicionarPrato();
-
-        adicionarBebida();
+        lista.appendChild(item);
 
         calcularTotal();
 
-    </script>
+    }
+
+
+    /* =========================
+       ADICIONAR BEBIDA
+    ========================= */
+
+    function adicionarBebida() {
+
+        const lista = document.getElementById("listaBebidas");
+
+        const item = document.createElement("div");
+
+        item.className = "item-pedido";
+
+        item.innerHTML = `
+
+            <div class="campo-principal">
+
+                <label>Bebida</label>
+
+                <select
+                    class="select-bebida"
+                    onchange="verificarSuco(this)">
+
+                    ${opcoesBebidas()}
+
+                </select>
+
+            </div>
+
+            <div class="sabor-suco" style="display:none;">
+
+                <label>Sabor do suco</label>
+
+                <select
+                    class="select-sabor"
+                    onchange="calcularTotal()">
+
+                    ${opcoesSabores()}
+
+                </select>
+
+            </div>
+
+            <div class="observacao">
+
+                <label>
+                    Retirar ingredientes / observações
+                </label>
+
+                <input
+                    type="text"
+                    class="campo-observacao"
+                    placeholder="Ex.: sem gelo, sem açúcar..."
+                    maxlength="150"
+                    oninput="calcularTotal()">
+
+            </div>
+
+            <div class="quantidade">
+
+                <button
+                    type="button"
+                    onclick="alterarQuantidadeItem(this, -1)">
+                    −
+                </button>
+
+                <span>1</span>
+
+                <button
+                    type="button"
+                    onclick="alterarQuantidadeItem(this, 1)">
+                    +
+                </button>
+
+            </div>
+
+            <button
+                type="button"
+                class="btn-remover"
+                onclick="removerItem(this)">
+
+                Remover
+
+            </button>
+
+        `;
+
+        lista.appendChild(item);
+
+        calcularTotal();
+
+    }
+
+
+    /* =========================
+       VERIFICAR SUCO
+    ========================= */
+
+    function verificarSuco(select) {
+
+        const item = select.closest(".item-pedido");
+
+        const campoSabor = item.querySelector(".sabor-suco");
+
+        const selectSabor = item.querySelector(".select-sabor");
+
+        const bebida = bebidas[parseInt(select.value)];
+
+        if (bebida && bebida.nome === "Suco natural") {
+
+            campoSabor.style.display = "block";
+
+        } else {
+
+            campoSabor.style.display = "none";
+
+            selectSabor.value = "";
+
+        }
+
+        calcularTotal();
+
+    }
+
+
+    /* =========================
+       ALTERAR QUANTIDADE
+    ========================= */
+
+    function alterarQuantidadeItem(botao, valor) {
+
+        const quantidade = botao.parentElement.querySelector("span");
+
+        let numero = parseInt(quantidade.textContent);
+
+        numero += valor;
+
+        if (numero < 1) numero = 1;
+
+        if (numero > 20) numero = 20;
+
+        quantidade.textContent = numero;
+
+        calcularTotal();
+
+    }
+
+
+    /* =========================
+       REMOVER ITEM
+    ========================= */
+
+    function removerItem(botao) {
+
+        const item = botao.closest(".item-pedido");
+
+        const lista = item.parentElement;
+
+        const quantidadeItens = lista.querySelectorAll(".item-pedido").length;
+
+        if (quantidadeItens > 1) {
+
+            item.remove();
+
+        } else {
+
+            const select = item.querySelector("select");
+
+            const quantidade = item.querySelector(".quantidade span");
+
+            const observacao = item.querySelector(".campo-observacao");
+
+            select.value = "";
+
+            quantidade.textContent = "1";
+
+            if (observacao) observacao.value = "";
+
+            const campoSabor = item.querySelector(".sabor-suco");
+
+            const selectSabor = item.querySelector(".select-sabor");
+
+            if (campoSabor) campoSabor.style.display = "none";
+
+            if (selectSabor) selectSabor.value = "";
+
+        }
+
+        calcularTotal();
+
+    }
+
+
+    /* =========================
+       PEGAR ITENS
+    ========================= */
+
+    function pegarItens(classeSelect, listaProdutos) {
+
+        const itens = [];
+
+        document.querySelectorAll(classeSelect).forEach(select => {
+
+            if (select.value !== "") {
+
+                const item = select.closest(".item-pedido");
+
+                const quantidade = parseInt(
+                    item.querySelector(".quantidade span").textContent
+                );
+
+                const produto = listaProdutos[parseInt(select.value)];
+
+                if (!produto) return;
+
+                const campoObservacao = item.querySelector(".campo-observacao");
+
+                const observacao = campoObservacao
+                    ? campoObservacao.value.trim()
+                    : "";
+
+                let sabor = "";
+
+                if (produto.nome === "Suco natural") {
+
+                    const selectSabor = item.querySelector(".select-sabor");
+
+                    sabor = selectSabor ? selectSabor.value : "";
+
+                }
+
+                itens.push({
+
+                    nome: produto.nome,
+
+                    preco: produto.preco,
+
+                    quantidade: quantidade,
+
+                    subtotal: produto.preco * quantidade,
+
+                    observacao: observacao,
+
+                    sabor: sabor
+
+                });
+
+            }
+
+        });
+
+        return itens;
+
+    }
+
+
+    /* =========================
+       CALCULAR TOTAL
+    ========================= */
+
+    function calcularTotal() {
+
+        const listaPratos = pegarItens(".select-prato", pratos);
+
+        const listaBebidas = pegarItens(".select-bebida", bebidas);
+
+        let total = 0;
+
+        listaPratos.forEach(item => total += item.subtotal);
+
+        listaBebidas.forEach(item => total += item.subtotal);
+
+        document.getElementById("total").textContent =
+            formatarDinheiro(total);
+
+    }
+
+
+    /* =========================
+       ESCAPAR TEXTO
+    ========================= */
+
+    function escaparTexto(texto) {
+
+        return String(texto)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       NÚMERO DO PEDIDO
+    ========================= */
+
+    function gerarNumeroPedido() {
+
+        let numero = parseInt(
+            localStorage.getItem("numeroPedidoSaborQuintal")
+        ) || 0;
+
+        numero++;
+
+        localStorage.setItem("numeroPedidoSaborQuintal", numero);
+
+        return "#" + String(numero).padStart(6, "0");
+
+    }
+
+
+    /* =========================
+       CONTINUAR
+    ========================= */
+
+    function continuar() {
+
+        const listaPratos = pegarItens(".select-prato", pratos);
+
+        const listaBebidas = pegarItens(".select-bebida", bebidas);
+
+        if (listaPratos.length === 0) {
+
+            alert("Selecione pelo menos um prato.");
+
+            return;
+
+        }
+
+        if (listaBebidas.length === 0) {
+
+            alert("Selecione pelo menos uma bebida.");
+
+            return;
+
+        }
+
+        const sucoSemSabor = listaBebidas.some(
+            bebida =>
+                bebida.nome === "Suco natural" &&
+                bebida.sabor === ""
+        );
+
+        if (sucoSemSabor) {
+
+            alert("Selecione o sabor de todos os sucos naturais.");
+
+            return;
+
+        }
+
+        let total = 0;
+
+        listaPratos.forEach(item => total += item.subtotal);
+
+        listaBebidas.forEach(item => total += item.subtotal);
+
+        const numeroPedido = gerarNumeroPedido();
+
+        const pedido = {
+
+            numeroPedido: numeroPedido,
+
+            pratos: listaPratos,
+
+            bebidas: listaBebidas,
+
+            total: total
+
+        };
+
+        localStorage.setItem(
+            "pedidoSaborQuintal",
+            JSON.stringify(pedido)
+        );
+
+        document.getElementById("numeroPedidoFinal").textContent =
+            numeroPedido;
+
+        document.getElementById("resumoPratos").innerHTML =
+            gerarResumo(listaPratos);
+
+        document.getElementById("resumoBebidas").innerHTML =
+            gerarResumo(listaBebidas);
+
+        document.getElementById("totalFinal").textContent =
+            formatarDinheiro(total);
+
+        document.getElementById("telaPedido").style.display = "none";
+
+        document.getElementById("telaFinal").style.display = "block";
+
+    }
+
+
+    /* =========================
+       RESUMO
+    ========================= */
+
+    function gerarResumo(itens) {
+
+        let html = "";
+
+        itens.forEach(item => {
+
+            html += `
+
+                <div class="resumo-item">
+
+                    <strong>
+                        ${escaparTexto(item.nome)}
+                    </strong>
+
+                    ${
+                        item.sabor
+                            ? `
+                                <span class="sabor-resumo">
+                                    🥤 Sabor:
+                                    <strong>${escaparTexto(item.sabor)}</strong>
+                                </span>
+                              `
+                            : ""
+                    }
+
+                    <br>
+
+                    Quantidade: ${item.quantidade}
+
+                    <br>
+
+                    Subtotal: ${formatarDinheiro(item.subtotal)}
+
+                    ${
+                        item.observacao
+                            ? `
+                                <span class="observacao-resumo">
+                                    📝 Observação:
+                                    ${escaparTexto(item.observacao)}
+                                </span>
+                              `
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+        });
+
+        return html;
+
+    }
+
+
+    /* =========================
+       VOLTAR PARA O PEDIDO
+    ========================= */
+
+    function voltarPedido() {
+
+        document.getElementById("telaFinal").style.display = "none";
+
+        document.getElementById("telaPedido").style.display = "block";
+
+    }
+
+
+    /* =========================
+       MOSTRAR NOTA
+    ========================= */
+
+    function mostrarNota() {
+
+        const dados = localStorage.getItem("pedidoSaborQuintal");
+
+        if (!dados) {
+
+            alert("Não foi possível encontrar o pedido.");
+
+            return;
+
+        }
+
+        const pedido = JSON.parse(dados);
+
+        document.getElementById("numeroNota").textContent =
+            pedido.numeroPedido;
+
+        document.getElementById("dataNota").textContent =
+            new Date().toLocaleString("pt-BR");
+
+        document.getElementById("notaPratos").innerHTML =
+            gerarNotaItens(pedido.pratos);
+
+        document.getElementById("notaBebidas").innerHTML =
+            gerarNotaItens(pedido.bebidas);
+
+        document.getElementById("totalNota").textContent =
+            formatarDinheiro(pedido.total);
+
+        document.getElementById("telaFinal").style.display = "none";
+
+        document.getElementById("telaNota").style.display = "block";
+
+    }
+
+
+    /* =========================
+       ITENS DA NOTA
+    ========================= */
+
+    function gerarNotaItens(itens) {
+
+        let html = "";
+
+        itens.forEach(item => {
+
+            html += `
+
+                <div class="linha-nota">
+
+                    <span>
+                        ${escaparTexto(item.nome)}
+                        <br>
+                        ${item.quantidade}x
+                    </span>
+
+                    <strong>
+                        ${formatarDinheiro(item.subtotal)}
+                    </strong>
+
+                </div>
+
+                ${
+                    item.sabor
+                        ? `
+                            <div class="sabor-nota">
+                                🥤 <strong>Sabor:</strong>
+                                ${escaparTexto(item.sabor)}
+                            </div>
+                          `
+                        : ""
+                }
+
+                ${
+                    item.observacao
+                        ? `
+                            <p class="observacao-nota">
+                                📝 <strong>Observação:</strong>
+                                ${escaparTexto(item.observacao)}
+                            </p>
+                          `
+                        : ""
+                }
+
+            `;
+
+        });
+
+        return html;
+
+    }
+
+
+    /* =========================
+       VOLTAR DA NOTA
+    ========================= */
+
+    function voltarFinal() {
+
+        document.getElementById("telaNota").style.display = "none";
+
+        document.getElementById("telaFinal").style.display = "block";
+
+    }
+
+
+    /* =========================
+       IMPRIMIR
+    ========================= */
+
+    function imprimirNota() {
+
+        window.print();
+
+    }
+
+
+    /* =========================
+       INICIALIZAÇÃO
+    ========================= */
+
+    document.getElementById("diaAtual").textContent = nomeDia();
+
+    adicionarPrato();
+
+    adicionarBebida();
+
+    calcularTotal();
+
+</script>
 
 </body>
 

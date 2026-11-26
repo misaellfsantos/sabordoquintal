@@ -1,156 +1,400 @@
- body {
-            margin: 0;
-            background-color: #D5D1CD;
-            color: #3f3328;
-            font-family: Arial, sans-serif;
-        }
 
-        header {
-            background-color: #D8B78B;
-            border-bottom: 1px solid #ddd;
-        }
+/* ================= CONFIGURAÇÕES GERAIS ================= */
 
-        .navbar {
-            height: 80px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .logo {
-            width: 55px;
-            height: 55px;
-            object-fit: cover;
-            transition: 0.2s;
-        }
+body {
+    background-color: #d3d0ce;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+}
 
-        /* Efeito ao passar o mouse na logo */
-        .logo:hover {
-            transform: scale(1.08);
-        }
+main {
+    flex: 1;
+}
 
-        .navbar-brand {
-            font-family: Georgia, serif;
-            font-size: 24px;
-            font-weight: bold;
-            color: #3f3328 !important;
-        }
+/* ================= HEADER ================= */
 
-        .navbar-nav {
-            display: flex;
-            flex-direction: row;
-            gap: 25px;
-        }
+header {
+    width: 100%;
+    background-color: #f4e7cf;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
 
-        .nav-link {
-            color: #3f3328 !important;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px 5px !important;
-            transition: 0.3s;
-        }
+.navbar {
+    width: 100%;
+    min-height: 85px;
+    padding: 5px 25px;
+}
 
-        .nav-link:hover {
-            color: #c96d4b !important;
-        }
+.navbar .container {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        .nav-link i {
-            margin-right: 5px;
-        }
+/* LOGO */
 
-        main {
-            padding: 60px 0;
-        }
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
 
-        .dia {
-            margin-bottom: 80px;
-        }
+.navbar-brand:hover {
+    color: #6b3d22;
+}
 
-        .titulo-dia {
-            text-align: center;
-            font-family: Georgia, serif;
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 35px;
-            color: #3f3328;
-        }
+.logo {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
-        .prato {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 18px;
-            height: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
-            transition: 0.3s;
-        }
+/* MENU */
 
-        .prato:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
-        }
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
 
-        .imagem-prato {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+.navbar-nav .nav-item {
+    list-style: none;
+    text-align: center;
+}
 
-        .nome-prato {
-            font-family: Georgia, serif;
-            font-size: 21px;
-            font-weight: bold;
-            margin-top: 16px;
-            margin-bottom: 10px;
-            color: #3f3328;
-        }
+.navbar-nav .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    color: #111;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
-        .descricao {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            min-height: 48px;
-        }
+.navbar-nav .nav-link i {
+    display: block;
+    font-size: 23px;
+    margin-bottom: 4px;
+}
 
-        .preco {
-            font-size: 18px;
-            font-weight: bold;
-            color: #c96d4b;
-            margin-top: 15px;
-        }
+.navbar-nav .nav-link:hover {
+    color: #6b3d22;
+}
 
-        /* BOTÃO */
-        .btn-pedir {
-            display: inline-block;
-            background-color: #D96A4A;
-            border: none;
-            color: white;
-            padding: 9px 25px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 6px;
-            margin-top: 5px;
-            text-decoration: none;
-        }
+/* ================= MAIN ================= */
 
-        .btn-pedir:hover {
-            background-color: #D96A4A;
-            color: white;
-        }
+main {
+    min-height: calc(100vh - 130px);
+    padding: 35px 0 50px;
+}
 
-        footer {
-            background-color: #D8B78B;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
+/* ================= DIAS DA SEMANA ================= */
 
-        footer p {
-            margin: 5px;
-        }
+.dia {
+    width: 100%;
+    margin-bottom: 55px;
+}
 
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
+.dia:last-child {
+    margin-bottom: 10px;
+}
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+/* ================= TÍTULOS ================= */
+
+.titulo-dia {
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+    color: #111;
+    margin: 7px 0 30px;
+    padding-bottom: 15px;
+}
+
+/* ================= CARDS DOS PRATOS ================= */
+
+.prato {
+    width: 100%;
+    height: 100%;
+    min-height: 440px;
+    border: none;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #f4e7cf;
+    text-align: center;
+    padding-bottom: 25px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prato:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= IMAGENS ================= */
+
+.imagem-prato {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.prato:hover .imagem-prato {
+    transform: scale(1.04);
+}
+
+/* ================= NOMES ================= */
+
+.nome-prato {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: bold;
+    color: #111;
+    margin: 20px 15px 12px;
+}
+
+/* ================= DESCRIÇÕES ================= */
+
+.descricao {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #333;
+    margin: 0 22px 15px;
+}
+
+/* ================= PREÇOS ================= */
+
+.preco {
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+    color: #c96d4b;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* ================= BOTÕES ================= */
+
+.btn-pedir {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 11px 22px;
+    background-color: #d96a4a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pedir:hover {
+    background-color: #c95538;
+    color: white;
+}
+
+.btn-pedir i {
+    margin-right: 5px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    width: 100%;
+    min-height: 45px;
+    background-color: #f4e7cf;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    gap: 10px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #111;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 992px) {
+
+    .navbar-nav {
+        gap: 25px;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+
+    .prato {
+        min-height: 430px;
+    }
+
+    .imagem-prato {
+        height: 220px;
+    }
+
+    .nome-prato {
+        font-size: 21px;
+    }
+
+    .descricao {
+        font-size: 15px;
+    }
+}
+
+/* ================= CELULAR ================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar-brand {
+        font-size: 23px;
+    }
+
+    .logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    main {
+        padding: 25px 0 35px;
+    }
+
+    .titulo-dia {
+        font-size: 26px;
+        margin-bottom: 22px;
+    }
+
+    .dia {
+        margin-bottom: 40px;
+    }
+
+    .prato {
+        min-height: auto;
+        padding-bottom: 22px;
+    }
+
+    .imagem-prato {
+        height: 230px;
+    }
+
+    .nome-prato {
+        font-size: 22px;
+    }
+
+    .descricao {
+        font-size: 15px;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+        gap: 6px;
+    }
+}
+
+/* ================= CELULAR PEQUENO ================= */
+
+@media (max-width: 500px) {
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .navbar-nav {
+        gap: 15px;
+    }
+
+    .navbar-nav .nav-link i {
+        font-size: 20px;
+    }
+
+    .titulo-dia {
+        font-size: 23px;
+    }
+
+    .imagem-prato {
+        height: 220px;
+    }
+
+    .nome-prato {
+        font-size: 20px;
+    }
+
+    .descricao {
+        font-size: 14px;
+        margin: 0 15px 12px;
+    }
+
+    .preco {
+        font-size: 19px;
+    }
+
+    .btn-pedir {
+        padding: 10px 18px;
+    }
+
+    footer {
+        font-size: 11px;
+    }
+}

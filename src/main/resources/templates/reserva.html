@@ -1,467 +1,345 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
-        content="Página de reservas do restaurante Sabor do Quintal. Escolha o ambiente, dia, horário, quantidade de pessoas e mesa para realizar sua reserva.">
+          content="Página de reservas do restaurante Sabor do Quintal. Escolha o ambiente, dia, horário, quantidade de pessoas e mesa para realizar sua reserva.">
 
-    <meta name="keywords"
-        content="Sabor do Quintal, restaurante, reserva, mesa">
+    <meta name="keywords" content="Sabor do Quintal, restaurante, reserva, mesa">
+    <meta name="author" content="Luara Pires">
 
-    <meta name="author"
-        content="Luara Pires">
-
-    <link rel="icon"
-        type="image/png"
-        href="../faviconn.png">
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
 
     <title>Sabor do Quintal - Reserva</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Bootstrap Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-
-    <!-- Google Fonts -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/reserva.css}">
-
-
 </head>
-
 
 <body>
 
+<!-- HEADER -->
 
-    <!-- ==============================
-         HEADER
-    ============================== -->
+<header>
 
-    <header>
+    <a th:href="@{/inicio}"
+       class="logo-link"
+       title="Voltar para a página principal">
 
-        <!-- LOGO CLICÁVEL -->
-        <a
-            href="pagina_principal.html"
-            class="logo-link"
-            title="Voltar para a página principal">
+        <img th:src="@{/img/logo.png}"
+             alt="Logo Sabor do Quintal"
+             class="logo">
+    </a>
 
-            <img
-                src="../imagem/logo.png"
-                alt="Logo Sabor do Quintal"
-                class="logo">
+    <h1 class="titulo">Sabor do Quintal</h1>
 
-        </a>
+    <a th:href="@{/inicio}" class="home">
+        <i class="bi bi-house-door"></i>
+        <span>Home</span>
+    </a>
 
-
-        <h1 class="titulo">
-            Sabor do Quintal
-        </h1>
+</header>
 
 
-        <a
-            href="pagina_principal.html"
-            class="home">
+<main>
 
-            <i class="bi bi-house-door"></i>
+    <!-- AMBIENTES -->
 
-            <span>Home</span>
+    <section class="ambientes">
 
-        </a>
+        <!-- AMBIENTE INTERNO -->
 
-    </header>
+        <article class="ambiente">
 
+            <div id="carouselInterno"
+                 class="carousel slide carousel-ambiente"
+                 data-bs-ride="carousel">
 
-    <!-- ==============================
-         CONTEÚDO
-    ============================== -->
+                <div class="carousel-indicators">
 
-    <main>
-
-
-        <!-- ==============================
-             AMBIENTES
-        ============================== -->
-
-        <section class="ambientes">
-
-
-            <!-- AMBIENTE INTERNO -->
-
-            <article class="ambiente">
-
-                <div
-                    id="carouselInterno"
-                    class="carousel slide carousel-ambiente"
-                    data-bs-ride="carousel">
-
-
-                    <div class="carousel-indicators">
-
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselInterno"
                             data-bs-slide-to="0"
-                            class="active">
-                        </button>
+                            class="active"
+                            aria-current="true"
+                            aria-label="Imagem 1"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselInterno"
-                            data-bs-slide-to="1">
-                        </button>
+                            data-bs-slide-to="1"
+                            aria-label="Imagem 2"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselInterno"
-                            data-bs-slide-to="2">
-                        </button>
+                            data-bs-slide-to="2"
+                            aria-label="Imagem 3"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselInterno"
-                            data-bs-slide-to="3">
-                        </button>
+                            data-bs-slide-to="3"
+                            aria-label="Imagem 4"></button>
 
-                    </div>
+                </div>
 
+                <div class="carousel-inner">
 
-                    <div class="carousel-inner">
+                    <div class="carousel-item active">
 
+                        <img th:src="@{/img/mesa 02.png}"
+                             class="foto"
+                             alt="Mesa interna para 2 pessoas">
 
-                        <div class="carousel-item active">
-
-                            <img
-                                src="../imagem/mesa 02.png"
-                                class="foto"
-                                alt="Mesa para 2 pessoas">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para 2 pessoas —
-                                perfeita para um momento
-                                tranquilo e especial.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa 04.png"
-                                class="foto"
-                                alt="Mesa para 4 pessoas">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para 4 pessoas —
-                                ideal para aproveitar bons
-                                momentos com a família.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa 06.png"
-                                class="foto"
-                                alt="Mesa para grupos">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para grupos —
-                                mais espaço para reunir
-                                amigos e familiares.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa sofa.png"
-                                class="foto"
-                                alt="Mesa com sofá">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa com sofá —
-                                conforto para aproveitar
-                                sua refeição.
-
-                            </div>
-
+                        <div class="mensagem-carrossel">
+                            Mesa para 2 pessoas — perfeita para um momento
+                            tranquilo e especial.
                         </div>
 
                     </div>
 
+                    <div class="carousel-item">
 
-                    <button
-                        class="carousel-control-prev"
+                        <img th:src="@{/img/mesa 04.png}"
+                             class="foto"
+                             alt="Mesa interna para 4 pessoas">
+
+                        <div class="mensagem-carrossel">
+                            Mesa para 4 pessoas — ideal para aproveitar bons
+                            momentos com a família.
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <img th:src="@{/img/mesa 06.png}"
+                             class="foto"
+                             alt="Mesa interna para grupos">
+
+                        <div class="mensagem-carrossel">
+                            Mesa para grupos — mais espaço para reunir
+                            amigos e familiares.
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <img th:src="@{/img/mesa sofa.png}"
+                             class="foto"
+                             alt="Mesa interna com sofá">
+
+                        <div class="mensagem-carrossel">
+                            Mesa com sofá — conforto para aproveitar
+                            sua refeição.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev"
                         type="button"
                         data-bs-target="#carouselInterno"
                         data-bs-slide="prev">
 
-                        <span
-                            class="carousel-control-prev-icon">
-                        </span>
+                    <span class="carousel-control-prev-icon"></span>
 
-                    </button>
+                </button>
 
-
-                    <button
-                        class="carousel-control-next"
+                <button class="carousel-control-next"
                         type="button"
                         data-bs-target="#carouselInterno"
                         data-bs-slide="next">
 
-                        <span
-                            class="carousel-control-next-icon">
-                        </span>
+                    <span class="carousel-control-next-icon"></span>
 
-                    </button>
+                </button>
 
-                </div>
+            </div>
 
+            <div class="descricao">
 
-                <div class="descricao">
+                <p>
+                    Ambientes aconchegantes e bem planejados
+                    para todos os momentos: desde mesas
+                    intimistas para duas pessoas, ideais para
+                    encontros tranquilos, até opções mais
+                    amplas para grupos e reuniões em família.
+                    Também contamos com mesas confortáveis
+                    para quatro pessoas e espaços com sofá.
+                </p>
 
-                    <p>
+            </div>
 
-                        Ambientes aconchegantes e bem planejados
-                        para todos os momentos: desde mesas
-                        intimistas para duas pessoas, ideais para
-                        encontros tranquilos, até opções mais
-                        amplas para grupos e reuniões em família.
-                        Também contamos com mesas confortáveis
-                        para quatro pessoas e espaços com sofá.
-
-                    </p>
-
-                </div>
-
-            </article>
+        </article>
 
 
-            <!-- AMBIENTE EXTERNO -->
+        <!-- AMBIENTE EXTERNO -->
 
-            <article class="ambiente">
+        <article class="ambiente">
 
-                <div
-                    id="carouselExterno"
-                    class="carousel slide carousel-ambiente"
-                    data-bs-ride="carousel">
+            <div id="carouselExterno"
+                 class="carousel slide carousel-ambiente"
+                 data-bs-ride="carousel">
 
+                <div class="carousel-indicators">
 
-                    <div class="carousel-indicators">
-
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselExterno"
                             data-bs-slide-to="0"
-                            class="active">
-                        </button>
+                            class="active"
+                            aria-current="true"
+                            aria-label="Imagem 1"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselExterno"
-                            data-bs-slide-to="1">
-                        </button>
+                            data-bs-slide-to="1"
+                            aria-label="Imagem 2"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselExterno"
-                            data-bs-slide-to="2">
-                        </button>
+                            data-bs-slide-to="2"
+                            aria-label="Imagem 3"></button>
 
-                        <button
-                            type="button"
+                    <button type="button"
                             data-bs-target="#carouselExterno"
-                            data-bs-slide-to="3">
-                        </button>
+                            data-bs-slide-to="3"
+                            aria-label="Imagem 4"></button>
 
-                    </div>
+                </div>
 
+                <div class="carousel-inner">
 
-                    <div class="carousel-inner">
+                    <div class="carousel-item active">
 
+                        <img th:src="@{/img/mesa 02 ex.png}"
+                             class="foto"
+                             alt="Mesa externa para 2 pessoas">
 
-                        <div class="carousel-item active">
-
-                            <img
-                                src="../imagem/mesa 02 ex.png"
-                                class="foto"
-                                alt="Mesa externa para 2 pessoas">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para 2 pessoas —
-                                aproveite uma refeição
-                                cercado pela natureza.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa 04 ex.png"
-                                class="foto"
-                                alt="Mesa externa para 4 pessoas">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para 4 pessoas —
-                                espaço para compartilhar
-                                bons momentos.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa 06 ex.png"
-                                class="foto"
-                                alt="Mesa externa para grupos">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa para grupos —
-                                reúna amigos e familiares
-                                ao ar livre.
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="carousel-item">
-
-                            <img
-                                src="../imagem/mesa sofa ex.png"
-                                class="foto"
-                                alt="Mesa externa com sofá">
-
-                            <div class="mensagem-carrossel">
-
-                                Mesa com sofá —
-                                mais conforto para aproveitar
-                                a natureza.
-
-                            </div>
-
+                        <div class="mensagem-carrossel">
+                            Mesa para 2 pessoas — aproveite uma refeição
+                            cercado pela natureza.
                         </div>
 
                     </div>
 
+                    <div class="carousel-item">
 
-                    <button
-                        class="carousel-control-prev"
+                        <img th:src="@{/img/mesa 04 ex.png}"
+                             class="foto"
+                             alt="Mesa externa para 4 pessoas">
+
+                        <div class="mensagem-carrossel">
+                            Mesa para 4 pessoas — espaço para compartilhar
+                            bons momentos.
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <img th:src="@{/img/mesa 06 ex.png}"
+                             class="foto"
+                             alt="Mesa externa para grupos">
+
+                        <div class="mensagem-carrossel">
+                            Mesa para grupos — reúna amigos e familiares
+                            ao ar livre.
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <img th:src="@{/img/mesa sofa ex.png}"
+                             class="foto"
+                             alt="Mesa externa com sofá">
+
+                        <div class="mensagem-carrossel">
+                            Mesa com sofá — mais conforto para aproveitar
+                            a natureza.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev"
                         type="button"
                         data-bs-target="#carouselExterno"
                         data-bs-slide="prev">
 
-                        <span
-                            class="carousel-control-prev-icon">
-                        </span>
+                    <span class="carousel-control-prev-icon"></span>
 
-                    </button>
+                </button>
 
-
-                    <button
-                        class="carousel-control-next"
+                <button class="carousel-control-next"
                         type="button"
                         data-bs-target="#carouselExterno"
                         data-bs-slide="next">
 
-                        <span
-                            class="carousel-control-next-icon">
-                        </span>
+                    <span class="carousel-control-next-icon"></span>
 
-                    </button>
+                </button>
 
-                </div>
+            </div>
 
+            <div class="descricao">
 
-                <div class="descricao">
+                <p>
+                    Em um cenário ao ar livre com vista para
+                    o rio, o ambiente combina natureza,
+                    charme e aconchego. Temos opções de mesas
+                    para duas pessoas, espaços para grupos
+                    e encontros em família, além de áreas
+                    com sofá para proporcionar mais conforto.
+                </p>
 
-                    <p>
+            </div>
 
-                        Em um cenário ao ar livre com vista para
-                        o rio, o ambiente combina natureza,
-                        charme e aconchego. Temos opções de mesas
-                        para duas pessoas, espaços para grupos
-                        e encontros em família, além de áreas
-                        com sofá para proporcionar mais conforto.
+        </article>
 
-                    </p>
-
-                </div>
-
-            </article>
-
-        </section>
+    </section>
 
 
-        <!-- ==============================
-             RESERVA
-        ============================== -->
+    <!-- RESERVA -->
 
-        <section class="reserva">
+    <section class="reserva">
 
+        <!-- FORMULÁRIO INTEGRADO AO SPRING BOOT -->
+
+        <form id="formReserva"
+              th:action="@{/reservas/salvar}"
+              method="post">
 
             <!-- DATA -->
 
             <div>
 
                 <div class="titulo-reserva">
-
                     <i class="bi bi-calendar3 me-2"></i>
-
                     DIA DA RESERVA
-
                 </div>
 
-
-                <input
-                    type="date"
-                    id="data"
-                    class="campo">
+                <input type="date"
+                       id="data"
+                       name="dataReserva"
+                       class="campo"
+                       required>
 
             </div>
 
@@ -471,21 +349,16 @@
             <div>
 
                 <div class="titulo-reserva">
-
                     <i class="bi bi-clock me-2"></i>
-
                     HORÁRIO
-
                 </div>
 
+                <select id="horario"
+                        name="horario"
+                        class="campo"
+                        required>
 
-                <select
-                    id="horario"
-                    class="campo">
-
-                    <option value="">
-                        Escolha o horário
-                    </option>
+                    <option value="">Escolha o horário</option>
 
                     <option value="10:00">10:00</option>
                     <option value="11:00">11:00</option>
@@ -510,21 +383,16 @@
             <div>
 
                 <div class="titulo-reserva">
-
                     <i class="bi bi-people me-2"></i>
-
                     QUANTIDADE DE PESSOAS
-
                 </div>
 
+                <select id="pessoas"
+                        name="quantidadePessoas"
+                        class="campo"
+                        required>
 
-                <select
-                    id="pessoas"
-                    class="campo">
-
-                    <option value="">
-                        Quantas pessoas?
-                    </option>
+                    <option value="">Quantas pessoas?</option>
 
                     <option value="1">1 pessoa</option>
                     <option value="2">2 pessoas</option>
@@ -545,29 +413,19 @@
             <div>
 
                 <div class="titulo-reserva">
-
                     <i class="bi bi-building me-2"></i>
-
                     AMBIENTE
-
                 </div>
 
+                <select id="ambiente"
+                        name="ambiente"
+                        class="campo"
+                        required>
 
-                <select
-                    id="ambiente"
-                    class="campo">
+                    <option value="">Escolha o ambiente</option>
 
-                    <option value="">
-                        Escolha o ambiente
-                    </option>
-
-                    <option value="Interno">
-                        Ambiente interno
-                    </option>
-
-                    <option value="Externo">
-                        Área externa
-                    </option>
+                    <option value="Interno">Ambiente interno</option>
+                    <option value="Externo">Área externa</option>
 
                 </select>
 
@@ -579,17 +437,14 @@
             <div>
 
                 <div class="titulo-reserva">
-
                     <i class="bi bi-grid-3x3-gap me-2"></i>
-
                     MESA DISPONÍVEL
-
                 </div>
 
-
-                <select
-                    id="mesa"
-                    class="campo">
+                <select id="mesa"
+                        name="mesa"
+                        class="campo"
+                        required>
 
                     <option value="">
                         Escolha primeiro o ambiente
@@ -604,12 +459,12 @@
 
             <div class="formulario">
 
-                <input
-                    type="text"
-                    id="nome"
-                    class="nome"
-                    placeholder="Nome do cliente">
-
+                <input type="text"
+                       id="nome"
+                       name="nomeCliente"
+                       class="nome"
+                       placeholder="Nome do cliente"
+                       required>
 
                 <div class="aviso">
 
@@ -621,14 +476,14 @@
                 </div>
 
 
-                <input
-                    type="tel"
-                    id="telefone"
-                    class="nome"
-                    placeholder="Telefone do cliente"
-                    maxlength="11"
-                    inputmode="numeric">
-
+                <input type="tel"
+                       id="telefone"
+                       name="telefone"
+                       class="nome"
+                       placeholder="Telefone do cliente"
+                       maxlength="11"
+                       inputmode="numeric"
+                       required>
 
                 <div class="aviso">
 
@@ -640,19 +495,14 @@
                 </div>
 
 
-                <div
-                    class="resumo"
-                    id="resumo">
-
+                <div class="resumo" id="resumo">
                     Preencha os dados da reserva.
-
                 </div>
 
 
-                <button
-                    type="button"
-                    class="finalizar"
-                    onclick="finalizarReserva()">
+                <button type="button"
+                        class="finalizar"
+                        onclick="finalizarReserva()">
 
                     Finalizar
 
@@ -660,824 +510,405 @@
 
             </div>
 
-        </section>
+        </form>
 
+    </section>
 
-        <!-- MENSAGEM DE SUCESSO -->
 
-        <div
-            id="mensagem"
-            class="mensagem">
+    <!-- MENSAGEM DE SUCESSO -->
 
-            <i class="bi bi-check-circle"></i>
+    <div id="mensagem"
+         class="mensagem"
+         th:if="${param.sucesso}">
 
-            <strong>
-                Reserva realizada com sucesso!
-            </strong>
+        <i class="bi bi-check-circle"></i>
 
-            <p id="textoConfirmacao"></p>
+        <strong>
+            Reserva realizada com sucesso!
+        </strong>
 
-        </div>
+        <p>
+            Sua reserva foi registrada. Agradecemos pela preferência!
+        </p>
 
-    </main>
+    </div>
 
+</main>
 
-    <!-- FOOTER -->
 
-    <footer>
+<!-- FOOTER -->
 
-        <div class="footer-esquerda">
+<footer>
 
-            <i class="bi bi-geo-alt"></i>
+    <div class="footer-esquerda">
 
-            <i class="bi bi-telephone"></i>
+        <i class="bi bi-geo-alt"></i>
+        <i class="bi bi-telephone"></i>
 
-            <span>
-                (11) 9 3275-8484
-            </span>
+        <span>(11) 9 3275-8484</span>
 
-        </div>
+    </div>
 
+    <div class="footer-centro">
+        © Direitos autorais
+    </div>
 
-        <div class="footer-centro">
+    <div class="footer-direita">
+        <span>sabordoquintal@gmail.com</span>
+    </div>
 
-            © Direitos autorais
+</footer>
 
-        </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-        <div class="footer-direita">
 
-            <span>
-                sabordoquintal@gmail.com
-            </span>
+<!-- JAVASCRIPT -->
 
-        </div>
+<script>
 
-    </footer>
+    /* CAMPOS */
 
+    const campoData = document.getElementById("data");
+    const horario = document.getElementById("horario");
+    const pessoas = document.getElementById("pessoas");
+    const ambiente = document.getElementById("ambiente");
+    const mesa = document.getElementById("mesa");
+    const nome = document.getElementById("nome");
+    const telefone = document.getElementById("telefone");
+    const resumo = document.getElementById("resumo");
 
-    <!-- Bootstrap JS -->
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+    /* PEGAR DADOS DO LOGIN */
 
+    function pegarDadosLogin() {
 
-    <script>
+        return {
 
-        /* =====================================================
-           CAMPOS
-        ===================================================== */
+            logado:
+                localStorage.getItem("usuarioLogado") === "true",
 
-        const campoData =
-            document.getElementById("data");
+            nome:
+                localStorage.getItem("nomeUsuario") || "",
 
-        const horario =
-            document.getElementById("horario");
+            email:
+                localStorage.getItem("emailUsuario") || "",
 
-        const pessoas =
-            document.getElementById("pessoas");
-
-        const ambiente =
-            document.getElementById("ambiente");
-
-        const mesa =
-            document.getElementById("mesa");
-
-        const nome =
-            document.getElementById("nome");
-
-        const telefone =
-            document.getElementById("telefone");
-
-        const resumo =
-            document.getElementById("resumo");
-
-
-        /* =====================================================
-           PEGAR DADOS DO LOGIN
-        ===================================================== */
-
-        function pegarDadosLogin() {
-
-            return {
-
-                logado:
-                    localStorage.getItem(
-                        "usuarioLogado"
-                    ) === "true",
-
-                nome:
-                    localStorage.getItem(
-                        "nomeUsuario"
-                    ) || "",
-
-                email:
-                    localStorage.getItem(
-                        "emailUsuario"
-                    ) || "",
-
-                telefone:
-                    localStorage.getItem(
-                        "telefoneUsuario"
-                    ) || ""
-
-            };
-
-        }
-
-
-        /* =====================================================
-           VERIFICAR LOGIN
-        ===================================================== */
-
-        const usuario =
-            pegarDadosLogin();
-
-
-        if (
-            !usuario.logado ||
-            !usuario.nome
-        ) {
-
-            alert(
-                "Você precisa fazer login para realizar uma reserva."
-            );
-
-            window.location.href =
-                "login.html";
-
-        }
-
-
-        /* =====================================================
-           PUXAR NOME DO LOGIN
-        ===================================================== */
-
-        if (usuario.nome) {
-
-            nome.value =
-                usuario.nome;
-
-        }
-
-
-        /* =====================================================
-           PUXAR TELEFONE DO LOGIN
-        ===================================================== */
-
-        if (usuario.telefone) {
-
-            telefone.value =
-                usuario.telefone;
-
-        }
-
-
-        /* =====================================================
-           TELEFONE - SOMENTE NÚMEROS
-        ===================================================== */
-
-        telefone.addEventListener(
-            "input",
-            function () {
-
-                this.value =
-                    this.value.replace(/\D/g, "");
-
-                this.value =
-                    this.value.substring(0, 11);
-
-                atualizarResumo();
-
-            }
-        );
-
-
-        /* =====================================================
-           DATA MÍNIMA
-        ===================================================== */
-
-        const hoje =
-            new Date();
-
-        const ano =
-            hoje.getFullYear();
-
-        const mes =
-            String(
-                hoje.getMonth() + 1
-            ).padStart(2, "0");
-
-        const dia =
-            String(
-                hoje.getDate()
-            ).padStart(2, "0");
-
-
-        campoData.min =
-            ano +
-            "-" +
-            mes +
-            "-" +
-            dia;
-
-
-        /* =====================================================
-           MESAS
-        ===================================================== */
-
-        const mesas = {
-
-            Interno: [
-
-                {
-                    nome: "Mesa 01",
-                    capacidade: 2
-                },
-
-                {
-                    nome: "Mesa 02",
-                    capacidade: 3
-                },
-
-                {
-                    nome: "Mesa 03",
-                    capacidade: 4
-                },
-
-                {
-                    nome: "Mesa 04",
-                    capacidade: 6
-                }
-
-            ],
-
-            Externo: [
-
-                {
-                    nome: "Mesa 05",
-                    capacidade: 2
-                },
-
-                {
-                    nome: "Mesa 06",
-                    capacidade: 4
-                },
-
-                {
-                    nome: "Mesa 07",
-                    capacidade: 6
-                },
-
-                {
-                    nome: "Mesa 08",
-                    capacidade: 8
-                }
-
-            ]
+            telefone:
+                localStorage.getItem("telefoneUsuario") || ""
 
         };
 
-
-        /* =====================================================
-           ATUALIZAR MESAS
-        ===================================================== */
-
-        function atualizarMesas() {
-
-            const ambienteEscolhido =
-                ambiente.value;
-
-            const quantidade =
-                Number(
-                    pessoas.value
-                );
+    }
 
 
-            mesa.innerHTML = "";
+    /* VERIFICAR LOGIN */
+
+    /* VERIFICAR LOGIN */
+
+    const usuario = pegarDadosLogin();
+
+    /* A página pode ser visualizada sem login.
+    O login será exigido ao finalizar a reserva. */
 
 
-            if (!ambienteEscolhido) {
+    /* PREENCHER NOME */
 
-                mesa.innerHTML =
-                    '<option value="">Escolha primeiro o ambiente</option>';
-
-                atualizarResumo();
-
-                return;
-
-            }
+    if (usuario.nome) {
+        nome.value = usuario.nome;
+    }
 
 
-            const opcaoInicial =
-                document.createElement(
-                    "option"
-                );
+    /* PREENCHER TELEFONE */
+
+    if (usuario.telefone) {
+        telefone.value = usuario.telefone;
+    }
 
 
-            opcaoInicial.value = "";
+    /* TELEFONE - SOMENTE NÚMEROS */
 
-            opcaoInicial.textContent =
-                "Escolha a mesa";
+    telefone.addEventListener("input", function () {
 
+        this.value = this.value.replace(/\D/g, "");
 
-            mesa.appendChild(
-                opcaoInicial
-            );
+        this.value = this.value.substring(0, 11);
 
+        atualizarResumo();
 
-            mesas[ambienteEscolhido]
-                .forEach(
-                    function(item) {
-
-                        if (
-                            !quantidade ||
-                            quantidade <= item.capacidade
-                        ) {
-
-                            const opcao =
-                                document.createElement(
-                                    "option"
-                                );
+    });
 
 
-                            opcao.value =
-                                item.nome;
+    /* DATA MÍNIMA */
+
+    function dataLocalAtual() {
+
+        const hoje = new Date();
+
+        const ano = hoje.getFullYear();
+
+        const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+
+        const dia = String(hoje.getDate()).padStart(2, "0");
+
+        return ano + "-" + mes + "-" + dia;
+
+    }
+
+    campoData.min = dataLocalAtual();
 
 
-                            opcao.textContent =
-                                item.nome +
-                                " - " +
-                                item.capacidade +
-                                " pessoas";
+    /* MESAS */
+
+    const mesas = {
+
+        Interno: [
+
+            { nome: "Mesa 01", capacidade: 2 },
+            { nome: "Mesa 02", capacidade: 3 },
+            { nome: "Mesa 03", capacidade: 4 },
+            { nome: "Mesa 04", capacidade: 6 }
+
+        ],
+
+        Externo: [
+
+            { nome: "Mesa 05", capacidade: 2 },
+            { nome: "Mesa 06", capacidade: 4 },
+            { nome: "Mesa 07", capacidade: 6 },
+            { nome: "Mesa 08", capacidade: 8 }
+
+        ]
+
+    };
 
 
-                            mesa.appendChild(
-                                opcao
-                            );
+    /* ATUALIZAR MESAS */
 
-                        }
+    function atualizarMesas() {
 
-                    }
-                );
+        const ambienteEscolhido = ambiente.value;
 
+        const quantidade = Number(pessoas.value);
+
+        mesa.innerHTML = "";
+
+        if (!ambienteEscolhido) {
+
+            mesa.innerHTML =
+                '<option value="">Escolha primeiro o ambiente</option>';
 
             atualizarResumo();
 
-        }
-
-
-        /* =====================================================
-           ATUALIZAR RESUMO
-        ===================================================== */
-
-        function atualizarResumo() {
-
-            const nomeCliente =
-                nome.value.trim() ||
-                "cliente";
-
-
-            if (
-                campoData.value &&
-                horario.value &&
-                pessoas.value &&
-                ambiente.value &&
-                mesa.value
-            ) {
-
-                const dataFormatada =
-                    campoData.value
-                        .split("-")
-                        .reverse()
-                        .join("/");
-
-
-                resumo.textContent =
-
-                    "Olá, " +
-                    nomeCliente +
-                    "! Reserva para " +
-                    pessoas.value +
-                    " pessoa(s), no dia " +
-                    dataFormatada +
-                    ", às " +
-                    horario.value +
-                    ", no ambiente " +
-                    ambiente.value +
-                    ", " +
-                    mesa.value +
-                    ".";
-
-            } else {
-
-                resumo.textContent =
-                    "Preencha os dados da reserva.";
-
-            }
+            return;
 
         }
 
+        const opcaoInicial = document.createElement("option");
 
-        /* =====================================================
-           EVENTOS
-        ===================================================== */
+        opcaoInicial.value = "";
 
-        ambiente.addEventListener(
-            "change",
-            atualizarMesas
-        );
+        opcaoInicial.textContent = "Escolha a mesa";
 
+        mesa.appendChild(opcaoInicial);
 
-        pessoas.addEventListener(
-            "change",
-            atualizarMesas
-        );
+        mesas[ambienteEscolhido].forEach(function (item) {
 
+            if (!quantidade || quantidade <= item.capacidade) {
 
-        campoData.addEventListener(
-            "change",
-            atualizarResumo
-        );
+                const opcao = document.createElement("option");
 
+                opcao.value = item.nome;
 
-        horario.addEventListener(
-            "change",
-            atualizarResumo
-        );
+                opcao.textContent =
+                    item.nome + " - " + item.capacidade + " pessoas";
 
-
-        mesa.addEventListener(
-            "change",
-            atualizarResumo
-        );
-
-
-        nome.addEventListener(
-            "input",
-            atualizarResumo
-        );
-
-
-        /* =====================================================
-           FINALIZAR RESERVA
-        ===================================================== */
-
-        function finalizarReserva() {
-
-            const usuarioAtual =
-                pegarDadosLogin();
-
-
-            if (
-                !usuarioAtual.logado ||
-                !usuarioAtual.nome
-            ) {
-
-                alert(
-                    "Sua sessão expirou. Faça login novamente."
-                );
-
-                window.location.href =
-                    "login.html";
-
-                return;
+                mesa.appendChild(opcao);
 
             }
 
+        });
 
-            const nomeCliente =
-                nome.value.trim();
+        atualizarResumo();
 
-
-            const telefoneCliente =
-                telefone.value.replace(/\D/g, "");
+    }
 
 
-            telefone.value =
-                telefoneCliente;
+    /* ATUALIZAR RESUMO */
 
+    function atualizarResumo() {
 
-            if (!nomeCliente) {
+        const nomeCliente = nome.value.trim() || "cliente";
 
-                alert(
-                    "Informe o nome do cliente."
-                );
-
-                nome.focus();
-
-                return;
-
-            }
-
-
-            if (!telefoneCliente) {
-
-                alert(
-                    "Informe o telefone do cliente."
-                );
-
-                telefone.focus();
-
-                return;
-
-            }
-
-
-            if (
-                telefoneCliente.length !== 10 &&
-                telefoneCliente.length !== 11
-            ) {
-
-                alert(
-                    "Digite um telefone válido com 10 ou 11 números."
-                );
-
-                telefone.focus();
-
-                return;
-
-            }
-
-
-            if (!campoData.value) {
-
-                alert(
-                    "Escolha o dia da reserva."
-                );
-
-                campoData.focus();
-
-                return;
-
-            }
-
-
-            if (!horario.value) {
-
-                alert(
-                    "Escolha o horário."
-                );
-
-                horario.focus();
-
-                return;
-
-            }
-
-
-            if (!pessoas.value) {
-
-                alert(
-                    "Escolha a quantidade de pessoas."
-                );
-
-                pessoas.focus();
-
-                return;
-
-            }
-
-
-            if (!ambiente.value) {
-
-                alert(
-                    "Escolha o ambiente."
-                );
-
-                ambiente.focus();
-
-                return;
-
-            }
-
-
-            if (!mesa.value) {
-
-                alert(
-                    "Escolha uma mesa."
-                );
-
-                mesa.focus();
-
-                return;
-
-            }
-
-
-            let identificadorUsuario = "";
-
-
-            if (usuarioAtual.email) {
-
-                identificadorUsuario =
-                    "email:" +
-                    usuarioAtual.email
-                        .trim()
-                        .toLowerCase();
-
-            } else {
-
-                identificadorUsuario =
-                    "nome:" +
-                    usuarioAtual.nome
-                        .trim()
-                        .toLowerCase();
-
-            }
-
+        if (
+            campoData.value &&
+            horario.value &&
+            pessoas.value &&
+            ambiente.value &&
+            mesa.value
+        ) {
 
             const dataFormatada =
-                campoData.value
-                    .split("-")
-                    .reverse()
-                    .join("/");
+                campoData.value.split("-").reverse().join("/");
 
+            resumo.textContent =
 
-            const reserva = {
+                "Olá, " + nomeCliente +
+                "! Reserva para " + pessoas.value +
+                " pessoa(s), no dia " + dataFormatada +
+                ", às " + horario.value +
+                ", no ambiente " + ambiente.value +
+                ", " + mesa.value + ".";
 
-                identificadorUsuario:
-                    identificadorUsuario,
+        } else {
 
-                nomeUsuario:
-                    usuarioAtual.nome,
-
-                emailUsuario:
-                    usuarioAtual.email,
-
-                nome:
-                    nomeCliente,
-
-                telefone:
-                    telefoneCliente,
-
-                data:
-                    dataFormatada,
-
-                hora:
-                    horario.value,
-
-                pessoas:
-                    pessoas.value,
-
-                ambiente:
-                    ambiente.value,
-
-                mesa:
-                    mesa.value,
-
-                dataReserva:
-                    new Date(
-                        campoData.value +
-                        "T" +
-                        horario.value +
-                        ":00"
-                    ).getTime(),
-
-                dataLembrete:
-                    new Date(
-                        campoData.value +
-                        "T" +
-                        horario.value +
-                        ":00"
-                    ).getTime()
-                    -
-                    (
-                        5 *
-                        24 *
-                        60 *
-                        60 *
-                        1000
-                    )
-
-            };
-
-
-            /*
-             * SALVAR A RESERVA SEM APAGAR AS ANTERIORES.
-             * A página principal poderá ler esta lista
-             * em "Minhas reservas".
-             */
-            let reservasSalvas = [];
-
-            try {
-
-                const dadosSalvos =
-                    localStorage.getItem(
-                        "reservasSaborQuintal"
-                    );
-
-                if (dadosSalvos) {
-
-                    const dados =
-                        JSON.parse(dadosSalvos);
-
-                    if (Array.isArray(dados)) {
-                        reservasSalvas = dados;
-                    } else if (dados) {
-                        reservasSalvas = [dados];
-                    }
-
-                }
-
-            } catch (erro) {
-
-                console.error(
-                    "Erro ao carregar reservas:",
-                    erro
-                );
-
-                reservasSalvas = [];
-
-            }
-
-
-            reservasSalvas.push(reserva);
-
-
-            localStorage.setItem(
-                "reservasSaborQuintal",
-                JSON.stringify(reservasSalvas)
-            );
-
-
-            /*
-             * Mantém a chave antiga atualizada para
-             * compatibilidade com versões anteriores.
-             */
-            localStorage.setItem(
-                "reservaSaborQuintal",
-                JSON.stringify(reserva)
-            );
-
-
-            document.getElementById(
-                "textoConfirmacao"
-            ).innerHTML =
-
-                "Cliente: <strong>" +
-                nomeCliente +
-                "</strong><br>" +
-
-                "Telefone: <strong>" +
-                telefoneCliente +
-                "</strong><br>" +
-
-                "Data: <strong>" +
-                dataFormatada +
-                "</strong><br>" +
-
-                "Horário: <strong>" +
-                horario.value +
-                "</strong><br>" +
-
-                "Pessoas: <strong>" +
-                pessoas.value +
-                "</strong><br>" +
-
-                "Ambiente: <strong>" +
-                ambiente.value +
-                "</strong><br>" +
-
-                "Mesa: <strong>" +
-                mesa.value +
-                "</strong>";
-
-
-            document.getElementById(
-                "mensagem"
-            ).style.display =
-                "block";
-
-
-            document.getElementById(
-                "mensagem"
-            ).scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "center"
-
-            });
-
-
-            /*
-             * Depois de salvar, volta para a página principal.
-             * Os dados continuam salvos no localStorage.
-             */
-            setTimeout(function () {
-
-                window.location.href =
-                    "pagina_principal.html";
-
-            }, 1200);
+            resumo.textContent =
+                "Preencha os dados da reserva.";
 
         }
 
-    </script>
+    }
+
+
+    /* EVENTOS */
+
+    ambiente.addEventListener("change", atualizarMesas);
+
+    pessoas.addEventListener("change", atualizarMesas);
+
+    campoData.addEventListener("change", atualizarResumo);
+
+    horario.addEventListener("change", atualizarResumo);
+
+    mesa.addEventListener("change", atualizarResumo);
+
+    nome.addEventListener("input", atualizarResumo);
+
+
+    /* FINALIZAR RESERVA */
+
+    function finalizarReserva() {
+
+        const usuarioAtual = pegarDadosLogin();
+
+        if (!usuarioAtual.logado || !usuarioAtual.nome) {
+
+            alert("Sua sessão expirou. Faça login novamente.");
+
+            window.location.href = "/login";
+
+            return;
+
+        }
+
+        const nomeCliente = nome.value.trim();
+
+        const telefoneCliente = telefone.value.replace(/\D/g, "");
+
+        telefone.value = telefoneCliente;
+
+
+        if (!nomeCliente) {
+
+            alert("Informe o nome do cliente.");
+
+            nome.focus();
+
+            return;
+
+        }
+
+        if (!telefoneCliente) {
+
+            alert("Informe o telefone do cliente.");
+
+            telefone.focus();
+
+            return;
+
+        }
+
+        if (
+            telefoneCliente.length !== 10 &&
+            telefoneCliente.length !== 11
+        ) {
+
+            alert("Digite um telefone válido com 10 ou 11 números.");
+
+            telefone.focus();
+
+            return;
+
+        }
+
+        if (!campoData.value) {
+
+            alert("Escolha o dia da reserva.");
+
+            campoData.focus();
+
+            return;
+
+        }
+
+        if (campoData.value < dataLocalAtual()) {
+
+            alert("Não é possível realizar uma reserva em uma data passada.");
+
+            campoData.focus();
+
+            return;
+
+        }
+
+        if (!horario.value) {
+
+            alert("Escolha o horário.");
+
+            horario.focus();
+
+            return;
+
+        }
+
+        if (!pessoas.value) {
+
+            alert("Escolha a quantidade de pessoas.");
+
+            pessoas.focus();
+
+            return;
+
+        }
+
+        if (!ambiente.value) {
+
+            alert("Escolha o ambiente.");
+
+            ambiente.focus();
+
+            return;
+
+        }
+
+        if (!mesa.value) {
+
+            alert("Escolha uma mesa.");
+
+            mesa.focus();
+
+            return;
+
+        }
+
+
+        /* ENVIAR PARA O SPRING BOOT */
+
+        document.getElementById("formReserva").requestSubmit();
+
+    }
+
+</script>
 
 </body>
-
 </html>
