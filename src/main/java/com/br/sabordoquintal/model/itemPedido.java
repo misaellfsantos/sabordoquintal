@@ -16,10 +16,10 @@ public class itemPedido {
     @JoinColumn(name = "pedido_id", nullable = false)
     private pedido pedido;
 
-    // Associação opcional com um produto do banco
+    // Associação opcional com um produto cadastrado no banco
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = true)
-    private produto produto;
+    private Produto produto;
 
     @Column(nullable = false)
     private String nomeProduto;
@@ -54,11 +54,11 @@ public class itemPedido {
         this.pedido = pedido;
     }
 
-    public produto getProduto() {
+    public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(produto produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
@@ -107,8 +107,6 @@ public class itemPedido {
             return BigDecimal.ZERO;
         }
 
-        return precoUnitario.multiply(
-                BigDecimal.valueOf(quantidade)
-        );
+        return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
     }
 }

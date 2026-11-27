@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "produtos")
-public class produto {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +17,25 @@ public class produto {
 
     private String descricao;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
+    @Column(nullable = false)
     private String categoria;
 
-    public produto() {
+    private Integer diaSemana;
+
+    public Produto() {
     }
 
-    public produto(String nome, String descricao,
-                   BigDecimal preco, String categoria) {
+    public Produto(String nome, String descricao,
+                   BigDecimal preco, String categoria,
+                   Integer diaSemana) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.categoria = categoria;
+        this.diaSemana = diaSemana;
     }
 
     public Long getId() {
@@ -71,5 +76,13 @@ public class produto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(Integer diaSemana) {
+        this.diaSemana = diaSemana;
     }
 }

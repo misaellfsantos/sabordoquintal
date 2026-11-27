@@ -1,8 +1,9 @@
 
 package com.br.sabordoquintal.controller;
 
-import com.br.sabordoquintal.model.produto;
+import com.br.sabordoquintal.model.Produto;
 import com.br.sabordoquintal.service.ProdutoService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,24 +19,24 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<produto> listar() {
+    public List<Produto> listar() {
         return service.listar();
     }
 
     @GetMapping("/{id}")
-    public produto buscar(@PathVariable Long id) {
+    public Produto buscar(@PathVariable Long id) {
         return service.buscarPorId(id).orElse(null);
     }
 
     @PostMapping
-    public produto cadastrar(@RequestBody produto produto) {
+    public Produto cadastrar(@RequestBody Produto produto) {
         return service.salvar(produto);
     }
 
     @PutMapping("/{id}")
-    public produto atualizar(
+    public Produto atualizar(
             @PathVariable Long id,
-            @RequestBody produto produto) {
+            @RequestBody Produto produto) {
 
         produto.setId(id);
         return service.salvar(produto);
