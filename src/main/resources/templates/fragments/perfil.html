@@ -1,106 +1,208 @@
-<!-- ================= TELA DO PERFIL ================= -->
 
-<div class="tela-perfil" id="telaPerfil" th:fragment="perfil"
-     xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+// ================= PERFIL DO USUÁRIO =================
 
-    <div class="perfil-card">
+// CARREGAR DADOS
+function pegarDadosLogin() {
+const nome = localStorage.getItem("nomeUsuario") || "Usuário";
+const email = localStorage.getItem("emailUsuario") || "Não informado";
+const telefone = localStorage.getItem("telefoneUsuario") || "Não informado";
+const foto = localStorage.getItem("usuarioFoto");
 
-        <button class="perfil-fechar"
-                onclick="fecharPerfil()">
-            &times;
-        </button>
+const perfilNome = document.getElementById("perfilNome");
+const perfilNomeDado = document.getElementById("perfilNomeDado");
+const perfilEmail = document.getElementById("perfilEmail");
+const perfilTelefone = document.getElementById("perfilTelefone");
+const fotoPerfil = document.getElementById("fotoPerfil");
 
-        <div class="foto-perfil-container">
+if (perfilNome) perfilNome.textContent = nome;
+if (perfilNomeDado) perfilNomeDado.textContent = nome;
+if (perfilEmail) perfilEmail.textContent = email;
+if (perfilTelefone) perfilTelefone.textContent = telefone;
 
-            <img id="fotoPerfil"
-                 th:src="@{/img/logo.png}"
-                 class="foto-perfil"
-                 alt="Foto de perfil">
+if (foto && fotoPerfil) {
+fotoPerfil.src = foto;
+}
+}
 
-            <label for="inputFoto"
-                   class="botao-foto"
-                   title="Alterar foto">
+// ABRIR PERFIL
+function abrirPerfil() {
+const usuarioLogado = localStorage.getItem("usuarioLogado");
 
-                <i class="bi bi-camera-fill"></i>
+if (usuarioLogado !== "true") {
+alert("Faça login para acessar o perfil.");
+window.location.href = "/login";
+return;
+}
 
-            </label>
+pegarDadosLogin();
 
-            <input type="file"
-                   id="inputFoto"
-                   accept="image/*">
+const telaPerfil = document.getElementById("telaPerfil");
 
-        </div>
+if (telaPerfil) {
+telaPerfil.classList.add("ativa");
+document.body.style.overflow = "hidden";
+} else {
+console.error("Elemento telaPerfil não encontrado.");
+}
+}
 
-        <h2 class="perfil-titulo" id="perfilNome">
-            Usuário
-        </h2>
+// FECHAR PERFIL
+function fecharPerfil() {
+const telaPerfil = document.getElementById("telaPerfil");
 
-        <div class="dados-perfil">
+if (telaPerfil) {
+telaPerfil.classList.remove("ativa");
+}
 
-            <div class="dado">
+document.body.style.overflow = "";
+}
 
-                <i class="bi bi-person-fill"></i>
+// ALTERAR FOTO
+function configurarFotoPerfil() {
+const inputFoto = document.getElementById("inputFoto");
 
-                <span>
-                    <strong>Nome:</strong>
-                    <span id="perfilNomeDado">Não informado</span>
-                </span>
+if (!inputFoto) return;
 
-            </div>
+inputFoto.addEventListener("change", function () {
+const arquivo = this.files[0];
 
-            <div class="dado">
+if (!arquivo) return;
 
-                <i class="bi bi-envelope-fill"></i>
+if (!arquivo.type.startsWith("image/")) {
+alert("Selecione uma imagem válida.");
+return;
+}
 
-                <span>
-                    <strong>E-mail:</strong>
-                    <span id="perfilEmail">Não informado</span>
-                </span>
+const leitor = new FileReader();
 
-            </div>
+leitor.onload = function (evento) {
+const foto = evento.target.result;
 
-            <div class="dado">
+document.getElementById("fotoPerfil").src = foto;
+localStorage.setItem("usuarioFoto", foto);
+};
 
-                <i class="bi bi-telephone-fill"></i>
+leitor.readAsDataURL(arquivo);
+});
+}
 
-                <span>
-                    <strong>Telefone:</strong>
-                    <span id="perfilTelefone">Não informado</span>
-                </span>
+// ABRIR MINHAS RESERVAS
+async function abrirReservas() {
+const telaReservas = document.getElementById("telaReservas");
+const lista = document.getElementById("listaReservas");
 
-            </div>
+if (!telaReservas || !lista) {
+alert("Área de reservas não encontrada.");
+return;
+}
 
-        </div>
+telaReservas.classList.add("ativa");
+lista.textContent = "Carregando reservas...";
 
-        <div class="perfil-opcoes">
+const telefone = localStorage.getItem("telefoneUsuario");
 
-            <button class="perfil-opcao"
-                    onclick="abrirReservas()">
+if (!telefone) {
+lista.textContent = "Telefone não encontrado.";
+return;
+}
 
-                <i class="bi bi-calendar-check"></i>
-                Minhas reservas
+try {
+const resposta = await fetch(
+"/api/reservas/minhas?telefone=" +
+encodeURIComponent(telefone)
+);
 
-            </button>
+if (!resposta.ok) {
+throw new Error("Erro ao buscar reservas.");
+}
 
-            <a th:href="@{/cardapio}"
-               class="perfil-opcao">
+const reservas = await resposta.json();
+mostrarReservas(reservas);
 
-                <i class="bi bi-journal-text"></i>
-                Cardápio
+} catch (erro) {
+console.error(erro);
+lista.textContent = "Não foi possível carregar suas reservas.";
+}
+}
 
-            </a>
+// MOSTRAR RESERVAS
+function mostrarReservas(reservas) {
+const lista = document.getElementById("listaReservas");
 
-            <button class="perfil-opcao perfil-sair"
-                    onclick="sairDaConta()">
+if (!lista) return;
 
-                <i class="bi bi-box-arrow-right"></i>
-                Sair da conta
+lista.innerHTML = "";
 
-            </button>
+if (!reservas || reservas.length === 0) {
+lista.textContent = "Você ainda não possui reservas.";
+return;
+}
 
-        </div>
+reservas.forEach(reserva => {
+const card = document.createElement("div");
+card.className = "reserva-item";
 
-    </div>
+const data = reserva.dataReserva
+? reserva.dataReserva.split("-").reverse().join("/")
+: "Não informada";
 
-</div>
+const campos = [
+["Data", data],
+["Horário", reserva.horario || "Não informado"],
+["Pessoas", reserva.quantidadePessoas || "Não informado"],
+["Ambiente", reserva.ambiente || "Não informado"],
+["Mesa", reserva.mesa || "Não informada"],
+["Status", reserva.status || "PENDENTE"]
+];
+
+const titulo = document.createElement("h3");
+titulo.textContent = "Minha reserva";
+card.appendChild(titulo);
+
+campos.forEach(([nome, valor]) => {
+const p = document.createElement("p");
+const strong = document.createElement("strong");
+
+strong.textContent = nome + ": ";
+p.appendChild(strong);
+p.appendChild(document.createTextNode(valor));
+card.appendChild(p);
+});
+
+lista.appendChild(card);
+});
+}
+
+// FECHAR RESERVAS
+function fecharReservas() {
+const telaReservas = document.getElementById("telaReservas");
+
+if (telaReservas) {
+telaReservas.classList.remove("ativa");
+}
+}
+
+// SAIR DA CONTA
+function sairDaConta() {
+if (!confirm("Deseja realmente sair da sua conta?")) {
+return;
+}
+
+localStorage.removeItem("usuarioLogado");
+fecharPerfil();
+
+window.location.href = "/login";
+}
+
+// INICIALIZAÇÃO
+document.addEventListener("DOMContentLoaded", function () {
+configurarFotoPerfil();
+pegarDadosLogin();
+
+document.addEventListener("keydown", function (evento) {
+if (evento.key === "Escape") {
+fecharReservas();
+fecharPerfil();
+}
+});
+});
