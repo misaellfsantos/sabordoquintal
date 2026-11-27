@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios | Sabor do Quintal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --marrom: #2D241E;
+            --marrom-claro: #49372B;
+            --bege: #F5E9CD;
+            --terracota: #D96C4C;
+            --areia: #DFBD8C;
+            --fundo: #F4F1EB;
+            --branco: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--marrom);
+            font-family: Arial, sans-serif;
+        }
+
+        /* CABEÇALHO */
+
+        .admin-header {
+            background: var(--marrom);
+            color: var(--bege);
+            padding: 20px 0;
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .12);
+        }
+
+        .admin-header h1 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .admin-header h1 i {
+            color: var(--areia);
+            margin-right: 8px;
+        }
+
+        .admin-header a {
+            color: var(--bege);
+            text-decoration: none;
+            background: var(--marrom-claro);
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .admin-header a:hover {
+            background: var(--terracota);
+            color: white;
+        }
+
+        /* CONTEÚDO */
+
+        .container-admin {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .btn-voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--marrom);
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 7px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--terracota);
+            color: white;
+        }
+
+        .titulo-pagina {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .descricao {
+            color: #897D72;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* CARDS */
+
+        .resumo-card {
+            background: white;
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
+            padding: 23px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            transition: .3s;
+        }
+
+        .resumo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 18px rgba(45, 36, 30, .08);
+        }
+
+        .resumo-icon {
+            width: 53px;
+            height: 53px;
+            min-width: 53px;
+            border-radius: 9px;
+            background: var(--bege);
+            color: var(--terracota);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .resumo-card h3 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 4px;
+        }
+
+        .resumo-card p {
+            color: #897D72;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        /* SEÇÕES */
+
+        .painel {
+            background: white;
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .04);
+        }
+
+        .titulo-secao {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .titulo-secao i {
+            color: var(--terracota);
+            margin-right: 7px;
+        }
+
+        /* GRÁFICO */
+
+        .grafico-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+
+        /* TABELA */
+
+        .table {
+            vertical-align: middle;
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: var(--marrom);
+            color: var(--bege);
+            font-size: 12px;
+            padding: 16px 13px;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .table tbody td {
+            padding: 16px 13px;
+            font-size: 13px;
+            color: var(--marrom);
+            border-bottom: 1px solid #EEE8DF;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover td {
+            background: #FCF9F3;
+        }
+
+        .status-entregue {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: bold;
+            background: #E8EADF;
+            color: #52603B;
+        }
+
+        .vazio {
+            padding: 45px !important;
+            text-align: center;
+            color: #897D72 !important;
+        }
+
+        .rodape-admin {
+            text-align: center;
+            color: #897D72;
+            font-size: 12px;
+            padding: 25px 15px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .container-admin {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .titulo-pagina {
+                font-size: 25px;
+            }
+
+            .resumo-card {
+                padding: 17px;
+            }
+
+            .painel {
+                padding: 15px;
+            }
+
+            .grafico-container {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="admin-header">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <h1>
+            <i class="bi bi-shop"></i>
+            Sabor do Quintal
+        </h1>
+
+        <a th:href="@{/admin}">
+            <i class="bi bi-speedometer2"></i>
+            Painel administrativo
+        </a>
+
+    </div>
+</header>
+
+<main class="container-admin">
+
+    <a th:href="@{/admin}" class="btn-voltar">
+        <i class="bi bi-arrow-left"></i>
+        Voltar ao painel
+    </a>
+
+    <h2 class="titulo-pagina">Relatórios de vendas</h2>
+
+    <p class="descricao">
+        Acompanhe o faturamento e o desempenho das vendas do restaurante.
+    </p>
+
+    <!-- CARDS DE RESUMO -->
+
+    <div class="row g-3">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="resumo-card">
+                <div class="resumo-icon">
+                    <i class="bi bi-cash-stack"></i>
+                </div>
+                <div>
+                    <h3 th:text="${'R$ ' + #numbers.formatDecimal(faturamentoTotal, 1, 'POINT', 2, 'COMMA')}">
+                        R$ 0,00
+                    </h3>
+                    <p>Faturamento total</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="resumo-card">
+                <div class="resumo-icon">
+                    <i class="bi bi-calendar-day"></i>
+                </div>
+                <div>
+                    <h3 th:text="${'R$ ' + #numbers.formatDecimal(faturamentoDiario, 1, 'POINT', 2, 'COMMA')}">
+                        R$ 0,00
+                    </h3>
+                    <p>Faturamento de hoje</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="resumo-card">
+                <div class="resumo-icon">
+                    <i class="bi bi-calendar-month"></i>
+                </div>
+                <div>
+                    <h3 th:text="${'R$ ' + #numbers.formatDecimal(faturamentoMensal, 1, 'POINT', 2, 'COMMA')}">
+                        R$ 0,00
+                    </h3>
+                    <p>Faturamento do mês</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="resumo-card">
+                <div class="resumo-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+                <div>
+                    <h3 th:text="${totalPedidosEntregues}">
+                        0
+                    </h3>
+                    <p>Pedidos entregues</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RESUMO DE PEDIDOS -->
+
+    <section class="painel">
+
+        <h4 class="titulo-secao">
+            <i class="bi bi-clipboard-data"></i>
+            Resumo de pedidos
+        </h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="resumo-card">
+                    <div class="resumo-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <h3 th:text="${pedidosEntreguesHoje}">0</h3>
+                        <p>Pedidos entregues hoje</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="resumo-card">
+                    <div class="resumo-icon">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+
+                    <div>
+                        <h3 th:text="${pedidosEntreguesMes}">0</h3>
+                        <p>Pedidos entregues neste mês</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GRÁFICO -->
+
+    <section class="painel">
+
+        <h4 class="titulo-secao">
+            <i class="bi bi-bar-chart-line"></i>
+            Comparativo de faturamento
+        </h4>
+
+        <p class="text-muted small">
+            Comparação entre o faturamento de hoje e o faturamento do mês.
+        </p>
+
+        <div class="grafico-container">
+            <canvas id="graficoVendas"></canvas>
+        </div>
+
+    </section>
+
+    <!-- HISTÓRICO DE VENDAS -->
+
+    <section class="painel">
+
+        <h4 class="titulo-secao">
+            <i class="bi bi-clock-history"></i>
+            Histórico de vendas
+        </h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+                <tr>
+                    <th>Nº do pedido</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="venda : ${vendas}">
+
+                    <td th:text="${venda.id}"></td>
+
+                    <td th:text="${venda.cliente != null
+                        ? venda.cliente.nome
+                        : 'Cliente não informado'}">
+                    </td>
+
+                    <td th:text="${venda.dataPedido != null
+                        ? #temporals.format(venda.dataPedido, 'dd/MM/yyyy HH:mm')
+                        : '-'}">
+                    </td>
+
+                    <td th:text="${venda.total != null
+                        ? 'R$ ' + #numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')
+                        : 'R$ 0,00'}">
+                    </td>
+
+                    <td>
+                        <span class="status-entregue"
+                              th:text="${venda.status}">
+                        </span>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(vendas)}">
+                    <td colspan="5" class="vazio">
+                        <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                        Nenhuma venda concluída até o momento.
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="rodape-admin">
+    © 2026 Sabor do Quintal — Relatórios administrativos
+</footer>
+
+<script th:inline="javascript">
+
+    const faturamentoHoje = Number(
+        /*[[${faturamentoDiario}]]*/ 0
+    );
+
+    const faturamentoMes = Number(
+        /*[[${faturamentoMensal}]]*/ 0
+    );
+
+    const contexto = document
+        .getElementById("graficoVendas")
+        .getContext("2d");
+
+    new Chart(contexto, {
+        type: "bar",
+
+        data: {
+            labels: ["Hoje", "Este mês"],
+
+            datasets: [{
+                label: "Faturamento (R$)",
+                data: [faturamentoHoje, faturamentoMes],
+                backgroundColor: [
+                    "#D96C4C",
+                    "#DFBD8C"
+                ],
+                borderRadius: 8,
+                barThickness: 65
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(valor) {
+                            return "R$ " + valor.toLocaleString("pt-BR");
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

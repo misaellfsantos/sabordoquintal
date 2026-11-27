@@ -29,7 +29,7 @@ public class ProdutoService {
         return repository.findById(id);
     }
 
-    // Cadastrar ou atualizar produto
+    // Salvar ou atualizar produto
     public Produto salvar(Produto produto) {
         return repository.save(produto);
     }
@@ -39,27 +39,27 @@ public class ProdutoService {
         repository.deleteById(id);
     }
 
-    // Listar pratos de determinado dia
+    // Listar pratos de uma categoria e dia da semana
     public List<Produto> listarPratosDoDia(Integer diaSemana) {
         return repository.findByCategoriaIgnoreCaseAndDiaSemana(
                 "PRATO", diaSemana
         );
     }
 
-    // Listar todas as bebidas
+    // Listar bebidas
     public List<Produto> listarBebidas() {
         return repository.findByCategoriaIgnoreCase("BEBIDA");
     }
 
-    // Cadastrar os produtos iniciais sem duplicar
+    // Cadastrar produto inicial sem duplicar pelo nome e categoria
     public void cadastrarProdutoInicial(
             String nome,
             BigDecimal preco,
             String categoria,
-            Integer diaSemana) {
-
-        boolean existe = repository
-                .existsByNomeIgnoreCaseAndCategoriaIgnoreCase(
+            Integer diaSemana
+    ) {
+        boolean existe =
+                repository.existsByNomeIgnoreCaseAndCategoriaIgnoreCase(
                         nome, categoria
                 );
 

@@ -25,12 +25,16 @@ public class Produto {
 
     private Integer diaSemana;
 
+    // Caminho da imagem do produto
+    private String imagem;
+
     public Produto() {
     }
 
     public Produto(String nome, String descricao,
                    BigDecimal preco, String categoria,
                    Integer diaSemana) {
+
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -84,5 +88,13 @@ public class Produto {
 
     public void setDiaSemana(Integer diaSemana) {
         this.diaSemana = diaSemana;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

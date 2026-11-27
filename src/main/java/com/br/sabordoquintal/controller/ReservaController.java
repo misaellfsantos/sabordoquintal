@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ReservaController {
 
@@ -36,11 +38,23 @@ public class ReservaController {
         return "redirect:/reservas?sucesso";
     }
 
+    // BUSCAR RESERVAS DO CLIENTE
+    @GetMapping("/api/reservas/minhas")
+    @ResponseBody
+    public List<reserva> minhasReservas(
+            @RequestParam String telefone) {
+
+        String telefoneLimpo = telefone.replaceAll("\\D", "");
+
+        return reservaService.buscarPorTelefone(telefoneLimpo);
+    }
+
     @GetMapping("/admin/reservas")
     public String listarReservas(Model model) {
         model.addAttribute("reservas", reservaService.listar());
         return "admin/reservas";
     }
+
     @PostMapping("/admin/reservas/excluir/{id}")
     public String excluir(@PathVariable Long id) {
         reservaService.excluir(id);

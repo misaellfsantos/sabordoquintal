@@ -7,39 +7,29 @@ import com.br.sabordoquintal.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservaService {
 
-    private final ReservaRepository reservaRepository;
+    private final ReservaRepository repository;
 
-    public ReservaService(ReservaRepository reservaRepository) {
-        this.reservaRepository = reservaRepository;
+    public ReservaService(ReservaRepository repository) {
+        this.repository = repository;
     }
 
-    // Listar todas as reservas
     public List<reserva> listar() {
-        return reservaRepository.findAll();
+        return repository.findAll();
     }
 
-    // Buscar reserva pelo ID
-    public Optional<reserva> buscarPorId(Long id) {
-        return reservaRepository.findById(id);
+    public reserva salvar(reserva reserva) {
+        return repository.save(reserva);
     }
 
-    // Salvar reserva
-    public reserva salvar(reserva novaReserva) {
-        return reservaRepository.save(novaReserva);
-    }
-
-    // Excluir reserva
     public void excluir(Long id) {
-        reservaRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
-    // Verificar se existe reserva
-    public boolean existe(Long id) {
-        return reservaRepository.existsById(id);
+    public List<reserva> buscarPorTelefone(String telefone) {
+        return repository.findByTelefone(telefone);
     }
 }
