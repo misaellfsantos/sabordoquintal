@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
@@ -10,85 +11,412 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+    <style>
+        :root {
+            --marrom: #2D241E;
+            --marrom-claro: #49372B;
+            --bege: #F5E9CD;
+            --terracota: #D96C4C;
+            --areia: #DFBD8C;
+            --fundo: #F4F1EB;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--marrom);
+            font-family: Arial, sans-serif;
+        }
+
+        /* CABEÇALHO */
+
+        .admin-header {
+            background: var(--marrom);
+            color: var(--bege);
+            padding: 20px 0;
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .12);
+        }
+
+        .admin-header h1 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .admin-header h1 i {
+            color: var(--areia);
+            margin-right: 8px;
+        }
+
+        .admin-header a {
+            background: var(--marrom-claro);
+            color: var(--bege);
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .admin-header a:hover {
+            background: var(--terracota);
+            color: white;
+        }
+
+        /* CONTEÚDO */
+
+        .container-admin {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .btn-voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--marrom);
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 7px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--terracota);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .titulo-pagina {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .descricao {
+            color: #897D72;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* CARD DA TABELA */
+
+        .tabela-container {
+            background: white;
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .04);
+        }
+
+        .titulo-tabela {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .titulo-tabela i {
+            color: var(--terracota);
+            margin-right: 7px;
+        }
+
+        /* TABELA */
+
+        .table {
+            vertical-align: middle;
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: var(--marrom);
+            color: var(--bege);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 16px 13px;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .table thead th:first-child {
+            border-radius: 7px 0 0 7px;
+        }
+
+        .table thead th:last-child {
+            border-radius: 0 7px 7px 0;
+        }
+
+        .table tbody td {
+            padding: 16px 13px;
+            font-size: 13px;
+            color: var(--marrom);
+            border-bottom: 1px solid #EEE8DF;
+            white-space: nowrap;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover td {
+            background: #FCF9F3;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-pendente {
+            background: #FFF0D5;
+            color: #946000;
+        }
+
+        .status-confirmada {
+            background: #E8EADF;
+            color: #52603B;
+        }
+
+        .status-cancelada {
+            background: #F5DADA;
+            color: #A32626;
+        }
+
+        .status-concluida {
+            background: #E5E5E5;
+            color: #454545;
+        }
+
+        /* BOTÃO EXCLUIR */
+
+        .btn-excluir {
+            background: #F5DADA;
+            color: #A32626;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .btn-excluir:hover {
+            background: #E9BCBC;
+            color: #861D1D;
+        }
+
+        /* AVISO SEM RESERVAS */
+
+        .vazio {
+            background: white;
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
+            padding: 45px;
+            text-align: center;
+            color: #897D72;
+            margin-top: 25px;
+        }
+
+        .vazio i {
+            color: var(--areia);
+        }
+
+        /* RODAPÉ */
+
+        .rodape-admin {
+            text-align: center;
+            color: #897D72;
+            font-size: 12px;
+            padding: 25px 15px;
+            margin-top: 35px;
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 768px) {
+            .container-admin {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .admin-header h1 {
+                font-size: 18px;
+            }
+
+            .admin-header a {
+                font-size: 11px;
+                padding: 9px;
+            }
+
+            .titulo-pagina {
+                font-size: 25px;
+            }
+
+            .tabela-container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header .container {
+                gap: 12px;
+            }
+
+            .admin-header h1 {
+                font-size: 16px;
+            }
+
+            .admin-header a {
+                font-size: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="p-3 shadow-sm">
+<header class="admin-header">
     <div class="container d-flex justify-content-between align-items-center">
-        <h3>Sabor do Quintal</h3>
-        <a th:href="@{/admin}" class="btn btn-outline-dark">
-            Voltar ao painel
+
+        <h1>
+            <i class="bi bi-shop"></i>
+            Sabor do Quintal
+        </h1>
+
+        <a th:href="@{/admin}">
+            <i class="bi bi-speedometer2"></i>
+            Painel administrativo
         </a>
+
     </div>
 </header>
 
-<main class="container py-5">
+<main class="container-admin">
 
-    <h2 class="mb-2">Gerenciamento de reservas</h2>
-    <p class="text-muted mb-4">
+    <a th:href="@{/admin}" class="btn-voltar">
+        <i class="bi bi-arrow-left"></i>
+        Voltar ao painel
+    </a>
+
+    <h2 class="titulo-pagina">Gerenciamento de reservas</h2>
+
+    <p class="descricao">
         Consulte e gerencie as reservas realizadas pelos clientes.
     </p>
 
+    <!-- NENHUMA RESERVA -->
+
     <div th:if="${reservas == null or #lists.isEmpty(reservas)}"
-         class="alert alert-info">
+         class="vazio">
+
+        <i class="bi bi-calendar-x fs-1 d-block mb-3"></i>
+
         Nenhuma reserva cadastrada até o momento.
+
     </div>
 
-    <div class="table-responsive"
-         th:if="${reservas != null and !#lists.isEmpty(reservas)}">
+    <!-- TABELA DE RESERVAS -->
 
-        <table class="table table-bordered table-hover align-middle">
+    <section class="tabela-container"
+             th:if="${reservas != null and !#lists.isEmpty(reservas)}">
 
-            <thead class="table-dark">
-            <tr>
-                <th>Cliente</th>
-                <th>Telefone</th>
-                <th>Data</th>
-                <th>Horário</th>
-                <th>Pessoas</th>
-                <th>Ambiente</th>
-                <th>Mesa</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
+        <h4 class="titulo-tabela">
+            <i class="bi bi-calendar-check"></i>
+            Reservas cadastradas
+        </h4>
 
-            <tbody>
-            <tr th:each="reserva : ${reservas}">
+        <div class="table-responsive">
 
-                <td th:text="${reserva.nomeCliente}"></td>
-                <td th:text="${reserva.telefone}"></td>
-                <td th:text="${reserva.dataReserva}"></td>
-                <td th:text="${reserva.horario}"></td>
-                <td th:text="${reserva.quantidadePessoas}"></td>
-                <td th:text="${reserva.ambiente}"></td>
-                <td th:text="${reserva.mesa}"></td>
-                <td>
-                    <span class="badge bg-warning text-dark"
-                          th:text="${reserva.status}"></span>
-                </td>
+            <table class="table table-hover">
 
-                <td>
-                    <form th:action="@{/admin/reservas/excluir/{id}(id=${reserva.id})}"
-                          method="post"
-                          onsubmit="return confirm('Deseja realmente excluir esta reserva?')">
+                <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Telefone</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Pessoas</th>
+                    <th>Ambiente</th>
+                    <th>Mesa</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
 
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            Excluir
-                        </button>
+                <tbody>
 
-                    </form>
-                </td>
+                <tr th:each="reserva : ${reservas}">
 
-            </tr>
-            </tbody>
+                    <td th:text="${reserva.nomeCliente}"></td>
 
-        </table>
-    </div>
+                    <td th:text="${reserva.telefone}"></td>
+
+                    <td th:text="${reserva.dataReserva}"></td>
+
+                    <td th:text="${reserva.horario}"></td>
+
+                    <td th:text="${reserva.quantidadePessoas}"></td>
+
+                    <td th:text="${reserva.ambiente}"></td>
+
+                    <td th:text="${reserva.mesa}"></td>
+
+                    <td>
+                        <span class="status"
+                              th:classappend="${reserva.status != null and #strings.toLowerCase(reserva.status) == 'confirmada' ? ' status-confirmada' : (reserva.status != null and #strings.toLowerCase(reserva.status) == 'cancelada' ? ' status-cancelada' : (reserva.status != null and #strings.toLowerCase(reserva.status) == 'concluida' ? ' status-concluida' : ' status-pendente'))}"
+                              th:text="${reserva.status}">
+                        </span>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/admin/reservas/excluir/{id}(id=${reserva.id})}"
+                              method="post"
+                              onsubmit="return confirm('Deseja realmente excluir esta reserva?')">
+
+                            <button type="submit" class="btn-excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
 
 </main>
+
+<footer class="rodape-admin">
+    © 2026 Sabor do Quintal — Painel Administrativo
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

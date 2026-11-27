@@ -17,61 +17,169 @@
     <link rel="stylesheet" th:href="@{/css/base.css}">
 
     <style>
-       /* CONTEÚDO */
+        :root {
+            --marrom: #2D241E;
+            --marrom-claro: #49372B;
+            --bege: #F5E9CD;
+            --terracota: #D96C4C;
+            --areia: #DFBD8C;
+            --fundo: #F4F1EB;
+            --branco: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--marrom);
+            font-family: Arial, sans-serif;
+        }
+
+        /* CABEÇALHO */
+
+        .admin-header {
+            background: var(--marrom);
+            color: var(--bege);
+            padding: 20px 0;
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .12);
+        }
+
+        .admin-header h1 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .admin-header h1 i {
+            color: var(--areia);
+            margin-right: 8px;
+        }
+
+        .admin-header a {
+            color: var(--bege);
+            text-decoration: none;
+            background: var(--marrom-claro);
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .admin-header a:hover {
+            background: var(--terracota);
+            color: white;
+        }
+
+        /* CONTEÚDO */
 
         .container-admin {
             max-width: 1250px;
-            margin: 45px auto;
-            padding: 0 20px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .btn-voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--marrom);
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 7px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--terracota);
+            color: white;
+            transform: translateY(-2px);
         }
 
         .titulo-pagina {
             font-family: Georgia, serif;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: bold;
             margin-bottom: 8px;
         }
 
         .descricao {
-            color: var(--marrom-claro);
+            color: #897D72;
             margin-bottom: 30px;
+            font-size: 14px;
         }
 
-        /* RESUMO */
+        /* CARDS DE RESUMO */
 
         .resumo-card {
             background: white;
-            border-radius: 12px;
-            padding: 22px;
-            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
+            padding: 23px;
             height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            transition: .3s;
         }
 
-        .resumo-card i {
+        .resumo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 18px rgba(45, 36, 30, .08);
+        }
+
+        .resumo-icon {
+            width: 53px;
+            height: 53px;
+            min-width: 53px;
+            border-radius: 9px;
+            background: var(--bege);
+            color: var(--terracota);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 25px;
-            color: var(--laranja);
         }
 
         .resumo-card h3 {
-            font-size: 27px;
+            font-family: Georgia, serif;
+            font-size: 25px;
             font-weight: bold;
-            margin: 12px 0 3px;
+            margin: 0 0 4px;
         }
 
         .resumo-card p {
-            color: #777;
+            color: #897D72;
             margin: 0;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* TABELA */
 
         .tabela-container {
             background: white;
-            border-radius: 12px;
+            border: 1px solid #E8DFD3;
+            border-radius: 10px;
             padding: 25px;
             margin-top: 30px;
-            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+            box-shadow: 0 3px 12px rgba(45, 36, 30, .04);
+        }
+
+        .titulo-tabela {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .titulo-tabela i {
+            color: var(--terracota);
+            margin-right: 7px;
         }
 
         .table {
@@ -80,16 +188,36 @@
         }
 
         .table thead th {
-            background: #f5e9cd;
-            color: var(--marrom);
-            font-size: 13px;
-            padding: 16px;
+            background: var(--marrom);
+            color: var(--bege);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 16px 13px;
             white-space: nowrap;
+            border: none;
+        }
+
+        .table thead th:first-child {
+            border-radius: 7px 0 0 7px;
+        }
+
+        .table thead th:last-child {
+            border-radius: 0 7px 7px 0;
         }
 
         .table tbody td {
-            padding: 16px;
-            font-size: 14px;
+            padding: 16px 13px;
+            font-size: 13px;
+            color: var(--marrom);
+            border-bottom: 1px solid #EEE8DF;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover td {
+            background: #FCF9F3;
         }
 
         /* STATUS */
@@ -98,105 +226,148 @@
             display: inline-block;
             padding: 7px 12px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
+            white-space: nowrap;
         }
 
         .PENDENTE {
-            background: #fff0d5;
+            background: #FFF0D5;
             color: #946000;
         }
 
         .RECEBIDO {
-            background: #e8e2d8;
+            background: #E8E2D8;
             color: #554536;
         }
 
         .EM_PREPARO {
-            background: #fce0d5;
-            color: #a9482e;
+            background: #FCE0D5;
+            color: #A9482E;
         }
 
         .PRONTO {
-            background: #e5e5e5;
+            background: #E5E5E5;
             color: #454545;
         }
 
         .ENTREGUE {
-            background: #e8eadf;
-            color: #52603b;
+            background: #E8EADF;
+            color: #52603B;
         }
 
         .CANCELADO {
-            background: #f5dada;
-            color: #a32626;
+            background: #F5DADA;
+            color: #A32626;
         }
 
         /* BOTÕES */
 
         .btn-status {
-            background: var(--laranja);
+            background: var(--terracota);
             color: white;
             border: none;
             border-radius: 6px;
             padding: 8px 12px;
             font-size: 13px;
+            transition: .3s;
         }
 
         .btn-status:hover {
-            background: var(--laranja-hover);
+            background: #B95438;
             color: white;
         }
 
         .btn-excluir {
-            background: #f5dada;
-            color: #a32626;
+            background: #F5DADA;
+            color: #A32626;
             border: none;
             border-radius: 6px;
             padding: 8px 12px;
+            transition: .3s;
         }
 
         .btn-excluir:hover {
-            background: #e9bcbc;
+            background: #E9Bcbc;
+            color: #861D1D;
         }
 
         .form-select {
-            min-width: 145px;
-            font-size: 13px;
+            min-width: 135px;
+            font-size: 12px;
+            border: 1px solid #DED5C9;
+            border-radius: 6px;
+            color: var(--marrom);
         }
 
-        .btn-voltar {
-            display: inline-block;
-            background: var(--marrom);
-            color: white;
-            text-decoration: none;
-            padding: 11px 18px;
-            border-radius: 7px;
-            margin-bottom: 25px;
+        .form-select:focus {
+            border-color: var(--terracota);
+            box-shadow: 0 0 0 .2rem rgba(217, 108, 76, .15);
         }
 
-        .btn-voltar:hover {
-            background: var(--marrom-claro);
-            color: white;
-        }
+        /* TABELA VAZIA */
 
         .vazio {
-            padding: 45px !important;
+            padding: 50px !important;
             text-align: center;
-            color: #888;
+            color: #897D72 !important;
         }
+
+        .vazio i {
+            color: var(--areia);
+        }
+
+        /* RODAPÉ */
+
+        .rodape-admin {
+            text-align: center;
+            color: #897D72;
+            font-size: 12px;
+            padding: 25px 15px;
+            margin-top: 35px;
+        }
+
+        /* RESPONSIVIDADE */
 
         @media (max-width: 768px) {
             .container-admin {
                 margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .admin-header h1 {
+                font-size: 18px;
+            }
+
+            .admin-header a {
+                font-size: 11px;
+                padding: 9px;
+            }
+
+            .titulo-pagina {
+                font-size: 25px;
             }
 
             .tabela-container {
                 padding: 15px;
             }
 
-            .titulo-pagina {
-                font-size: 27px;
+            .resumo-card {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header .container {
+                gap: 12px;
+            }
+
+            .admin-header h1 {
+                font-size: 16px;
+            }
+
+            .admin-header a {
+                font-size: 10px;
             }
         }
     </style>
@@ -239,31 +410,40 @@
 
         <div class="col-md-4">
             <div class="resumo-card">
-                <i class="bi bi-receipt"></i>
+                <div class="resumo-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
 
-                <h3 th:text="${#lists.size(pedidos)}">0</h3>
-
-                <p>Total de pedidos</p>
+                <div>
+                    <h3 th:text="${#lists.size(pedidos)}">0</h3>
+                    <p>Total de pedidos</p>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="resumo-card">
-                <i class="bi bi-clock-history"></i>
+                <div class="resumo-icon">
+                    <i class="bi bi-clock-history"></i>
+                </div>
 
-                <h3 th:text="${#lists.size(pedidos.?[status == 'PENDENTE' or status == 'Pendente'])}">0</h3>
-
-                <p>Pedidos pendentes</p>
+                <div>
+                    <h3 th:text="${#lists.size(pedidos.?[status == 'PENDENTE' or status == 'Pendente'])}">0</h3>
+                    <p>Pedidos pendentes</p>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="resumo-card">
-                <i class="bi bi-check-circle"></i>
+                <div class="resumo-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
 
-                <h3 th:text="${#lists.size(pedidos.?[status == 'ENTREGUE' or status == 'Entregue'])}">0</h3>
-
-                <p>Pedidos entregues</p>
+                <div>
+                    <h3 th:text="${#lists.size(pedidos.?[status == 'ENTREGUE' or status == 'Entregue'])}">0</h3>
+                    <p>Pedidos entregues</p>
+                </div>
             </div>
         </div>
 
@@ -273,7 +453,7 @@
 
     <section class="tabela-container">
 
-        <h4 class="mb-4">
+        <h4 class="titulo-tabela">
             <i class="bi bi-list-ul"></i>
             Pedidos cadastrados
         </h4>
@@ -298,28 +478,23 @@
 
                 <tr th:each="pedido : ${pedidos}">
 
-                    <!-- ID -->
                     <td th:text="${pedido.id}"></td>
 
-                    <!-- NOME DO CLIENTE -->
                     <td th:text="${pedido.cliente != null
                         ? pedido.cliente.nome
                         : 'Cliente não informado'}">
                     </td>
 
-                    <!-- DATA -->
                     <td th:text="${pedido.dataPedido != null
                         ? #temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')
                         : '-'}">
                     </td>
 
-                    <!-- TOTAL -->
                     <td th:text="${pedido.total != null
                         ? 'R$ ' + #numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA')
                         : 'R$ 0,00'}">
                     </td>
 
-                    <!-- STATUS -->
                     <td>
                         <span class="status"
                               th:classappend="${#strings.toUpperCase(#strings.replace(pedido.status, ' ', '_'))}"
@@ -327,9 +502,7 @@
                         </span>
                     </td>
 
-                    <!-- ATUALIZAR STATUS -->
                     <td>
-
                         <form th:action="@{/admin/pedidos/status/{id}(id=${pedido.id})}"
                               method="post"
                               class="d-flex gap-2">
@@ -373,12 +546,9 @@
                             </button>
 
                         </form>
-
                     </td>
 
-                    <!-- EXCLUIR -->
                     <td>
-
                         <form th:action="@{/admin/pedidos/excluir/{id}(id=${pedido.id})}"
                               method="post"
                               onsubmit="return confirm('Deseja realmente excluir este pedido?')">
@@ -388,33 +558,28 @@
                             </button>
 
                         </form>
-
                     </td>
 
                 </tr>
 
-                <!-- NENHUM PEDIDO -->
                 <tr th:if="${#lists.isEmpty(pedidos)}">
-
                     <td colspan="7" class="vazio">
-
                         <i class="bi bi-inbox fs-1 d-block mb-3"></i>
-
                         Nenhum pedido cadastrado até o momento.
-
                     </td>
-
                 </tr>
 
                 </tbody>
-
             </table>
 
         </div>
-
     </section>
 
 </main>
+
+<footer class="rodape-admin">
+    © 2026 Sabor do Quintal — Painel Administrativo
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 

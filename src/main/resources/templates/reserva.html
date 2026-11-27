@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
@@ -15,36 +16,47 @@
 
     <title>Sabor do Quintal - Reserva</title>
 
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+    <!-- BOOTSTRAP ICONS -->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+    <!-- FONTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/perfil.css}">
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/reserva.css}">
+
 </head>
 
 <body>
 
-
 <!-- ================= HEADER ================= -->
+
 <div th:replace="~{fragments/menu :: menu}"></div>
 
+<!-- ================= PERFIL DO CLIENTE ================= -->
+
+<div th:replace="~{fragments/perfil :: perfil}"></div>
 
 <main>
 
-    <!-- AMBIENTES -->
+    <!-- ==================================================
+         AMBIENTES
+         ================================================== -->
 
     <section class="ambientes">
 
-        <!-- AMBIENTE INTERNO -->
+        <!-- ================= AMBIENTE INTERNO ================= -->
 
         <article class="ambiente">
 
@@ -171,7 +183,7 @@
         </article>
 
 
-        <!-- AMBIENTE EXTERNO -->
+        <!-- ================= AMBIENTE EXTERNO ================= -->
 
         <article class="ambiente">
 
@@ -299,11 +311,11 @@
     </section>
 
 
-    <!-- RESERVA -->
+    <!-- ==================================================
+         FORMULÁRIO DE RESERVA
+         ================================================== -->
 
     <section class="reserva">
-
-        <!-- FORMULÁRIO INTEGRADO AO SPRING BOOT -->
 
         <form id="formReserva"
               th:action="@{/reservas/salvar}"
@@ -478,10 +490,14 @@
                 </div>
 
 
+                <!-- RESUMO -->
+
                 <div class="resumo" id="resumo">
                     Preencha os dados da reserva.
                 </div>
 
+
+                <!-- FINALIZAR -->
 
                 <button type="button"
                         class="finalizar"
@@ -498,7 +514,9 @@
     </section>
 
 
-    <!-- MENSAGEM DE SUCESSO -->
+    <!-- ==================================================
+         MENSAGEM DE SUCESSO
+         ================================================== -->
 
     <div id="mensagem"
          class="mensagem"
@@ -519,7 +537,9 @@
 </main>
 
 
-<!-- FOOTER -->
+<!-- ==================================================
+     FOOTER
+     ================================================== -->
 
 <footer>
 
@@ -543,14 +563,15 @@
 </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<!-- JAVASCRIPT -->
+<!-- ==================================================
+     JAVASCRIPT DA RESERVA
+     ================================================== -->
 
 <script>
 
-    /* CAMPOS */
+    /* ==================================================
+       CAMPOS DA RESERVA
+       ================================================== */
 
     const campoData = document.getElementById("data");
     const horario = document.getElementById("horario");
@@ -562,9 +583,11 @@
     const resumo = document.getElementById("resumo");
 
 
-    /* PEGAR DADOS DO LOGIN */
+    /* ==================================================
+       PEGAR DADOS DO LOGIN
+       ================================================== */
 
-    function pegarDadosLogin() {
+    function pegarDadosLoginReserva() {
 
         return {
 
@@ -585,31 +608,28 @@
     }
 
 
-    /* VERIFICAR LOGIN */
+    /* ==================================================
+       PREENCHER DADOS DO CLIENTE
+       ================================================== */
 
-    /* VERIFICAR LOGIN */
+    const usuarioReserva = pegarDadosLoginReserva();
 
-    const usuario = pegarDadosLogin();
+    if (usuarioReserva.nome) {
 
-    /* A página pode ser visualizada sem login.
-    O login será exigido ao finalizar a reserva. */
+        nome.value = usuarioReserva.nome;
 
+    }
 
-    /* PREENCHER NOME */
+    if (usuarioReserva.telefone) {
 
-    if (usuario.nome) {
-        nome.value = usuario.nome;
+        telefone.value = usuarioReserva.telefone;
+
     }
 
 
-    /* PREENCHER TELEFONE */
-
-    if (usuario.telefone) {
-        telefone.value = usuario.telefone;
-    }
-
-
-    /* TELEFONE - SOMENTE NÚMEROS */
+    /* ==================================================
+       TELEFONE - SOMENTE NÚMEROS
+       ================================================== */
 
     telefone.addEventListener("input", function () {
 
@@ -622,7 +642,9 @@
     });
 
 
-    /* DATA MÍNIMA */
+    /* ==================================================
+       DATA MÍNIMA
+       ================================================== */
 
     function dataLocalAtual() {
 
@@ -641,7 +663,9 @@
     campoData.min = dataLocalAtual();
 
 
-    /* MESAS */
+    /* ==================================================
+       MESAS DISPONÍVEIS
+       ================================================== */
 
     const mesas = {
 
@@ -666,7 +690,9 @@
     };
 
 
-    /* ATUALIZAR MESAS */
+    /* ==================================================
+       ATUALIZAR MESAS
+       ================================================== */
 
     function atualizarMesas() {
 
@@ -717,7 +743,9 @@
     }
 
 
-    /* ATUALIZAR RESUMO */
+    /* ==================================================
+       ATUALIZAR RESUMO
+       ================================================== */
 
     function atualizarResumo() {
 
@@ -753,7 +781,9 @@
     }
 
 
-    /* EVENTOS */
+    /* ==================================================
+       EVENTOS DOS CAMPOS
+       ================================================== */
 
     ambiente.addEventListener("change", atualizarMesas);
 
@@ -768,11 +798,13 @@
     nome.addEventListener("input", atualizarResumo);
 
 
-    /* FINALIZAR RESERVA */
+    /* ==================================================
+       FINALIZAR RESERVA
+       ================================================== */
 
     function finalizarReserva() {
 
-        const usuarioAtual = pegarDadosLogin();
+        const usuarioAtual = pegarDadosLoginReserva();
 
         if (!usuarioAtual.logado || !usuarioAtual.nome) {
 
@@ -892,6 +924,13 @@
     }
 
 </script>
+
+
+<!-- JAVASCRIPT DO PERFIL -->
+<script th:src="@{/js/perfil.js}" defer></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

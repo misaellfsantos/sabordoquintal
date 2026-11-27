@@ -26,6 +26,7 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/perfil.css}">
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/inicio.css}">
 
@@ -170,110 +171,7 @@
 
 </div>
 
-<!-- ================= TELA DO PERFIL ================= -->
-
-<div class="tela-perfil" id="telaPerfil">
-
-    <div class="perfil-card">
-
-        <button class="perfil-fechar"
-                onclick="fecharPerfil()">
-            &times;
-        </button>
-
-        <div class="foto-perfil-container">
-
-            <img id="fotoPerfil"
-                 th:src="@{/img/logo.png}"
-                 class="foto-perfil"
-                 alt="Foto de perfil">
-
-            <label for="inputFoto"
-                   class="botao-foto"
-                   title="Alterar foto">
-
-                <i class="bi bi-camera-fill"></i>
-
-            </label>
-
-            <input type="file"
-                   id="inputFoto"
-                   accept="image/*">
-
-        </div>
-
-        <h2 class="perfil-titulo" id="perfilNome">
-            Usuário
-        </h2>
-
-        <div class="dados-perfil">
-
-            <div class="dado">
-
-                <i class="bi bi-person-fill"></i>
-
-                <span>
-                    <strong>Nome:</strong>
-                    <span id="perfilNomeDado">Não informado</span>
-                </span>
-
-            </div>
-
-            <div class="dado">
-
-                <i class="bi bi-envelope-fill"></i>
-
-                <span>
-                    <strong>E-mail:</strong>
-                    <span id="perfilEmail">Não informado</span>
-                </span>
-
-            </div>
-
-            <div class="dado">
-
-                <i class="bi bi-telephone-fill"></i>
-
-                <span>
-                    <strong>Telefone:</strong>
-                    <span id="perfilTelefone">Não informado</span>
-                </span>
-
-            </div>
-
-        </div>
-
-        <div class="perfil-opcoes">
-
-            <button class="perfil-opcao"
-                    onclick="abrirReservas()">
-
-                <i class="bi bi-calendar-check"></i>
-                Minhas reservas
-
-            </button>
-
-            <a th:href="@{/cardapio}"
-               class="perfil-opcao">
-
-                <i class="bi bi-journal-text"></i>
-                Cardápio
-
-            </a>
-
-            <button class="perfil-opcao perfil-sair"
-                    onclick="sairDaConta()">
-
-                <i class="bi bi-box-arrow-right"></i>
-                Sair da conta
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
+<div th:replace="~{fragments/perfil :: perfil}"></div>
 
 <!-- ================= TELA DE RESERVAS ================= -->
 
@@ -300,8 +198,10 @@
 </div>
 
 <!-- ================= JAVASCRIPT ================= -->
+<script th:src="@{/js/perfil.js}" defer></script>
 
 <script>
+
 
     /* ==================================================
        PRATOS DO DIA
@@ -410,7 +310,6 @@
 
     };
 
-
     const nomesDias = [
         "Domingo",
         "Segunda-feira",
@@ -431,8 +330,9 @@
         const numeroDia = new Date().getDay();
 
         const lista = document.getElementById("listaPratosDia");
-
         const diaAtual = document.getElementById("diaAtual");
+
+        if (!lista || !diaAtual) return;
 
         diaAtual.textContent = "Hoje é " + nomesDias[numeroDia];
 
@@ -455,12 +355,10 @@
                     <div class="row g-0 align-items-stretch">
 
                         <div class="col-md-4">
-
                             <img
                                 src="${prato.imagem}"
                                 class="prato-card-imagem"
                                 alt="${prato.nome}">
-
                         </div>
 
                         <div class="col-md-8">
@@ -479,13 +377,9 @@
                                     ${prato.preco}
                                 </p>
 
-                                <a
-                                    href="/pedido"
-                                    class="botao-prato">
-
+                                <a href="/pedido" class="botao-prato">
                                     <i class="bi bi-cart-plus"></i>
                                     Pedir agora
-
                                 </a>
 
                             </div>
@@ -518,18 +412,15 @@
     function quantidadeVisivel() {
 
         if (window.innerWidth <= 500) return 1;
-
         if (window.innerWidth <= 768) return 2;
-
         if (window.innerWidth <= 992) return 3;
 
         return 4;
-
     }
 
     function moverCarrossel() {
 
-        if (!itens.length) return;
+        if (!galeria || !itens.length) return;
 
         const visiveis = quantidadeVisivel();
 
@@ -549,7 +440,6 @@
 
         galeria.style.transform =
             `translateX(-${deslocamento}px)`;
-
     }
 
     setInterval(moverCarrossel, 3000);
@@ -558,698 +448,27 @@
 
         posicao = 0;
 
-        galeria.style.transform = "translateX(0)";
-
-    });
-
-
-    /* ==================================================
-       PEGAR DADOS DO LOGIN
-       ================================================== */
-
-    function pegarDadosLogin() {
-
-        const nome = localStorage.getItem("nomeUsuario");
-
-        const email = localStorage.getItem("emailUsuario");
-
-        const telefone = localStorage.getItem("telefoneUsuario");
-
-        document.getElementById("perfilNome").textContent =
-            nome || "Usuário";
-
-        document.getElementById("perfilNomeDado").textContent =
-            nome || "Não informado";
-
-        document.getElementById("perfilEmail").textContent =
-            email || "Não informado";
-
-        document.getElementById("perfilTelefone").textContent =
-            telefone || "Não informado";
-
-        const fotoSalva = localStorage.getItem("usuarioFoto");
-
-        document.getElementById("fotoPerfil").src =
-            fotoSalva || "/img/logo.png";
-
-    }
-
-
-    /* ==================================================
-       ABRIR PERFIL
-       ================================================== */
-
-    function abrirPerfil() {
-
-        const usuarioLogado = localStorage.getItem("usuarioLogado");
-
-        if (usuarioLogado !== "true") {
-
-            alert("Faça login para acessar o perfil.");
-
-            window.location.href = "/login";
-
-            return;
-
-        }
-
-        pegarDadosLogin();
-
-        document.getElementById("telaPerfil")
-            .classList.add("ativa");
-
-        document.body.style.overflow = "hidden";
-
-    }
-
-
-    /* ==================================================
-       FECHAR PERFIL
-       ================================================== */
-
-    function fecharPerfil() {
-
-        document.getElementById("telaPerfil")
-            .classList.remove("ativa");
-
-        document.body.style.overflow = "";
-
-    }
-
-
-    /* ==================================================
-       FOTO DO PERFIL
-       ================================================== */
-
-    document.getElementById("inputFoto")
-        .addEventListener("change", function() {
-
-            const arquivo = this.files[0];
-
-            if (!arquivo) return;
-
-            if (!arquivo.type.startsWith("image/")) {
-
-                alert("Escolha uma imagem válida.");
-
-                return;
-
-            }
-
-            const leitor = new FileReader();
-
-            leitor.onload = function(evento) {
-
-                const foto = evento.target.result;
-
-                document.getElementById("fotoPerfil").src = foto;
-
-                localStorage.setItem("usuarioFoto", foto);
-
-            };
-
-            leitor.readAsDataURL(arquivo);
-
-        });
-
-
-    /* ==================================================
-       ABRIR MINHAS RESERVAS
-       ================================================== */
-
-    function abrirReservas() {
-
-        document.getElementById("telaPerfil")
-            .classList.remove("ativa");
-
-        let reservas = [];
-
-        let reservasSalvas =
-            localStorage.getItem("reservasSaborQuintal") ||
-            localStorage.getItem("reservaSaborQuintal") ||
-            localStorage.getItem("reservas");
-
-        if (reservasSalvas) {
-
-            try {
-
-                const dados = JSON.parse(reservasSalvas);
-
-                if (Array.isArray(dados)) {
-
-                    reservas = dados;
-
-                } else if (dados) {
-
-                    reservas = [dados];
-
-                }
-
-            } catch (erro) {
-
-                console.error("Erro ao carregar reservas:", erro);
-
-            }
-
-        }
-
-        const nomeCliente = (
-            localStorage.getItem("nomeUsuario") || ""
-        ).trim().toLowerCase();
-
-        const emailCliente = (
-            localStorage.getItem("emailUsuario") || ""
-        ).trim().toLowerCase();
-
-        const telefoneCliente = (
-            localStorage.getItem("telefoneUsuario") || ""
-        ).replace(/\D/g, "");
-
-        const minhasReservas = reservas.filter(function(reserva) {
-
-            const nomeReserva = (
-                reserva.nomeUsuario ||
-                reserva.nomeCliente ||
-                reserva.nome ||
-                reserva.cliente ||
-                ""
-            ).trim().toLowerCase();
-
-            const emailReserva = (
-                reserva.emailUsuario ||
-                reserva.email ||
-                reserva.usuarioEmail ||
-                ""
-            ).trim().toLowerCase();
-
-            const telefoneReserva = (
-                reserva.telefone ||
-                reserva.telefoneUsuario ||
-                reserva.usuarioTelefone ||
-                ""
-            ).replace(/\D/g, "");
-
-            if (emailCliente && emailReserva) {
-                return emailReserva === emailCliente;
-            }
-
-            if (telefoneCliente && telefoneReserva) {
-                return telefoneReserva === telefoneCliente;
-            }
-
-            if (nomeCliente && nomeReserva) {
-                return nomeReserva === nomeCliente;
-            }
-
-            return false;
-
-        });
-
-        mostrarReservas(minhasReservas);
-
-        document.getElementById("telaReservas")
-            .classList.add("ativa");
-
-    }
-
-
-    /* ==================================================
-       MOSTRAR RESERVAS
-       ================================================== */
-
-    function mostrarReservas(reservas) {
-
-        const lista = document.getElementById("listaReservas");
-
-        lista.innerHTML = "";
-
-        if (reservas.length === 0) {
-
-            lista.innerHTML = `
-
-                <div class="sem-reservas">
-
-                    <i class="bi bi-calendar-x"
-                       style="font-size:40px;color:#6b3d22;">
-                    </i>
-
-                    <p style="margin-top:15px;">
-                        Você ainda não possui nenhuma reserva.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-        reservas.forEach(function(reserva, indice) {
-
-            const data =
-                reserva.data ||
-                reserva.dia ||
-                reserva.dataReserva ||
-                "Não informado";
-
-            const horario =
-                reserva.horario ||
-                reserva.hora ||
-                "Não informado";
-
-            const pessoas =
-                reserva.pessoas ||
-                reserva.quantidadePessoas ||
-                reserva.quantidade ||
-                "Não informado";
-
-            const ambiente =
-                reserva.ambiente ||
-                reserva.local ||
-                "Não informado";
-
-            const mesa =
-                reserva.mesa ||
-                reserva.numeroMesa ||
-                "Não informado";
-
-            const nome =
-                reserva.nomeUsuario ||
-                reserva.nomeCliente ||
-                reserva.nome ||
-                reserva.cliente ||
-                "Não informado";
-
-            const item = document.createElement("div");
-
-            item.className = "reserva-item";
-
-            const campos = [
-                ["Cliente", nome, "bi-person-fill"],
-                ["Data", data, "bi-calendar3"],
-                ["Horário", horario, "bi-clock"],
-                ["Pessoas", pessoas, "bi-people-fill"],
-                ["Ambiente", ambiente, "bi-geo-alt-fill"],
-                ["Mesa", mesa, "bi-grid-3x3-gap-fill"]
-            ];
-
-            const titulo = document.createElement("div");
-
-            titulo.className = "reserva-titulo";
-
-            titulo.textContent = "Reserva " + (indice + 1);
-
-            item.appendChild(titulo);
-
-            campos.forEach(function(campo) {
-
-                const linha = document.createElement("div");
-
-                linha.className = "reserva-dado";
-
-                const icone = document.createElement("i");
-
-                icone.className = "bi " + campo[2];
-
-                const strong = document.createElement("strong");
-
-                strong.textContent = campo[0] + ":";
-
-                const span = document.createElement("span");
-
-                span.textContent = campo[1];
-
-                linha.appendChild(icone);
-                linha.appendChild(strong);
-                linha.appendChild(span);
-
-                item.appendChild(linha);
-
-            });
-
-            lista.appendChild(item);
-
-        });
-
-    }
-
-
-    /* ==================================================
-       FECHAR RESERVAS
-       ================================================== */
-
-    function fecharReservas() {
-
-        document.getElementById("telaReservas")
-            .classList.remove("ativa");
-
-        document.getElementById("telaPerfil")
-            .classList.add("ativa");
-
-        pegarDadosLogin();
-
-    }
-
-
-    /* ==================================================
-       CLICAR FORA DO PERFIL
-       ================================================== */
-
-    document.getElementById("telaPerfil")
-        .addEventListener("click", function(evento) {
-
-            if (evento.target === this) {
-
-                fecharPerfil();
-
-            }
-
-        });
-
-
-    /* ==================================================
-       CLICAR FORA DAS RESERVAS
-       ================================================== */
-
-    document.getElementById("telaReservas")
-        .addEventListener("click", function(evento) {
-
-            if (evento.target === this) {
-
-                fecharReservas();
-
-            }
-
-        });
-
-
-    /* ==================================================
-       TECLA ESC
-       ================================================== */
-
-    document.addEventListener("keydown", function(evento) {
-
-        if (evento.key === "Escape") {
-
-            document.getElementById("telaPerfil")
-                .classList.remove("ativa");
-
-            document.getElementById("telaReservas")
-                .classList.remove("ativa");
-
-            document.body.style.overflow = "";
-
+        if (galeria) {
+            galeria.style.transform = "translateX(0)";
         }
 
     });
 
 
     /* ==================================================
-       SAIR DA CONTA
-       ================================================== */
-
-    function sairDaConta() {
-
-        localStorage.removeItem("usuarioLogado");
-
-        fecharPerfil();
-
-        alert("Você saiu da sua conta. Seus dados continuam salvos.");
-
-        window.location.href = "/login";
-
-    }
-
-
-    /* ==================================================
-       CARREGAR TODAS AS RESERVAS
-       ================================================== */
-
-    function carregarTodasReservas() {
-
-        let reservas = [];
-
-        const chaves = [
-            "reservasSaborQuintal",
-            "reservaSaborQuintal",
-            "reservas"
-        ];
-
-        for (let i = 0; i < chaves.length; i++) {
-
-            const dadosSalvos = localStorage.getItem(chaves[i]);
-
-            if (!dadosSalvos) continue;
-
-            try {
-
-                const dados = JSON.parse(dadosSalvos);
-
-                if (Array.isArray(dados)) {
-
-                    reservas = dados;
-
-                } else if (dados) {
-
-                    reservas = [dados];
-
-                }
-
-                if (reservas.length > 0) break;
-
-            } catch (erro) {
-
-                console.error("Erro ao carregar reservas:", erro);
-
-            }
-
-        }
-
-        return reservas;
-
-    }
-
-
-    /* ==================================================
-       VERIFICAR AVISOS DE RESERVA
-       ================================================== */
-
-    function verificarAvisosReserva() {
-
-        const usuarioLogado =
-            localStorage.getItem("usuarioLogado");
-
-        if (usuarioLogado !== "true") return;
-
-        const emailCliente = (
-            localStorage.getItem("emailUsuario") || ""
-        ).trim().toLowerCase();
-
-        const telefoneCliente = (
-            localStorage.getItem("telefoneUsuario") || ""
-        ).replace(/\D/g, "");
-
-        const nomeCliente = (
-            localStorage.getItem("nomeUsuario") || ""
-        ).trim().toLowerCase();
-
-        const reservas = carregarTodasReservas();
-
-        const agora = new Date().getTime();
-
-        const cincoDias = 5 * 24 * 60 * 60 * 1000;
-
-        reservas.forEach(function(reserva) {
-
-            const emailReserva = (
-                reserva.emailUsuario ||
-                reserva.email ||
-                reserva.usuarioEmail ||
-                ""
-            ).trim().toLowerCase();
-
-            const telefoneReserva = (
-                reserva.telefone ||
-                reserva.telefoneUsuario ||
-                reserva.usuarioTelefone ||
-                ""
-            ).replace(/\D/g, "");
-
-            const nomeReserva = (
-                reserva.nomeUsuario ||
-                reserva.nomeCliente ||
-                reserva.nome ||
-                reserva.cliente ||
-                ""
-            ).trim().toLowerCase();
-
-            let pertenceAoCliente = false;
-
-            if (emailCliente && emailReserva &&
-                emailCliente === emailReserva) {
-
-                pertenceAoCliente = true;
-
-            } else if (telefoneCliente && telefoneReserva &&
-                       telefoneCliente === telefoneReserva) {
-
-                pertenceAoCliente = true;
-
-            } else if (nomeCliente && nomeReserva &&
-                       nomeCliente === nomeReserva) {
-
-                pertenceAoCliente = true;
-
-            }
-
-            if (!pertenceAoCliente) return;
-
-            const dataReserva =
-                reserva.dataReserva ||
-                reserva.data ||
-                reserva.dia;
-
-            const horarioReserva =
-                reserva.horario ||
-                reserva.hora ||
-                "00:00";
-
-            if (!dataReserva) return;
-
-            let dataCompleta;
-
-            if (typeof dataReserva === "number") {
-
-                dataCompleta = dataReserva;
-
-            } else {
-
-                dataCompleta = new Date(
-                    dataReserva + "T" + horarioReserva + ":00"
-                ).getTime();
-
-            }
-
-            if (isNaN(dataCompleta)) return;
-
-            const inicioAviso = dataCompleta - cincoDias;
-
-            const identificador =
-                reserva.id ||
-                dataCompleta + "_" +
-                (reserva.mesa || reserva.numeroMesa || "mesa");
-
-            const chaveAviso =
-                "avisoReservaEnviado_" + identificador;
-
-            if (
-                agora >= inicioAviso &&
-                agora < dataCompleta &&
-                !localStorage.getItem(chaveAviso)
-            ) {
-
-                const dataFormatada =
-                    new Date(dataCompleta).toLocaleDateString("pt-BR");
-
-                const ambiente =
-                    reserva.ambiente ||
-                    reserva.local ||
-                    "não informado";
-
-                const mesa =
-                    reserva.mesa ||
-                    reserva.numeroMesa ||
-                    "não informada";
-
-                const pessoas =
-                    reserva.pessoas ||
-                    reserva.quantidadePessoas ||
-                    reserva.quantidade ||
-                    "não informado";
-
-                const mensagem =
-                    "Sua reserva no Sabor do Quintal está próxima!\n\n" +
-                    "Data: " + dataFormatada + "\n" +
-                    "Horário: " + horarioReserva + "\n" +
-                    "Pessoas: " + pessoas + "\n" +
-                    "Ambiente: " + ambiente + "\n" +
-                    "Mesa: " + mesa;
-
-                localStorage.setItem(chaveAviso, "true");
-
-                alert(mensagem);
-
-                if (
-                    "Notification" in window &&
-                    Notification.permission === "granted"
-                ) {
-
-                    new Notification("Sabor do Quintal", {
-
-                        body:
-                            "Sua reserva está próxima: " +
-                            dataFormatada +
-                            " às " +
-                            horarioReserva + ".",
-
-                        icon: "/img/logo.png"
-
-                    });
-
-                }
-
-            }
-
-        });
-
-    }
-
-
-    /* ==================================================
-       PERMISSÃO PARA NOTIFICAÇÕES
-       ================================================== */
-
-    function pedirPermissaoNotificacao() {
-
-        if (
-            "Notification" in window &&
-            Notification.permission === "default"
-        ) {
-
-            Notification.requestPermission();
-
-        }
-
-    }
-
-
-    /* ==================================================
-       CARREGAR PÁGINA
+       CARREGAR PÁGINA INICIAL
        ================================================== */
 
     document.addEventListener("DOMContentLoaded", function() {
-
         mostrarPratosDoDia();
-
-        pegarDadosLogin();
-
-        pedirPermissaoNotificacao();
-
-        verificarAvisosReserva();
-
     });
-
-
-    /* VERIFICAR RESERVAS A CADA 1 MINUTO */
-
-    setInterval(verificarAvisosReserva, 60000);
 
 </script>
 
 <!-- BOOTSTRAP JS -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

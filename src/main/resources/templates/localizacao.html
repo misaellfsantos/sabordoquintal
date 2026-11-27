@@ -23,15 +23,15 @@
 
     <title>Sabor do Quintal - Localização</title>
 
-    <!-- Bootstrap -->
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
+    <!-- BOOTSTRAP ICONS -->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Fontes -->
+    <!-- FONTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,7 @@
           rel="stylesheet">
 
     <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/perfil.css}">
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/localizacao.css}">
 
@@ -47,234 +48,256 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<div th:replace="~{fragments/menu :: menu}"></div>
+<div class="site">
 
-<!-- ================= MAIN ================= -->
+    <!-- ================= HEADER ================= -->
 
-<main>
+    <div th:replace="~{fragments/menu :: menu}"></div>
 
-    <div class="container-principal">
+    <!-- PERFIL DO CLIENTE -->
+    <div th:replace="~{fragments/perfil :: perfil}"></div>
 
-        <!-- ================= COLUNA ESQUERDA ================= -->
 
-        <section>
+    <!-- ================= MAIN ================= -->
 
-            <div class="formulario">
+    <main>
 
-                <h2 class="titulo-formulario">
+        <div class="container-principal">
 
-                    <i class="bi bi-geo-alt"></i>
+            <!-- ================= COLUNA ESQUERDA ================= -->
 
-                    Encontre nosso restaurante
+            <section>
 
-                </h2>
+                <div class="formulario">
 
-                <!-- ESTADO -->
+                    <h2 class="titulo-formulario">
 
-                <div class="campo">
+                        <i class="bi bi-geo-alt"></i>
 
-                    <label for="estado">
-                        Estado:
-                    </label>
+                        Encontre nosso restaurante
 
-                    <input
-                            type="text"
-                            id="estado"
-                            value="São Paulo"
-                            placeholder="Ex: São Paulo">
+                    </h2>
+
+                    <!-- ESTADO -->
+
+                    <div class="campo">
+
+                        <label for="estado">
+                            Estado:
+                        </label>
+
+                        <input
+                                type="text"
+                                id="estado"
+                                value="São Paulo"
+                                placeholder="Ex: São Paulo">
+
+                    </div>
+
+
+                    <!-- CIDADE -->
+
+                    <div class="campo">
+
+                        <label for="cidade">
+                            Cidade:
+                        </label>
+
+                        <input
+                                type="text"
+                                id="cidade"
+                                value="São Roque"
+                                placeholder="Ex: São Roque">
+
+                    </div>
+
+
+                    <!-- BAIRRO -->
+
+                    <div class="campo">
+
+                        <label for="bairro">
+                            Bairro:
+                        </label>
+
+                        <input
+                                type="text"
+                                id="bairro"
+                                value="Canguera"
+                                placeholder="Ex: Canguera">
+
+                    </div>
+
+
+                    <!-- RUA -->
+
+                    <div class="campo">
+
+                        <label for="rua">
+                            Rua / número:
+                        </label>
+
+                        <input
+                                type="text"
+                                id="rua"
+                                value="Estrada do Vinho, 2450"
+                                placeholder="Ex: Estrada do Vinho, 2450">
+
+                    </div>
+
+
+                    <div id="mensagem"></div>
+
+
+                    <!-- BOTÃO -->
+
+                    <button
+                            type="button"
+                            class="btn-continuar"
+                            onclick="mostrarMapa()">
+
+                        <i class="bi bi-map"></i>
+
+                        Encontrar no mapa
+
+                    </button>
 
                 </div>
 
 
-                <!-- CIDADE -->
+                <!-- CONTATO -->
 
-                <div class="campo">
+                <div class="contato">
 
-                    <label for="cidade">
-                        Cidade:
-                    </label>
+                    <p>
+                        Caso tenha alguma dúvida,
+                        entre em contato conosco.
+                    </p>
 
-                    <input
-                            type="text"
-                            id="cidade"
-                            value="São Roque"
-                            placeholder="Ex: São Roque">
+                    <p class="telefone">
+
+                        <i class="bi bi-telephone"></i>
+
+                        (11) 9 3275-8484
+
+                    </p>
+
+                    <p>
+                        <i class="bi bi-envelope"></i>
+                        sabordoquintal@gmail.com
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= COLUNA DIREITA ================= -->
+
+            <section>
+
+                <!-- MAPA -->
+
+                <div class="mapa">
+
+                    <iframe
+                            id="mapaGoogle"
+                            src="https://www.google.com/maps?q=Estrada%20do%20Vinho%2C%202450%2C%20Canguera%2C%20São%20Roque%2C%20São%20Paulo%2C%2018145-000&output=embed"
+                            loading="lazy"
+                            allowfullscreen>
+                    </iframe>
 
                 </div>
 
 
-                <!-- BAIRRO -->
+                <!-- DESCRIÇÃO -->
 
-                <div class="campo">
+                <div class="descricao">
 
-                    <label for="bairro">
-                        Bairro:
-                    </label>
+                    <p>
 
-                    <input
-                            type="text"
-                            id="bairro"
-                            value="Canguera"
-                            placeholder="Ex: Canguera">
+                        <i class="bi bi-geo-alt-fill"></i>
 
-                </div>
+                        <strong>
+                            Sabor do Quintal – Restaurante Rural
+                        </strong>
 
+                        <br>
 
-                <!-- RUA -->
+                        Estrada do Vinho, 2450 – Canguera
 
-                <div class="campo">
+                        <br>
 
-                    <label for="rua">
-                        Rua / número:
-                    </label>
+                        São Roque – SP | CEP 18145-000
 
-                    <input
-                            type="text"
-                            id="rua"
-                            value="Estrada do Vinho, 2450"
-                            placeholder="Ex: Estrada do Vinho, 2450">
+                    </p>
+
+                    <p>
+                        Desde 1984, recebemos nossos clientes em
+                        um ambiente acolhedor, com comida caseira,
+                        tradição e o verdadeiro clima do interior.
+                    </p>
 
                 </div>
 
 
-                <div id="mensagem"></div>
+                <!-- FOTO -->
+
+                <div class="foto-restaurante">
+
+                    <img
+                            th:src="@{/img/entrada_restaurante.png}"
+                            alt="Entrada do restaurante Sabor do Quintal">
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
 
 
-                <!-- BOTÃO -->
+    <!-- ================= FOOTER ================= -->
 
-                <button
-                        type="button"
-                        class="btn-continuar"
-                        onclick="mostrarMapa()">
+    <footer>
 
-                    <i class="bi bi-map"></i>
+        <div>
 
-                    Encontrar no mapa
+            <i class="bi bi-telephone"></i>
 
-                </button>
+            (11) 9 3275-8484
 
-            </div>
+        </div>
 
 
-            <!-- CONTATO -->
+        <div class="direitos">
 
-            <div class="contato">
+            © 2026 Sabor do Quintal - Todos os direitos reservados
 
-                <p>
-                    Caso tenha alguma dúvida,
-                    entre em contato conosco.
-                </p>
-
-                <p class="telefone">
-
-                    <i class="bi bi-telephone"></i>
-
-                    (11) 9 3275-8484
-
-                </p>
-
-            </div>
-
-        </section>
+        </div>
 
 
-        <!-- ================= COLUNA DIREITA ================= -->
+        <div class="email">
 
-        <section>
+            <i class="bi bi-envelope"></i>
 
-            <!-- MAPA -->
+            sabordoquintal@gmail.com
 
-            <div class="mapa">
+        </div>
 
-                <iframe
-                        id="mapaGoogle"
-                        src="https://www.google.com/maps?q=Estrada%20do%20Vinho%2C%202450%2C%20Canguera%2C%20São%20Roque%2C%20São%20Paulo%2C%2018145-000&output=embed"
-                        loading="lazy"
-                        allowfullscreen>
-                </iframe>
+    </footer>
 
-            </div>
+</div>
 
 
-            <!-- DESCRIÇÃO -->
-
-            <div class="descricao">
-
-                <p>
-
-                    <i class="bi bi-geo-alt-fill"></i>
-
-                    <strong>
-                        Sabor do Quintal – Restaurante Rural
-                    </strong>
-
-                    <br>
-
-                    Estrada do Vinho, 2450 – Canguera
-
-                    <br>
-
-                    São Roque – SP | CEP 18145-000
-
-                </p>
-
-            </div>
-
-
-            <!-- FOTO -->
-
-            <div class="foto-restaurante">
-
-                <img
-                        th:src="@{/img/entrada_restaurante.png}"
-                        alt="Entrada do restaurante Sabor do Quintal">
-
-            </div>
-
-        </section>
-
-    </div>
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <div>
-
-        <i class="bi bi-telephone"></i>
-
-        (11) 9 3275-8484
-
-    </div>
-
-
-    <div class="direitos">
-
-        © Direitos autorais
-
-    </div>
-
-
-    <div class="email">
-
-        sabordoquintal@gmail.com
-
-    </div>
-
-</footer>
-
-
-<!-- ================= JAVASCRIPT ================= -->
+<!-- ==================================================
+     JAVASCRIPT DA LOCALIZAÇÃO
+     ================================================== -->
 
 <script>
 
     function mostrarMapa() {
-
-        // Pega os valores digitados
 
         const estado =
             document.getElementById("estado").value.trim();
@@ -288,12 +311,9 @@
         const rua =
             document.getElementById("rua").value.trim();
 
-
         const mensagem =
             document.getElementById("mensagem");
 
-
-        // Verifica os campos
 
         if (
             estado === "" ||
@@ -313,10 +333,7 @@
         }
 
 
-        // Monta o endereço
-
         let endereco = "";
-
 
         if (rua !== "") {
 
@@ -324,20 +341,15 @@
 
         }
 
-
         endereco +=
             bairro + ", " +
             cidade + ", " +
             estado;
 
 
-        // Codifica o endereço para a URL
-
         const enderecoMapa =
             encodeURIComponent(endereco);
 
-
-        // Atualiza o mapa
 
         const mapa =
             document.getElementById("mapaGoogle");
@@ -349,8 +361,6 @@
             "&output=embed";
 
 
-        // Mostra confirmação
-
         mensagem.style.display = "block";
 
         mensagem.style.color = "#155724";
@@ -358,8 +368,6 @@
         mensagem.textContent =
             "Localização atualizada no mapa!";
 
-
-        // Leva o usuário até o mapa
 
         document.querySelector(".mapa").scrollIntoView({
 
@@ -372,7 +380,7 @@
     }
 
 
-    // Permite usar ENTER para pesquisar
+    /* PERMITIR USAR ENTER */
 
     document.querySelectorAll(".campo input").forEach(function(input) {
 
@@ -389,6 +397,17 @@
     });
 
 </script>
+
+
+<!-- ==================================================
+     JAVASCRIPT EXTERNO DO PERFIL
+     ================================================== -->
+
+<script th:src="@{/js/perfil.js}" defer></script>
+
+<!-- BOOTSTRAP JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

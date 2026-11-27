@@ -1,0 +1,106 @@
+<!-- ================= TELA DO PERFIL ================= -->
+
+<div class="tela-perfil" id="telaPerfil" th:fragment="perfil"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <div class="perfil-card">
+
+        <button class="perfil-fechar"
+                onclick="fecharPerfil()">
+            &times;
+        </button>
+
+        <div class="foto-perfil-container">
+
+            <img id="fotoPerfil"
+                 th:src="@{/img/logo.png}"
+                 class="foto-perfil"
+                 alt="Foto de perfil">
+
+            <label for="inputFoto"
+                   class="botao-foto"
+                   title="Alterar foto">
+
+                <i class="bi bi-camera-fill"></i>
+
+            </label>
+
+            <input type="file"
+                   id="inputFoto"
+                   accept="image/*">
+
+        </div>
+
+        <h2 class="perfil-titulo" id="perfilNome">
+            Usuário
+        </h2>
+
+        <div class="dados-perfil">
+
+            <div class="dado">
+
+                <i class="bi bi-person-fill"></i>
+
+                <span>
+                    <strong>Nome:</strong>
+                    <span id="perfilNomeDado">Não informado</span>
+                </span>
+
+            </div>
+
+            <div class="dado">
+
+                <i class="bi bi-envelope-fill"></i>
+
+                <span>
+                    <strong>E-mail:</strong>
+                    <span id="perfilEmail">Não informado</span>
+                </span>
+
+            </div>
+
+            <div class="dado">
+
+                <i class="bi bi-telephone-fill"></i>
+
+                <span>
+                    <strong>Telefone:</strong>
+                    <span id="perfilTelefone">Não informado</span>
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="perfil-opcoes">
+
+            <button class="perfil-opcao"
+                    onclick="abrirReservas()">
+
+                <i class="bi bi-calendar-check"></i>
+                Minhas reservas
+
+            </button>
+
+            <a th:href="@{/cardapio}"
+               class="perfil-opcao">
+
+                <i class="bi bi-journal-text"></i>
+                Cardápio
+
+            </a>
+
+            <button class="perfil-opcao perfil-sair"
+                    onclick="sairDaConta()">
+
+                <i class="bi bi-box-arrow-right"></i>
+                Sair da conta
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
