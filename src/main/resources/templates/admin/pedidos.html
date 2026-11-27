@@ -14,48 +14,10 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+
     <style>
-        :root {
-            --laranja: #c85c3b;
-            --laranja-hover: #a9482e;
-            --bege: #f5e9cd;
-            --fundo: #f4f0e8;
-            --marrom: #2d241e;
-            --marrom-claro: #6b5748;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            background: var(--fundo);
-            color: var(--marrom);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* HEADER */
-
-        .admin-header {
-            background: var(--marrom);
-            color: var(--bege);
-            padding: 20px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,.15);
-        }
-
-        .admin-header h1 {
-            font-family: Georgia, serif;
-            font-size: 25px;
-            margin: 0;
-        }
-
-        .admin-header a {
-            color: var(--bege);
-            text-decoration: none;
-        }
-
-        /* CONTEÚDO */
+       /* CONTEÚDO */
 
         .container-admin {
             max-width: 1250px;
@@ -244,6 +206,7 @@
 
 <header class="admin-header">
     <div class="container d-flex justify-content-between align-items-center">
+
         <h1>
             <i class="bi bi-shop"></i>
             Sabor do Quintal
@@ -253,6 +216,7 @@
             <i class="bi bi-speedometer2"></i>
             Painel administrativo
         </a>
+
     </div>
 </header>
 
@@ -276,7 +240,9 @@
         <div class="col-md-4">
             <div class="resumo-card">
                 <i class="bi bi-receipt"></i>
+
                 <h3 th:text="${#lists.size(pedidos)}">0</h3>
+
                 <p>Total de pedidos</p>
             </div>
         </div>
@@ -284,7 +250,9 @@
         <div class="col-md-4">
             <div class="resumo-card">
                 <i class="bi bi-clock-history"></i>
-                <h3 th:text="${#lists.size(pedidos.?[status == 'PENDENTE'])}">0</h3>
+
+                <h3 th:text="${#lists.size(pedidos.?[status == 'PENDENTE' or status == 'Pendente'])}">0</h3>
+
                 <p>Pedidos pendentes</p>
             </div>
         </div>
@@ -292,7 +260,9 @@
         <div class="col-md-4">
             <div class="resumo-card">
                 <i class="bi bi-check-circle"></i>
-                <h3 th:text="${#lists.size(pedidos.?[status == 'ENTREGUE'])}">0</h3>
+
+                <h3 th:text="${#lists.size(pedidos.?[status == 'ENTREGUE' or status == 'Entregue'])}">0</h3>
+
                 <p>Pedidos entregues</p>
             </div>
         </div>
@@ -328,22 +298,38 @@
 
                 <tr th:each="pedido : ${pedidos}">
 
+                    <!-- ID -->
                     <td th:text="${pedido.id}"></td>
 
-                    <td th:text="${pedido.cliente != null ? pedido.cliente : 'Cliente não informado'}"></td>
+                    <!-- NOME DO CLIENTE -->
+                    <td th:text="${pedido.cliente != null
+                        ? pedido.cliente.nome
+                        : 'Cliente não informado'}">
+                    </td>
 
-                    <td th:text="${pedido.dataPedido != null ? #temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm') : '-'}"></td>
+                    <!-- DATA -->
+                    <td th:text="${pedido.dataPedido != null
+                        ? #temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')
+                        : '-'}">
+                    </td>
 
-                    <td th:text="${pedido.total != null ? 'R$ ' + #numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA') : 'R$ 0,00'}"></td>
+                    <!-- TOTAL -->
+                    <td th:text="${pedido.total != null
+                        ? 'R$ ' + #numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA')
+                        : 'R$ 0,00'}">
+                    </td>
 
+                    <!-- STATUS -->
                     <td>
                         <span class="status"
-                              th:classappend="${pedido.status}"
+                              th:classappend="${#strings.toUpperCase(#strings.replace(pedido.status, ' ', '_'))}"
                               th:text="${pedido.status}">
                         </span>
                     </td>
 
+                    <!-- ATUALIZAR STATUS -->
                     <td>
+
                         <form th:action="@{/admin/pedidos/status/{id}(id=${pedido.id})}"
                               method="post"
                               class="d-flex gap-2">
@@ -351,32 +337,32 @@
                             <select name="status" class="form-select">
 
                                 <option value="PENDENTE"
-                                        th:selected="${pedido.status == 'PENDENTE'}">
+                                        th:selected="${pedido.status == 'PENDENTE' or pedido.status == 'Pendente'}">
                                     Pendente
                                 </option>
 
                                 <option value="RECEBIDO"
-                                        th:selected="${pedido.status == 'RECEBIDO'}">
+                                        th:selected="${pedido.status == 'RECEBIDO' or pedido.status == 'Recebido'}">
                                     Recebido
                                 </option>
 
                                 <option value="EM_PREPARO"
-                                        th:selected="${pedido.status == 'EM_PREPARO'}">
+                                        th:selected="${pedido.status == 'EM_PREPARO' or pedido.status == 'Em preparo'}">
                                     Em preparo
                                 </option>
 
                                 <option value="PRONTO"
-                                        th:selected="${pedido.status == 'PRONTO'}">
+                                        th:selected="${pedido.status == 'PRONTO' or pedido.status == 'Pronto'}">
                                     Pronto
                                 </option>
 
                                 <option value="ENTREGUE"
-                                        th:selected="${pedido.status == 'ENTREGUE'}">
+                                        th:selected="${pedido.status == 'ENTREGUE' or pedido.status == 'Entregue'}">
                                     Entregue
                                 </option>
 
                                 <option value="CANCELADO"
-                                        th:selected="${pedido.status == 'CANCELADO'}">
+                                        th:selected="${pedido.status == 'CANCELADO' or pedido.status == 'Cancelado'}">
                                     Cancelado
                                 </option>
 
@@ -387,9 +373,12 @@
                             </button>
 
                         </form>
+
                     </td>
 
+                    <!-- EXCLUIR -->
                     <td>
+
                         <form th:action="@{/admin/pedidos/excluir/{id}(id=${pedido.id})}"
                               method="post"
                               onsubmit="return confirm('Deseja realmente excluir este pedido?')">
@@ -399,15 +388,22 @@
                             </button>
 
                         </form>
+
                     </td>
 
                 </tr>
 
+                <!-- NENHUM PEDIDO -->
                 <tr th:if="${#lists.isEmpty(pedidos)}">
+
                     <td colspan="7" class="vazio">
+
                         <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+
                         Nenhum pedido cadastrado até o momento.
+
                     </td>
+
                 </tr>
 
                 </tbody>

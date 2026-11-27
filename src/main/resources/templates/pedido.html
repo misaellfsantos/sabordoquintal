@@ -1,11 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
@@ -18,23 +15,17 @@
 
     <title>Sabor do Quintal - Pedido</title>
 
+
     <link rel="stylesheet" th:href="@{/css/pedido.css}">
-
-    <link rel="icon"
-          th:href="@{/img/favicon.png}"
-          type="image/png">
-
+    <link rel="icon" th:href="@{/img/favicon.png}" type="image/png">
 </head>
 
 <body>
 
 <!-- CABEÇALHO -->
-
-<!-- ================= HEADER ================= -->
 <div th:replace="~{fragments/menu :: menu}"></div>
 
 <!-- TELA DO PEDIDO -->
-
 <main id="telaPedido">
 
     <div class="titulo-pedido">
@@ -46,19 +37,15 @@
         </p>
 
         <div class="dia-atual">
-
             📅 Cardápio disponível hoje:
             <strong id="diaAtual"></strong>
-
         </div>
 
     </div>
 
-
     <div class="pedido">
 
         <!-- PRATOS -->
-
         <div class="secao-pedido">
 
             <h3>🍽️ Escolha seus pratos</h3>
@@ -76,9 +63,7 @@
 
         </div>
 
-
         <!-- BEBIDAS -->
-
         <div class="secao-pedido">
 
             <h3>🥤 Escolha suas bebidas</h3>
@@ -96,19 +81,13 @@
 
         </div>
 
-
         <!-- TOTAL -->
-
         <div class="total">
-
             Total:
             <span id="total">R$ 0,00</span>
-
         </div>
 
-
         <!-- BOTÕES -->
-
         <div class="botoes-final">
 
             <a
@@ -134,9 +113,7 @@
 
 </main>
 
-
 <!-- TELA FINAL -->
-
 <main id="telaFinal">
 
     <div class="tela-final-card">
@@ -144,25 +121,19 @@
         <h2>Pedido realizado!</h2>
 
         <div class="numero-pedido">
-
             Pedido
             <span id="numeroPedidoFinal"></span>
-
         </div>
 
         <h3>🍽️ Pratos</h3>
-
         <div id="resumoPratos"></div>
 
         <h3>🥤 Bebidas</h3>
-
         <div id="resumoBebidas"></div>
 
         <div class="resumo-total">
-
             Total:
             <span id="totalFinal"></span>
-
         </div>
 
         <div class="botoes-final">
@@ -191,9 +162,7 @@
 
 </main>
 
-
 <!-- TELA NOTA -->
-
 <main id="telaNota">
 
     <div class="nota">
@@ -213,7 +182,7 @@
 
         <p>
             <strong>Cliente:</strong>
-            Cliente
+            <span id="clienteNota">Cliente</span>
         </p>
 
         <p>
@@ -224,11 +193,9 @@
         <hr>
 
         <h3>Pratos</h3>
-
         <div id="notaPratos"></div>
 
         <h3>Bebidas</h3>
-
         <div id="notaBebidas"></div>
 
         <hr>
@@ -236,7 +203,6 @@
         <div class="linha-nota">
 
             <strong>Total</strong>
-
             <strong id="totalNota"></strong>
 
         </div>
@@ -267,9 +233,7 @@
 
 </main>
 
-
 <!-- RODAPÉ -->
-
 <footer>
 
     <p>
@@ -281,7 +245,6 @@
     </p>
 
 </footer>
-
 
 <script>
 
@@ -920,83 +883,164 @@
        CONTINUAR
     ========================= */
 
-    function continuar() {
+    async function continuar() {
 
         const listaPratos = pegarItens(".select-prato", pratos);
-
         const listaBebidas = pegarItens(".select-bebida", bebidas);
 
         if (listaPratos.length === 0) {
-
             alert("Selecione pelo menos um prato.");
-
             return;
-
         }
 
         if (listaBebidas.length === 0) {
-
             alert("Selecione pelo menos uma bebida.");
-
             return;
-
         }
 
         const sucoSemSabor = listaBebidas.some(
-            bebida =>
-                bebida.nome === "Suco natural" &&
-                bebida.sabor === ""
+            bebida => bebida.nome === "Suco natural" && bebida.sabor === ""
         );
 
         if (sucoSemSabor) {
-
             alert("Selecione o sabor de todos os sucos naturais.");
-
             return;
-
         }
 
-        let total = 0;
+        // Verifica se o cliente está conectado.
+        if (localStorage.getItem("usuarioLogado") !== "true") {
+            alert("Faça login para realizar seu pedido.");
+            window.location.href = "/login";
+            return;
+        }
 
-        listaPratos.forEach(item => total += item.subtotal);
+        // Dados gravados pelo login/cadastro do site.
+        const nome = localStorage.getItem("nomeUsuario") || "";
+        const email = localStorage.getItem("emailUsuario") || "";
+        const telefone = localStorage.getItem("telefoneUsuario") || "";
 
-        listaBebidas.forEach(item => total += item.subtotal);
+        if (!nome.trim() || !email.trim()) {
+            alert("Não foi possível identificar seus dados. Faça login novamente.");
+            window.location.href = "/login";
+            return;
+        }
 
-        const numeroPedido = gerarNumeroPedido();
+        const totalCalculado =
+            listaPratos.reduce((soma, item) => soma + item.subtotal, 0) +
+            listaBebidas.reduce((soma, item) => soma + item.subtotal, 0);
 
-        const pedido = {
-
-            numeroPedido: numeroPedido,
-
-            pratos: listaPratos,
-
-            bebidas: listaBebidas,
-
-            total: total
-
+        // Mantém os produtos cadastrados neste próprio JavaScript.
+        // O backend recebe os dados e grava o pedido e seus itens no MySQL.
+        const dadosPedido = {
+            nome: nome,
+            email: email,
+            telefone: telefone,
+            pratos: listaPratos.map(item => ({
+                nome: item.nome,
+                preco: Number(item.preco),
+                quantidade: Number(item.quantidade),
+                observacao: item.observacao || "",
+                sabor: item.sabor || ""
+            })),
+            bebidas: listaBebidas.map(item => ({
+                nome: item.nome,
+                preco: Number(item.preco),
+                quantidade: Number(item.quantidade),
+                observacao: item.observacao || "",
+                sabor: item.sabor || ""
+            }))
         };
 
-        localStorage.setItem(
-            "pedidoSaborQuintal",
-            JSON.stringify(pedido)
-        );
+        const botaoContinuar = document.querySelector(".btn-continuar");
 
-        document.getElementById("numeroPedidoFinal").textContent =
-            numeroPedido;
+        if (botaoContinuar) {
+            botaoContinuar.disabled = true;
+            botaoContinuar.textContent = "ENVIANDO...";
+        }
 
-        document.getElementById("resumoPratos").innerHTML =
-            gerarResumo(listaPratos);
+        try {
 
-        document.getElementById("resumoBebidas").innerHTML =
-            gerarResumo(listaBebidas);
+            const resposta = await fetch("/api/pedidos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(dadosPedido)
+            });
 
-        document.getElementById("totalFinal").textContent =
-            formatarDinheiro(total);
+            const textoResposta = await resposta.text();
 
-        document.getElementById("telaPedido").style.display = "none";
+            let resultado = {};
 
-        document.getElementById("telaFinal").style.display = "block";
+            if (textoResposta) {
+                try {
+                    resultado = JSON.parse(textoResposta);
+                } catch (erroParse) {
+                    resultado = { mensagem: textoResposta };
+                }
+            }
 
+            if (!resposta.ok) {
+                throw new Error(
+                    resultado.detail ||
+                    resultado.message ||
+                    resultado.mensagem ||
+                    "Não foi possível salvar o pedido. Verifique o servidor."
+                );
+            }
+
+            // Só gera o número local e mostra a confirmação depois que o
+            // servidor confirmar que o pedido foi gravado.
+            const numeroPedido = gerarNumeroPedido();
+
+            const totalFinal = Number(resultado.total ?? totalCalculado);
+
+            const pedido = {
+                idBanco: resultado.id,
+                numeroPedido: numeroPedido,
+                nomeCliente: nome,
+                emailCliente: email,
+                pratos: listaPratos,
+                bebidas: listaBebidas,
+                total: totalFinal
+            };
+
+            localStorage.setItem(
+                "pedidoSaborQuintal",
+                JSON.stringify(pedido)
+            );
+
+            document.getElementById("numeroPedidoFinal").textContent =
+                numeroPedido;
+
+            document.getElementById("resumoPratos").innerHTML =
+                gerarResumo(listaPratos);
+
+            document.getElementById("resumoBebidas").innerHTML =
+                gerarResumo(listaBebidas);
+
+            document.getElementById("totalFinal").textContent =
+                formatarDinheiro(totalFinal);
+
+            document.getElementById("telaPedido").style.display = "none";
+            document.getElementById("telaNota").style.display = "none";
+            document.getElementById("telaFinal").style.display = "block";
+
+        } catch (erro) {
+
+            console.error("Erro ao enviar pedido:", erro);
+
+            alert("Não foi possível enviar seu pedido. " + erro.message);
+
+        } finally {
+
+            if (botaoContinuar) {
+                botaoContinuar.disabled = false;
+                botaoContinuar.textContent = "CONTINUAR";
+            }
+
+        }
     }
 
 
@@ -1089,6 +1133,9 @@
         }
 
         const pedido = JSON.parse(dados);
+
+        document.getElementById("clienteNota").textContent =
+            pedido.nomeCliente || localStorage.getItem("nomeUsuario") || "Cliente";
 
         document.getElementById("numeroNota").textContent =
             pedido.numeroPedido;

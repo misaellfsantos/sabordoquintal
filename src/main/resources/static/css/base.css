@@ -1,0 +1,97 @@
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #d3d0ce;
+            color: #111;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .site {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background-color: #f4e7cf;
+            width: 100%;
+        }
+
+        .navbar {
+            min-height: 80px;
+            padding: 5px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .navbar-brand {
+            color: #111;
+            font-size: 27px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .navbar-brand:hover {
+            color: #111;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+        }
+
+        /* ================= MENU ================= */
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-nav > li,
+        .navbar-nav > a {
+            list-style: none;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .nav-item {
+            text-align: center;
+        }
+
+        .nav-item a,
+        .navbar-nav > a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .nav-item i,
+        .navbar-nav > a i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item span,
+        .navbar-nav > a span {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .nav-item:hover i,
+        .nav-item:hover span,
+        .navbar-nav > a:hover i,
+        .navbar-nav > a:hover span {
+            color: #6b3d22;
+        }
